@@ -1,2 +1,2 @@
-def solve(A, B):
+def solve():
     pass
