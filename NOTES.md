@@ -38,3 +38,11 @@
 ### 1.9 String Rotation
 - Rotating an array/string means that it is split into two parts, x and y, such that the input is xy and the output is yx
 - Checking if an s2 is a rotation of s1 is simply checking if len(s1) == len(s2) and if s1 is a substring of s2 + s2
+
+## Chapter 2 - Linked Lists
+
+### 2.1 Remove Dups
+- A runner pointer that 'runs ahead' of the current pointer can be used to look ahead when traversing linked lists. This is useful when searching for nodes with specific data or specific types of nodes, but still keeping track of the current node (possibly to find a relation between the 2 nodes).
+- A pointer to the previous node may not be necessary when deleting a node from a linked list depending on how the current node is being tracked.
+
+### 2.2 Return Kth to Last

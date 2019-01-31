@@ -5,8 +5,9 @@ def test(t):
     cur = Node(0)
     head = cur
     for i in range(1, 8):
-        node = Node(i)
+        node = Node(i % 2)
         cur.nxt = node
         cur = node
 
-    t.assertEqual(solve(head, 3), '4')
+    head = solve(head)
+    t.assertEqual(str(head), '0 1')
