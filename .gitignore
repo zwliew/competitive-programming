@@ -1,2 +1,9 @@
+# VS Code
+.vscode
+
+# C++
+a.out
+
+# Python
 __pycache__
 venv
