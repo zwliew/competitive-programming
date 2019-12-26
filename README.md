@@ -6,5 +6,10 @@ I write some notes as I learn [here](http://bit.ly/zwliew-notes).
 
 Sources:
 
+- [HackerEarth](https://www.hackerearth.com/)
+- [HackerRank](https://www.hackerrank.com/)
+- [Google Kickstart](https://codingcompetitions.withgoogle.com/kickstart/)
+- [LeetCode](https://leetcode.com/)
 - [mrJudge](https://dunjudge.me/)
 - [Cracking the Coding Interview (ctci)](http://www.crackingthecodinginterview.com/)
+- [UVa Online Judge](https://onlinejudge.org/)
