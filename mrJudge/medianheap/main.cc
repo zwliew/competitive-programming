@@ -19,20 +19,20 @@ int main() {
 
       if (!minq.empty() && x > minq.top()) {
         minq.emplace(x);
-        while (maxq.size() < minq.size()) {
+        if (maxq.size() < minq.size()) {
           maxq.emplace(minq.top());
           minq.pop();
         }
       } else {
         maxq.emplace(x);
-        while (maxq.size() > minq.size() + 1) {
+        if (maxq.size() > minq.size() + 1) {
           minq.emplace(maxq.top());
           maxq.pop();
         }
       }
     } else if (s == "POP") {
       maxq.pop();
-      while (maxq.size() < minq.size()) {
+      if (maxq.size() < minq.size()) {
         maxq.emplace(minq.top());
         minq.pop();
       }
