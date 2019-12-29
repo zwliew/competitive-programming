@@ -8,7 +8,6 @@
 #include <set>
 #include <string>
 #include <unordered_map>
-#include <unordered_set>
 #include <vector>
 
 using namespace std;
@@ -37,7 +36,6 @@ typedef priority_queue<s32> PQI;
 typedef priority_queue<s64> PQLL;
 typedef priority_queue<PII> PQPII;
 typedef priority_queue<PLLLL> PQPLLLL;
-typedef unordered_set<s32> USI;
 
 template <typename T, typename U>
 inline void amin(T &x, U y) {
@@ -51,4 +49,18 @@ inline void amax(T &x, U y) {
 int main() {
   // Don't collapse the block
   FASTIO();
+
+  s32 n, w, h;
+  cin >> n >> w >> h;
+
+  w = sqrt(w * w + h * h);
+
+  while (n--) {
+    cin >> h;
+    if (h <= w) {
+      cout << "DA\n";
+    } else {
+      cout << "NE\n";
+    }
+  }
 }

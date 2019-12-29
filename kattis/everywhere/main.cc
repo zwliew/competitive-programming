@@ -37,7 +37,6 @@ typedef priority_queue<s32> PQI;
 typedef priority_queue<s64> PQLL;
 typedef priority_queue<PII> PQPII;
 typedef priority_queue<PLLLL> PQPLLLL;
-typedef unordered_set<s32> USI;
 
 template <typename T, typename U>
 inline void amin(T &x, U y) {
@@ -51,4 +50,22 @@ inline void amax(T &x, U y) {
 int main() {
   // Don't collapse the block
   FASTIO();
+
+  s32 t, n;
+  unordered_set<string> s;
+  cin >> t;
+  while (t--) {
+    cin >> n;
+    s32 cnt = 0;
+    while (n--) {
+      string x;
+      cin >> x;
+      if (s.find(x) == s.end()) {
+        s.emplace(x);
+        ++cnt;
+      }
+    }
+    cout << cnt << '\n';
+    s.clear();
+  }
 }
