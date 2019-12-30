@@ -1,10 +1,19 @@
+/*
+ID: zhaowei10
+TASK: test
+LANG: C++
+*/
 // #include <bits/stdc++.h>
 #include <algorithm>
+#include <array>
 #include <climits>
 #include <cmath>
 #include <deque>
+#include <fstream>
+#include <iomanip>
 #include <iostream>
 #include <map>
+#include <numeric>
 #include <queue>
 #include <set>
 #include <string>
@@ -35,13 +44,16 @@ typedef pair<s32, s32> II;
 typedef pair<s64, s64> LL;
 typedef vector<s32> VI;
 typedef vector<II> VII;
+typedef vector<char> VC;
 typedef priority_queue<s32> PQI;
+typedef priority_queue<s32, VI, greater<s32>> PQIA;
 typedef priority_queue<s64> PQL;
 typedef priority_queue<II> PQII;
 typedef priority_queue<II, VII, greater<II>> PQIIA;
 typedef priority_queue<LL> PQLL;
 typedef unordered_set<s32> USI;
 typedef unordered_set<s64> USL;
+typedef set<II> SII;
 
 template <typename T, typename U>
 inline void amin(T &x, U y) {
@@ -52,7 +64,4 @@ inline void amax(T &x, U y) {
   if (x < y) x = y;
 }
 
-int main() {
-  // Don't collapse the block
-  FASTIO();
-}
+int main() { FASTIO(); }
