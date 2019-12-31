@@ -1,9 +1,8 @@
 /*
 ID: zhaowei10
-TASK: test
+TASK:
 LANG: C++
 */
-// #include <bits/stdc++.h>
 #include <algorithm>
 #include <array>
 #include <climits>
@@ -54,6 +53,7 @@ typedef priority_queue<LL> PQLL;
 typedef unordered_set<s32> USI;
 typedef unordered_set<s64> USL;
 typedef set<II> SII;
+typedef multiset<s32> MSI;
 
 template <typename T, typename U>
 inline void amin(T &x, U y) {
@@ -62,6 +62,16 @@ inline void amin(T &x, U y) {
 template <typename T, typename U>
 inline void amax(T &x, U y) {
   if (x < y) x = y;
+}
+
+template <typename T>
+inline s32 ndigits(T x) {
+  s32 r = 0;
+  while (x) {
+    x /= 10;
+    ++r;
+  }
+  return r;
 }
 
 int main() { FASTIO(); }
