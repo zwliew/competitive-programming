@@ -44,6 +44,7 @@ typedef pair<s64, s64> LL;
 typedef vector<s32> VI;
 typedef vector<II> VII;
 typedef vector<char> VC;
+typedef vector<VII> VVII;
 typedef priority_queue<s32> PQI;
 typedef priority_queue<s32, VI, greater<s32>> PQIA;
 typedef priority_queue<s64> PQL;

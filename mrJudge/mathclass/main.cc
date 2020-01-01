@@ -75,23 +75,49 @@ inline s32 ndigits(T x) {
 }
 
 template <typename T>
+inline T mmult(T a, T b, T m) {
+  T r = 0;
+  for (a %= m; b; b >>= 1) {
+    r += (b & 1) * a;
+    r %= m;
+    a <<= 1;
+    a %= m;
+  }
+  return r;
+}
+
+template <typename T>
 inline T mpow(T a, T b, T m) {
   if (!b) return 1;
   if (b == 1) return a;
-  T t = mpow(a, b / 2, m);
-  t = (t * t) % m;
-  if (b & 1) return (a * t) % m;
-  return t;
+  T p = mpow(a, b / 2, m);
+  p = mmult(p, p, m);
+  if (b & 1) {
+    return mmult(a, p, m);
+  }
+  return p;
+}
+
+template <typename T>
+inline T gcd(T a, T b) {
+  if (!b) {
+    return a;
+  }
+  return gcd(b, a % b);
 }
 
 int main() {
   FASTIO();
+  s64 a, b;
+  cin >> a >> b;
 
-  s64 t;
-  cin >> t;
-  while (t--) {
-    s64 a, b, m;
-    cin >> a >> b >> m;
-    cout << mpow(a, b, m) << '\n';
+  if (!a && !b) {
+    cout << -1;
+    return 0;
+  }
+  if (a >= b) {
+    cout << mpow(a, b, 10000000007);
+  } else {
+    cout << -1;
   }
 }

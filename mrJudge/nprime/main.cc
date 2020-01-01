@@ -74,24 +74,28 @@ inline s32 ndigits(T x) {
   return r;
 }
 
-template <typename T>
-inline T mpow(T a, T b, T m) {
-  if (!b) return 1;
-  if (b == 1) return a;
-  T t = mpow(a, b / 2, m);
-  t = (t * t) % m;
-  if (b & 1) return (a * t) % m;
-  return t;
+inline s32 nprime(s32 n) {
+  if (n <= 3) return n >= 2;
+  if (!(n & 1) || !(n % 3)) return false;
+  for (s32 i = 5; i * i <= n; i += 6) {
+    if (!(n % i) || !(n % (i + 2))) {
+      return false;
+    }
+  }
+  return true;
 }
 
 int main() {
   FASTIO();
 
-  s64 t;
-  cin >> t;
-  while (t--) {
-    s64 a, b, m;
-    cin >> a >> b >> m;
-    cout << mpow(a, b, m) << '\n';
+  s32 n;
+  cin >> n;
+
+  s32 cur = 2, cnt = 0;
+  while (cnt < n) {
+    if (nprime(cur++)) {
+      ++cnt;
+    }
   }
+  cout << cur - 1;
 }
