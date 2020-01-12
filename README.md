@@ -14,3 +14,5 @@ Sources:
 - [Cracking the Coding Interview (ctci)](http://www.crackingthecodinginterview.com/)
 - [Online Judge](https://onlinejudge.org/)
 - [USACO Training](https://train.usaco.org/usacogate)
+- [Codeforces](https://codeforces.com/)
+- [AtCoder](https://atcoder.jp/)

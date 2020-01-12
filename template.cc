@@ -5,6 +5,7 @@ LANG: C++
 */
 #include <algorithm>
 #include <array>
+#include <bitset>
 #include <climits>
 #include <cmath>
 #include <deque>
@@ -22,7 +23,9 @@ LANG: C++
 
 using namespace std;
 
+#define pb push_back
 #define MOD 1000000007
+#define NDIG(x) floor(log10(x)) + 1
 #define FOR(i, j, k, l) for (s32 i = j; i < k; i += l)
 #define RFOR(i, j, k, l) for (s32 i = j; i >= k; i -= l)
 #define REP(i, j) FOR(i, 0, j, 1)
@@ -33,6 +36,7 @@ using namespace std;
   cin.tie(nullptr); \
   ios::sync_with_stdio(false);
 
+typedef long long ll;
 typedef int64_t s64;
 typedef uint64_t u64;
 typedef int32_t s32;
@@ -66,10 +70,10 @@ inline void amax(T &x, U y) {
 }
 
 template <typename T>
-inline s32 ndigits(T x) {
+inline s32 ndigits(T x, T b) {
   s32 r = 0;
   while (x) {
-    x /= 10;
+    x /= b;
     ++r;
   }
   return r;
