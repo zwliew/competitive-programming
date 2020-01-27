@@ -23,6 +23,8 @@ LANG: C++
 
 using namespace std;
 
+#define mp make_pair
+#define eb emplace_back
 #define pb push_back
 #define MOD 1000000007
 #define NDIG(x) floor(log10(x)) + 1
@@ -43,6 +45,7 @@ typedef int32_t s32;
 typedef uint32_t u32;
 typedef float f32;
 typedef double f64;
+typedef long double f80;
 typedef pair<s32, s32> II;
 typedef pair<s64, s64> LL;
 typedef vector<s32> VI;
@@ -59,24 +62,5 @@ typedef unordered_set<s32> USI;
 typedef unordered_set<s64> USL;
 typedef set<II> SII;
 typedef multiset<s32> MSI;
-
-template <typename T, typename U>
-inline void amin(T &x, U y) {
-  if (y < x) x = y;
-}
-template <typename T, typename U>
-inline void amax(T &x, U y) {
-  if (x < y) x = y;
-}
-
-template <typename T>
-inline s32 ndigits(T x, T b) {
-  s32 r = 0;
-  while (x) {
-    x /= b;
-    ++r;
-  }
-  return r;
-}
 
 int main() { FASTIO(); }
