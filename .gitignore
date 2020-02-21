@@ -4,6 +4,7 @@
 # C++
 a.out
 a.exe
+a.jar
 
 # I/O test cases
 a.txt
@@ -17,3 +18,4 @@ wip
 _wip
 test.cc
 test.py
+test.kt
