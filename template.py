@@ -11,6 +11,7 @@ from heapq import (
     nlargest,
     nsmallest,
 )
+from statistics import mean, median, mode
 
 
 def main():
