@@ -1,5 +1,7 @@
 #include <vector>
 
+// Useful for computing range queries in general
+// First element greater than x, First array prefix greater than x
 struct SegmentTree {
   std::vector<long long> t;
   long long n = -1;

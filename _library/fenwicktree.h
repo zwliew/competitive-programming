@@ -1,4 +1,5 @@
 #include <vector>
+// Useful for computing prefix or range sums efficiently
 struct FenwickTree {
   std::vector<long long> b1, b2;
   long long n;

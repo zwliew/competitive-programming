@@ -34,18 +34,16 @@ using namespace std;
 #define RREP(i, j) RFOR(i, j, 0, 1)
 #define ALL(x) x.begin(), x.end()
 #define MEAN(a, b) min(a, b) + (abs(b - a) >> 1)
-#define FASTIO()    \
-  cin.tie(nullptr); \
-  ios::sync_with_stdio(false);
 
-typedef long long ll;
+using ll = long long;
+using ld = long double;
+
 typedef int64_t s64;
 typedef uint64_t u64;
 typedef int32_t s32;
 typedef uint32_t u32;
 typedef float f32;
 typedef double f64;
-typedef long double f80;
 typedef pair<s32, s32> II;
 typedef pair<s64, s64> LL;
 typedef vector<s32> VI;
@@ -63,4 +61,7 @@ typedef unordered_set<s64> USL;
 typedef set<II> SII;
 typedef multiset<s32> MSI;
 
-int main() { FASTIO(); }
+int main() {
+  cin.tie(nullptr);
+  ios::sync_with_stdio(false);
+}

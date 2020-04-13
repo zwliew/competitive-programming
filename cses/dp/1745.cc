@@ -31,25 +31,28 @@ int main() {
   int n;
   cin >> n;
   vector<int> x(n);
-  for (int& i : x) cin >> i;
-  vector<bitset<100001>> dp(n, bitset<100001>());
-  for (int i = 0; i < n; ++i) {
-    for (int j = 0; j < 100001; ++j) {
-      if (!j) {
-        dp[i][j] = 1;
-      } else if (!i) {
-        dp[i][j] = j == x[0];
-      } else {
-        dp[i][j] = dp[i - 1][j];
-        if (!dp[i][j] && j >= x[i]) {
-          dp[i][j] = dp[i - 1][j - x[i]];
-        }
+  int maxSum = 0;
+  for (int& i : x) {
+    cin >> i;
+    maxSum += i;
+  }
+  vector<bitset<100001>> possible(n + 1, bitset<100001>());
+  for (int i = 0; i <= n; ++i) {
+    possible[i][0] = 1;
+  }
+  for (int i = 1; i <= n; ++i) {
+    for (int j = 1; j <= 100000; ++j) {
+      possible[i][j] = possible[i - 1][j];
+      if (!possible[i][j] && j >= x[i - 1]) {
+        possible[i][j] = possible[i - 1][j - x[i - 1]];
       }
     }
   }
   vector<int> res;
-  for (int i = 1; i <= 100000; ++i) {
-    if (dp[n - 1][i]) res.push_back(i);
+  for (int i = 1; i <= maxSum; ++i) {
+    if (possible[n][i]) {
+      res.push_back(i);
+    }
   }
   cout << res.size() << '\n';
   for (int i : res) {
