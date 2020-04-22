@@ -59,4 +59,21 @@ int main() {
       cout << "no\n";
     }
   }
+
+  // Alternative solution
+  // Think of the conditions for a and b to simultaneously reach 0.
+  // int t;
+  // cin >> t;
+  // while (t--) {
+  //   ll a, b;
+  //   cin >> a >> b;
+  //   if (a == b) {
+  //     cout << (a % 3 == 0 ? "YES" : "NO") << '\n';
+  //   } else {
+  //     cout << (abs(a - b) <= min(a, b) && (min(a, b) - abs(a - b)) % 3 == 0
+  //                  ? "YES"
+  //                  : "NO")
+  //          << '\n';
+  //   }
+  // }
 }
