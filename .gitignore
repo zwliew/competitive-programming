@@ -1,16 +1,17 @@
 # VS Code
 .vscode
 
-# C++
+# I/O test cases
+a.txt
+
+# Build outputs
 a.out
 a.exe
 a.jar
 a.exp
 a.lib
 a.pdb
-
-# I/O test cases
-a.txt
+test.class
 
 # Python
 __pycache__
@@ -24,3 +25,4 @@ test.py
 test.kt
 test.js
 test2.py
+test.java
