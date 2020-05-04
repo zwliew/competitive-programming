@@ -12,11 +12,13 @@
 #include <iomanip>
 #include <iostream>
 #include <iterator>
+#include <list>
 #include <map>
 #include <numeric>
 #include <queue>
 #include <set>
 #include <sstream>
+#include <stack>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
@@ -37,6 +39,11 @@ string to_string(bool b) { return (b ? "true" : "false"); }
 template <typename A, typename B>
 string to_string(pair<A, B> p) {
   return "(" + to_string(p.first) + ", " + to_string(p.second) + ")";
+}
+template <typename A, typename B, typename C>
+string to_string(tuple<A, B, C> t) {
+  return "(" + to_string(get<0>(t)) + ", " + to_string(get<1>(t)) + ", " +
+         to_string(get<2>(t)) + ")";
 }
 template <typename A>
 string to_string(A v) {
@@ -73,4 +80,5 @@ using vb = vector<bool>;
 int main() {
   cin.tie(nullptr);
   ios::sync_with_stdio(false);
+  cout << fixed << setprecision(9);
 }
