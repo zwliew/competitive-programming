@@ -82,13 +82,24 @@ int main() {
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(9);
 
-  int n;
-  cin >> n;
-  int ans = 0;
+  ll n, x;
+  cin >> n >> x;
+  int cnt = 0;
   while (n--) {
-    int a, b, c;
-    cin >> a >> b >> c;
-    if (a + b + c >= 2) ++ans;
+    char c;
+    cin >> c;
+    int y;
+    cin >> y;
+    if (c == '-') {
+      if (x >= y) {
+        x -= y;
+      } else {
+        ++cnt;
+      }
+    } else {
+      x += y;
+    }
   }
-  cout << ans;
+
+  cout << x << ' ' << cnt;
 }

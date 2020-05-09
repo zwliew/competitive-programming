@@ -38,4 +38,26 @@ int main() {
   }
 
   cout << cnt;
+
+  // Alternative brute force solution
+  // int n;
+  // cin >> n;
+  // vii col;
+  // for (int i = 0; i < n; ++i) {
+  //   int h, g;
+  //   cin >> h >> g;
+  //   col.emplace_back(h, g);
+  // }
+
+  // int ans = 0;
+  // for (int i = 0; i < n; ++i) {
+  //   for (int j = 0; j < n; ++j) {
+  //     if (i == j) continue;
+  //     if (col[i].first == col[j].second) {
+  //       ++ans;
+  //     }
+  //   }
+  // }
+
+  // cout << ans;
 }

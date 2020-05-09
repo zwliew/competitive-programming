@@ -82,13 +82,18 @@ int main() {
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(9);
 
-  int n;
-  cin >> n;
-  int ans = 0;
-  while (n--) {
-    int a, b, c;
-    cin >> a >> b >> c;
-    if (a + b + c >= 2) ++ans;
+  vi cal(5);
+  for (int i = 1; i <= 4; ++i) {
+    cin >> cal[i];
   }
-  cout << ans;
+
+  string s;
+  cin >> s;
+  int sum = 0;
+  for (char c : s) {
+    int x = c - '0';
+    sum += cal[x];
+  }
+
+  cout << sum;
 }

@@ -84,11 +84,17 @@ int main() {
 
   int n;
   cin >> n;
-  int ans = 0;
-  while (n--) {
-    int a, b, c;
-    cin >> a >> b >> c;
-    if (a + b + c >= 2) ++ans;
+  string s;
+  cin >> s;
+
+  int cnt = 0;
+  char prev = 0;
+  for (char c : s) {
+    if (c == prev) {
+      ++cnt;
+    } else {
+      prev = c;
+    }
   }
-  cout << ans;
+  cout << cnt;
 }

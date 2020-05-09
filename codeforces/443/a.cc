@@ -82,13 +82,17 @@ int main() {
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(9);
 
-  int n;
-  cin >> n;
-  int ans = 0;
-  while (n--) {
-    int a, b, c;
-    cin >> a >> b >> c;
-    if (a + b + c >= 2) ++ans;
+  bool first = 1;
+  string s;
+  unordered_set<string> hs;
+  while (cin >> s) {
+    if (first) {
+      first = 0;
+      string x = s.substr(1, s.size() - 2);
+      if (x.size()) hs.emplace(x);
+    } else {
+      hs.emplace(s.substr(0, s.size() - 1));
+    }
   }
-  cout << ans;
+  cout << hs.size();
 }

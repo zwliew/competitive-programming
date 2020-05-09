@@ -83,12 +83,33 @@ int main() {
   cout << fixed << setprecision(9);
 
   int n;
-  cin >> n;
-  int ans = 0;
-  while (n--) {
-    int a, b, c;
-    cin >> a >> b >> c;
-    if (a + b + c >= 2) ++ans;
+  while (cin >> n) {
+    vi arr(n);
+    for (int &x : arr) cin >> x;
+
+    vi parent(n, -1);
+    vii dp = {{numeric_limits<int>::min(), -1}};
+    for (int i = 0; i < n; ++i) {
+      auto it = lower_bound(dp.begin(), dp.end(), make_pair(arr[i], 0));
+      if (it == dp.end()) {
+        parent[i] = dp.back().second;
+        dp.emplace_back(arr[i], i);
+      } else {
+        *it = {arr[i], i};
+        parent[i] = prev(it)->second;
+      }
+    }
+
+    cout << dp.size() - 1 << '\n';
+    int idx = dp.back().second;
+    vi output;
+    while (idx != -1) {
+      output.emplace_back(idx);
+      idx = parent[idx];
+    }
+    reverse(output.begin(), output.end());
+
+    for (auto x : output) cout << x << ' ';
+    cout << '\n';
   }
-  cout << ans;
 }

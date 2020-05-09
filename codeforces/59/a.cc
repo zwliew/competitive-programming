@@ -82,13 +82,20 @@ int main() {
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(9);
 
-  int n;
-  cin >> n;
-  int ans = 0;
-  while (n--) {
-    int a, b, c;
-    cin >> a >> b >> c;
-    if (a + b + c >= 2) ++ans;
+  string s;
+  cin >> s;
+  int up = 0, lo = 0;
+  for (char c : s) {
+    if (isupper(c)) {
+      ++up;
+    } else
+      ++lo;
   }
-  cout << ans;
+
+  if (lo >= up) {
+    for (char &c : s) c = tolower(c);
+  } else {
+    for (char &c : s) c = toupper(c);
+  }
+  cout << s;
 }

@@ -82,13 +82,24 @@ int main() {
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(9);
 
-  int n;
-  cin >> n;
-  int ans = 0;
-  while (n--) {
-    int a, b, c;
-    cin >> a >> b >> c;
-    if (a + b + c >= 2) ++ans;
+  int n, b;
+  while (cin >> n >> b && (n != -1 || b != -1)) {
+    priority_queue<pair<ld, int>, vector<pair<ld, int>>> pq;
+    for (int i = 0; i < n; ++i) {
+      int x;
+      cin >> x;
+      pq.emplace(x, 1);
+    }
+
+    b -= n;
+    while (b) {
+      auto [tn, tb] = pq.top();
+      pq.pop();
+      tn = tn * tb / (tb + 1);
+      pq.emplace(tn, tb + 1);
+      --b;
+    }
+
+    cout << (int)ceil(pq.top().first) << '\n';
   }
-  cout << ans;
 }

@@ -82,13 +82,25 @@ int main() {
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(9);
 
-  int n;
-  cin >> n;
-  int ans = 0;
-  while (n--) {
-    int a, b, c;
-    cin >> a >> b >> c;
-    if (a + b + c >= 2) ++ans;
+  int n, t, k, d;
+  cin >> n >> t >> k >> d;
+
+  int a = (n + k - 1) / k * t;
+  int cur = 0;
+  int ct = 0;
+  int firststart = 0;
+  int secondstart = d;
+  while (cur < n) {
+    ++ct;
+    if (ct - firststart == t) {
+      cur += k;
+      firststart = ct;
+    }
+    if (ct - secondstart == t) {
+      cur += k;
+      secondstart = ct;
+    }
   }
-  cout << ans;
+
+  cout << (ct >= a ? "NO" : "YES");
 }

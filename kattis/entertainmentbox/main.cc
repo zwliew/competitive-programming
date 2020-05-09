@@ -82,13 +82,31 @@ int main() {
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(9);
 
-  int n;
-  cin >> n;
-  int ans = 0;
-  while (n--) {
-    int a, b, c;
-    cin >> a >> b >> c;
-    if (a + b + c >= 2) ++ans;
+  // Interval scheduling problem on m-machines (m-ISP)
+  // http://www.cs.toronto.edu/~milad/csc373/lectures/T1.pdf
+  int n, k;
+  cin >> n >> k;
+  vii shows(n);
+  for (auto &[e, s] : shows) {
+    cin >> s >> e;
   }
-  cout << ans;
+  sort(shows.begin(), shows.end());
+
+  multiset<int> slots;
+  int cnt = 0;
+  for (auto &[e, s] : shows) {
+    auto it = slots.upper_bound(s);
+    if (it == slots.begin()) {
+      if (slots.size() < k) {
+        ++cnt;
+        slots.emplace(e);
+      }
+    } else {
+      slots.erase(prev(it));
+      slots.emplace(e);
+      ++cnt;
+    }
+  }
+
+  cout << cnt;
 }

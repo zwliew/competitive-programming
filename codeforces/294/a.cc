@@ -84,11 +84,19 @@ int main() {
 
   int n;
   cin >> n;
-  int ans = 0;
-  while (n--) {
-    int a, b, c;
-    cin >> a >> b >> c;
-    if (a + b + c >= 2) ++ans;
+  vi num(n);
+  for (auto &x : num) cin >> x;
+  int m;
+  cin >> m;
+  while (m--) {
+    int x, y;
+    cin >> y >> x;
+    if (y > 1) num[y - 2] += x - 1;
+    if (y < n) num[y] += num[y - 1] - x;
+    num[y - 1] = 0;
   }
-  cout << ans;
+
+  for (auto x : num) {
+    cout << x << '\n';
+  }
 }

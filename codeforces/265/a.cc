@@ -82,13 +82,13 @@ int main() {
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(9);
 
-  int n;
-  cin >> n;
-  int ans = 0;
-  while (n--) {
-    int a, b, c;
-    cin >> a >> b >> c;
-    if (a + b + c >= 2) ++ans;
+  string a, b;
+  cin >> a >> b;
+  int pos = 0;
+  for (char c : b) {
+    if (a[pos] == c) {
+      ++pos;
+    }
   }
-  cout << ans;
+  cout << pos + 1;
 }

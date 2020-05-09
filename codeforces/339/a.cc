@@ -82,13 +82,17 @@ int main() {
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(9);
 
-  int n;
-  cin >> n;
-  int ans = 0;
-  while (n--) {
-    int a, b, c;
-    cin >> a >> b >> c;
-    if (a + b + c >= 2) ++ans;
+  vector<char> ans;
+  char c;
+  while (cin >> c) {
+    if (isdigit(c)) {
+      ans.emplace_back(c);
+    }
   }
-  cout << ans;
+  sort(ans.begin(), ans.end());
+
+  cout << ans.front();
+  for (int i = 1; i < ans.size(); ++i) {
+    cout << '+' << ans[i];
+  }
 }

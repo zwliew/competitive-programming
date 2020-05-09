@@ -84,11 +84,16 @@ int main() {
 
   int n;
   cin >> n;
-  int ans = 0;
-  while (n--) {
-    int a, b, c;
-    cin >> a >> b >> c;
-    if (a + b + c >= 2) ++ans;
+  vector<vi> cnt(4);
+  for (int i = 1; i <= n; ++i) {
+    int x;
+    cin >> x;
+    cnt[x].eb(i);
   }
-  cout << ans;
+
+  int ans = min(min(cnt[1].size(), cnt[2].size()), cnt[3].size());
+  cout << ans << '\n';
+  for (int i = 0; i < ans; ++i) {
+    cout << cnt[1][i] << ' ' << cnt[2][i] << ' ' << cnt[3][i] << '\n';
+  }
 }

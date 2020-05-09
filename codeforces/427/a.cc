@@ -84,11 +84,20 @@ int main() {
 
   int n;
   cin >> n;
+
+  int bal = 0;
   int ans = 0;
   while (n--) {
-    int a, b, c;
-    cin >> a >> b >> c;
-    if (a + b + c >= 2) ++ans;
+    int x;
+    cin >> x;
+    if (x == -1) {
+      if (!bal)
+        ++ans;
+      else
+        --bal;
+    } else {
+      bal += x;
+    }
   }
   cout << ans;
 }

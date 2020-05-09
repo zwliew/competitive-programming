@@ -84,11 +84,20 @@ int main() {
 
   int n;
   cin >> n;
-  int ans = 0;
-  while (n--) {
-    int a, b, c;
-    cin >> a >> b >> c;
-    if (a + b + c >= 2) ++ans;
+  string x;
+  cin >> x;
+  int a = 0;
+  int b = 0;
+  for (char c : x) {
+    if (c == 'A')
+      ++a;
+    else
+      ++b;
   }
-  cout << ans;
+  if (a > b)
+    cout << "Anton";
+  else if (a < b)
+    cout << "Danik";
+  else
+    cout << "Friendship";
 }

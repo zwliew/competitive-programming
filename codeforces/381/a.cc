@@ -84,11 +84,31 @@ int main() {
 
   int n;
   cin >> n;
-  int ans = 0;
+  deque<int> q;
+  int a = 0, b = 0;
   while (n--) {
-    int a, b, c;
-    cin >> a >> b >> c;
-    if (a + b + c >= 2) ++ans;
+    int x;
+    cin >> x;
+    q.push_back(x);
   }
-  cout << ans;
+
+  bool aturn = 1;
+  while (q.size()) {
+    int best = 0;
+    if (q.front() > q.back()) {
+      best = q.front();
+      q.pop_front();
+    } else {
+      best = q.back();
+      q.pop_back();
+    }
+    if (aturn)
+      a += best;
+    else
+      b += best;
+
+    aturn = !aturn;
+  }
+
+  cout << a << ' ' << b;
 }

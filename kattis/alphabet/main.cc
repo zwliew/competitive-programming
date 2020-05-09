@@ -82,13 +82,22 @@ int main() {
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(9);
 
-  int n;
-  cin >> n;
-  int ans = 0;
-  while (n--) {
-    int a, b, c;
-    cin >> a >> b >> c;
-    if (a + b + c >= 2) ++ans;
+  string s;
+  cin >> s;
+
+  vi dp(s.size());
+  dp[0] = 1;
+
+  int ans = 1;
+  for (int i = 1; i < s.size(); ++i) {
+    for (int j = 0; j < i; ++j) {
+      if (s[i] > s[j]) {
+        dp[i] = max(dp[i], dp[j]);
+      }
+    }
+    ++dp[i];
+    ans = max(ans, dp[i]);
   }
-  cout << ans;
+
+  cout << 26 - ans;
 }
