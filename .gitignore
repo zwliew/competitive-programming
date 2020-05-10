@@ -3,6 +3,8 @@
 
 # I/O test cases
 a.txt
+input.txt
+output.txt
 
 # Build outputs
 a.out
@@ -26,4 +28,4 @@ test.kt
 test.js
 test2.py
 test.java
-test/
+_work/
