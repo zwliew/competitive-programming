@@ -75,7 +75,6 @@ using vi = vector<int>;
 using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
-using vll = vector<ll>;
 
 int main() {
   cin.tie(nullptr);
@@ -87,28 +86,56 @@ int main() {
   freopen("./output.txt", "w", stdout);
 #endif
 
-  int n, k;
-  cin >> n >> k;
-  vi a(n);
-  for (auto &x : a) cin >> x;
+  // O(N) solution. Longer to code.
+  int n;
+  cin >> n;
+  vi arr(n);
+  for (auto &x : arr) cin >> x;
 
-  int cnt = 0;
-  int best = 1e9;
-  int ans = -1;
-  int i = 0;
-  int cur = 0;
-  for (int j = 0; j < n; ++j) {
-    ++cnt;
-    cur += a[j];
-    if (cnt > k) {
-      --cnt;
-      cur -= a[i];
-      ++i;
-    }
-    if (cnt == k && cur < best) {
-      best = cur;
-      ans = i;
+  vi nondec;
+  for (int i = 0; i < n; ++i) {
+    if (!i || arr[i] < arr[i - 1]) {
+      nondec.eb(1);
+    } else {
+      nondec.eb(nondec.back() + 1);
     }
   }
-  cout << ans + 1;
+
+  vi noninc;
+  for (int i = n - 1; i >= 0; --i) {
+    if (i == n - 1 || arr[i] < arr[i + 1]) {
+      noninc.eb(1);
+    } else {
+      noninc.eb(noninc.back() + 1);
+    }
+  }
+  reverse(noninc.begin(), noninc.end());
+
+  int ans = 0;
+  for (int i = 0; i < n; ++i) {
+    ans = max(ans, noninc[i] + nondec[i] - 1);
+  }
+  cout << ans;
+
+  // Alternative O(N^2) brute force. Simpler to code and recommended given N <=
+  // 1000.
+
+  // int n;
+  // cin >> n;
+  // vi arr(n);
+  // for (auto &x : arr) cin >> x;
+  // int ans = 0;
+  // for (int i = 0; i < n; ++i) {
+  //   int cnt = 1;
+  //   for (int j = i - 1; j >= 0; --j) {
+  //     if (arr[j] > arr[j + 1]) break;
+  //     ++cnt;
+  //   }
+  //   for (int j = i + 1; j < n; ++j) {
+  //     if (arr[j] > arr[j - 1]) break;
+  //     ++cnt;
+  //   }
+  //   ans = max(ans, cnt);
+  // }
+  // cout << ans;
 }

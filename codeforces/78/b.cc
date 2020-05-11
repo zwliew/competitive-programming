@@ -75,7 +75,6 @@ using vi = vector<int>;
 using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
-using vll = vector<ll>;
 
 int main() {
   cin.tie(nullptr);
@@ -87,28 +86,19 @@ int main() {
   freopen("./output.txt", "w", stdout);
 #endif
 
-  int n, k;
-  cin >> n >> k;
-  vi a(n);
-  for (auto &x : a) cin >> x;
-
-  int cnt = 0;
-  int best = 1e9;
-  int ans = -1;
-  int i = 0;
-  int cur = 0;
-  for (int j = 0; j < n; ++j) {
-    ++cnt;
-    cur += a[j];
-    if (cnt > k) {
-      --cnt;
-      cur -= a[i];
-      ++i;
-    }
-    if (cnt == k && cur < best) {
-      best = cur;
-      ans = i;
-    }
+  vc colors = {'R', 'O', 'Y', 'G', 'B', 'I', 'V'};
+  int n;
+  cin >> n;
+  vc arr;
+  for (int i = 0; i < n - 3; ++i) {
+    arr.eb(colors[i % 4]);
   }
-  cout << ans + 1;
+  int j = 0;
+  for (int i = n - 3; i < n; ++i) {
+    arr.eb(colors[j % 4 + 4]);
+    ++j;
+  }
+  for (char c : arr) {
+    cout << c;
+  }
 }

@@ -26,7 +26,7 @@
 
 using namespace std;
 
-#ifndef ONLINE_JUDGE
+#ifdef LOCAL
 #define debug(...) cerr << '[' << #__VA_ARGS__ << "]:", _debug(__VA_ARGS__)
 #else
 #define debug(...) 0
@@ -75,7 +75,17 @@ using vi = vector<int>;
 using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
-using vll = vector<ll>;
+
+bool ok(vi &arr, int start, int val) {
+  int left = start - 1, prev = 0;
+  for (int i = 1; i < arr.size() && left; ++i) {
+    if (arr[i] - arr[prev] >= val) {
+      left--;
+      prev = i;
+    }
+  }
+  return !left;
+}
 
 int main() {
   cin.tie(nullptr);
@@ -87,28 +97,28 @@ int main() {
   freopen("./output.txt", "w", stdout);
 #endif
 
-  int n, k;
-  cin >> n >> k;
-  vi a(n);
-  for (auto &x : a) cin >> x;
+  int t;
+  cin >> t;
+  while (t--) {
+    int n, c;
+    cin >> n >> c;
+    vi arr(n);
+    for (auto &x : arr) cin >> x;
+    sort(arr.begin(), arr.end());
 
-  int cnt = 0;
-  int best = 1e9;
-  int ans = -1;
-  int i = 0;
-  int cur = 0;
-  for (int j = 0; j < n; ++j) {
-    ++cnt;
-    cur += a[j];
-    if (cnt > k) {
-      --cnt;
-      cur -= a[i];
-      ++i;
+    int lo = 0, hi = 1e9 + 1;
+    while (lo < hi - 1) {
+      int mid = lo + (hi - lo) / 2;
+      if (ok(arr, c, mid)) {
+        lo = mid;
+      } else {
+        hi = mid;
+      }
     }
-    if (cnt == k && cur < best) {
-      best = cur;
-      ans = i;
-    }
+
+    if (ok(arr, c, hi))
+      cout << hi << '\n';
+    else
+      cout << lo << '\n';
   }
-  cout << ans + 1;
 }

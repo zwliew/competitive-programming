@@ -75,7 +75,14 @@ using vi = vector<int>;
 using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
-using vll = vector<ll>;
+
+inline int gcd(int a, int b) {
+  while (b) {
+    a %= b;
+    swap(a, b);
+  }
+  return a;
+}
 
 int main() {
   cin.tie(nullptr);
@@ -87,28 +94,24 @@ int main() {
   freopen("./output.txt", "w", stdout);
 #endif
 
-  int n, k;
-  cin >> n >> k;
-  vi a(n);
-  for (auto &x : a) cin >> x;
+  int n, m;
+  while (cin >> n >> m && (n || m)) {
+    vi numer;
+    for (int i = n - m + 1; i <= n; ++i) {
+      numer.eb(i);
+    }
+    for (int i = 2; i <= m; ++i) {
+      int cur = i;
+      for (int j = 0; j < numer.size() && cur > 1; ++j) {
+        int d = gcd(cur, numer[j]);
+        cur /= d;
+        numer[j] /= d;
+      }
+    }
 
-  int cnt = 0;
-  int best = 1e9;
-  int ans = -1;
-  int i = 0;
-  int cur = 0;
-  for (int j = 0; j < n; ++j) {
-    ++cnt;
-    cur += a[j];
-    if (cnt > k) {
-      --cnt;
-      cur -= a[i];
-      ++i;
-    }
-    if (cnt == k && cur < best) {
-      best = cur;
-      ans = i;
-    }
+    ll c = accumulate(numer.begin(), numer.end(), 1, multiplies<ll>());
+
+    cout << n << " things taken " << m << " at a time is " << c
+         << " exactly.\n";
   }
-  cout << ans + 1;
 }

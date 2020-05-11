@@ -26,7 +26,7 @@
 
 using namespace std;
 
-#ifndef ONLINE_JUDGE
+#ifdef LOCAL
 #define debug(...) cerr << '[' << #__VA_ARGS__ << "]:", _debug(__VA_ARGS__)
 #else
 #define debug(...) 0
@@ -75,7 +75,16 @@ using vi = vector<int>;
 using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
-using vll = vector<ll>;
+
+void topoSort(vector<vi> &adj, vb &vis, vi &out, int u) {
+  vis[u] = 1;
+  for (auto v : adj[u]) {
+    if (!vis[v]) {
+      topoSort(adj, vis, out, v);
+    }
+  }
+  out.eb(u);
+}
 
 int main() {
   cin.tie(nullptr);
@@ -87,28 +96,24 @@ int main() {
   freopen("./output.txt", "w", stdout);
 #endif
 
-  int n, k;
-  cin >> n >> k;
-  vi a(n);
-  for (auto &x : a) cin >> x;
+  int n, m;
+  while (cin >> n >> m && (n || m)) {
+    vector<vi> adj(n + 1);
+    for (int i = 0; i < m; ++i) {
+      int u, v;
+      cin >> u >> v;
+      adj[u].eb(v);
+    }
 
-  int cnt = 0;
-  int best = 1e9;
-  int ans = -1;
-  int i = 0;
-  int cur = 0;
-  for (int j = 0; j < n; ++j) {
-    ++cnt;
-    cur += a[j];
-    if (cnt > k) {
-      --cnt;
-      cur -= a[i];
-      ++i;
+    vi out;
+    vb vis(n + 1);
+    for (int i = 1; i <= n; ++i) {
+      if (!vis[i]) topoSort(adj, vis, out, i);
     }
-    if (cnt == k && cur < best) {
-      best = cur;
-      ans = i;
+    cout << out.back();
+    for (int i = n - 2; i >= 0; --i) {
+      cout << ' ' << out[i];
     }
+    cout << '\n';
   }
-  cout << ans + 1;
 }

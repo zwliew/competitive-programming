@@ -26,7 +26,7 @@
 
 using namespace std;
 
-#ifndef ONLINE_JUDGE
+#ifdef LOCAL
 #define debug(...) cerr << '[' << #__VA_ARGS__ << "]:", _debug(__VA_ARGS__)
 #else
 #define debug(...) 0
@@ -75,7 +75,6 @@ using vi = vector<int>;
 using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
-using vll = vector<ll>;
 
 int main() {
   cin.tie(nullptr);
@@ -87,28 +86,30 @@ int main() {
   freopen("./output.txt", "w", stdout);
 #endif
 
-  int n, k;
-  cin >> n >> k;
-  vi a(n);
-  for (auto &x : a) cin >> x;
-
-  int cnt = 0;
-  int best = 1e9;
-  int ans = -1;
-  int i = 0;
-  int cur = 0;
-  for (int j = 0; j < n; ++j) {
-    ++cnt;
-    cur += a[j];
-    if (cnt > k) {
-      --cnt;
-      cur -= a[i];
-      ++i;
-    }
-    if (cnt == k && cur < best) {
-      best = cur;
-      ans = i;
-    }
+  char c;
+  vector<tuple<ld, ld, ld, ld>> rects;
+  while (cin >> c && c == 'r') {
+    ld x1, x2, y1, y2;
+    cin >> x1 >> y1 >> x2 >> y2;
+    rects.emplace_back(x1, y1, x2, y2);
   }
-  cout << ans + 1;
+
+  ld x, y;
+  int pointnum = 1;
+  while (cin >> x >> y) {
+    if (fabsl(x - 9999.9) < 1e-9 && fabsl(y - 9999.9) < 1e-9) break;
+    bool found = 0;
+    for (int i = 0; i < rects.size(); ++i) {
+      auto &[x1, y1, x2, y2] = rects[i];
+      if (x > x1 && x < x2 && y > y2 && y < y1) {
+        found = 1;
+        cout << "Point " << pointnum << " is contained in figure " << i + 1
+             << '\n';
+      }
+    }
+    if (!found) {
+      cout << "Point " << pointnum << " is not contained in any figure\n";
+    }
+    ++pointnum;
+  }
 }

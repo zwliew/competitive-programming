@@ -26,7 +26,7 @@
 
 using namespace std;
 
-#ifndef ONLINE_JUDGE
+#ifdef LOCAL
 #define debug(...) cerr << '[' << #__VA_ARGS__ << "]:", _debug(__VA_ARGS__)
 #else
 #define debug(...) 0
@@ -75,7 +75,6 @@ using vi = vector<int>;
 using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
-using vll = vector<ll>;
 
 int main() {
   cin.tie(nullptr);
@@ -87,28 +86,24 @@ int main() {
   freopen("./output.txt", "w", stdout);
 #endif
 
-  int n, k;
-  cin >> n >> k;
-  vi a(n);
-  for (auto &x : a) cin >> x;
-
-  int cnt = 0;
-  int best = 1e9;
-  int ans = -1;
-  int i = 0;
-  int cur = 0;
-  for (int j = 0; j < n; ++j) {
-    ++cnt;
-    cur += a[j];
-    if (cnt > k) {
-      --cnt;
-      cur -= a[i];
-      ++i;
+  int n, m;
+  cin >> n >> m;
+  for (int i = n + 1; i <= m; ++i) {
+    bool prime = 1;
+    for (int j = 2; j <= sqrt(i); ++j) {
+      if (i % j == 0) {
+        prime = 0;
+        break;
+      }
     }
-    if (cnt == k && cur < best) {
-      best = cur;
-      ans = i;
+    if (prime) {
+      if (m == i) {
+        cout << "YES";
+      } else {
+        cout << "NO";
+      }
+      return 0;
     }
   }
-  cout << ans + 1;
+  cout << "NO";
 }

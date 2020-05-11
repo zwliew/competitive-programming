@@ -1,1 +1,3 @@
-python test.py
+param([string]$file = "a")
+
+python _work/python/$file.py

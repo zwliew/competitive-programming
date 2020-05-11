@@ -26,7 +26,7 @@
 
 using namespace std;
 
-#ifndef ONLINE_JUDGE
+#ifdef LOCAL
 #define debug(...) cerr << '[' << #__VA_ARGS__ << "]:", _debug(__VA_ARGS__)
 #else
 #define debug(...) 0
@@ -75,7 +75,6 @@ using vi = vector<int>;
 using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
-using vll = vector<ll>;
 
 int main() {
   cin.tie(nullptr);
@@ -89,26 +88,15 @@ int main() {
 
   int n, k;
   cin >> n >> k;
-  vi a(n);
-  for (auto &x : a) cin >> x;
+  vi arr(2 * n + 1);
+  for (auto &x : arr) cin >> x;
 
-  int cnt = 0;
-  int best = 1e9;
-  int ans = -1;
-  int i = 0;
-  int cur = 0;
-  for (int j = 0; j < n; ++j) {
-    ++cnt;
-    cur += a[j];
-    if (cnt > k) {
-      --cnt;
-      cur -= a[i];
-      ++i;
-    }
-    if (cnt == k && cur < best) {
-      best = cur;
-      ans = i;
+  for (int i = 1; i < 2 * n && k; i += 2) {
+    if (arr[i] > arr[i - 1] + 1 && arr[i] > arr[i + 1] + 1) {
+      --k;
+      arr[i]--;
     }
   }
-  cout << ans + 1;
+
+  for (auto x : arr) cout << x << ' ';
 }

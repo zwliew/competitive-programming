@@ -26,7 +26,7 @@
 
 using namespace std;
 
-#ifndef ONLINE_JUDGE
+#ifdef LOCAL
 #define debug(...) cerr << '[' << #__VA_ARGS__ << "]:", _debug(__VA_ARGS__)
 #else
 #define debug(...) 0
@@ -75,7 +75,6 @@ using vi = vector<int>;
 using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
-using vll = vector<ll>;
 
 int main() {
   cin.tie(nullptr);
@@ -87,28 +86,20 @@ int main() {
   freopen("./output.txt", "w", stdout);
 #endif
 
-  int n, k;
-  cin >> n >> k;
-  vi a(n);
-  for (auto &x : a) cin >> x;
+  int r1, r2, c1, c2, d1, d2;
+  cin >> r1 >> r2 >> c1 >> c2 >> d1 >> d2;
 
-  int cnt = 0;
-  int best = 1e9;
-  int ans = -1;
-  int i = 0;
-  int cur = 0;
-  for (int j = 0; j < n; ++j) {
-    ++cnt;
-    cur += a[j];
-    if (cnt > k) {
-      --cnt;
-      cur -= a[i];
-      ++i;
-    }
-    if (cnt == k && cur < best) {
-      best = cur;
-      ans = i;
-    }
+  for (int i = 1; i <= 9; ++i) {
+    int j = r1 - i;
+    int k = c1 - i;
+    int l = r2 - k;
+    if (i == j || i == k || i == l || j == k || j == l || k == l || j < 1 ||
+        j > 9 || k < 1 || k > 9 || l < 1 || l > 9 || i + l != d1 ||
+        j + k != d2 || j + l != c2)
+      continue;
+    cout << i << ' ' << j << '\n' << k << ' ' << l;
+    return 0;
   }
-  cout << ans + 1;
+
+  cout << -1;
 }

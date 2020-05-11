@@ -75,7 +75,6 @@ using vi = vector<int>;
 using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
-using vll = vector<ll>;
 
 int main() {
   cin.tie(nullptr);
@@ -87,28 +86,28 @@ int main() {
   freopen("./output.txt", "w", stdout);
 #endif
 
-  int n, k;
-  cin >> n >> k;
-  vi a(n);
-  for (auto &x : a) cin >> x;
+  int n;
+  cin >> n;
+  while (n--) {
+    string a, b;
+    cin >> a >> b;
 
-  int cnt = 0;
-  int best = 1e9;
-  int ans = -1;
-  int i = 0;
-  int cur = 0;
-  for (int j = 0; j < n; ++j) {
-    ++cnt;
-    cur += a[j];
-    if (cnt > k) {
-      --cnt;
-      cur -= a[i];
-      ++i;
+    vi out;
+    int carry = 0;
+    for (int i = 0; i < max(a.size(), b.size()); ++i) {
+      int cur = carry;
+      if (i < a.size()) cur += a[i] - '0';
+      if (i < b.size()) cur += b[i] - '0';
+      out.eb(cur % 10);
+      carry = cur / 10;
     }
-    if (cnt == k && cur < best) {
-      best = cur;
-      ans = i;
+    if (carry) out.eb(carry);
+
+    bool started = 0;
+    for (int x : out) {
+      if (x || started) cout << x;
+      started = started || x;
     }
+    cout << '\n';
   }
-  cout << ans + 1;
 }

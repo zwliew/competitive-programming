@@ -26,7 +26,7 @@
 
 using namespace std;
 
-#ifndef ONLINE_JUDGE
+#ifdef LOCAL
 #define debug(...) cerr << '[' << #__VA_ARGS__ << "]:", _debug(__VA_ARGS__)
 #else
 #define debug(...) 0
@@ -75,7 +75,6 @@ using vi = vector<int>;
 using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
-using vll = vector<ll>;
 
 int main() {
   cin.tie(nullptr);
@@ -87,28 +86,22 @@ int main() {
   freopen("./output.txt", "w", stdout);
 #endif
 
-  int n, k;
-  cin >> n >> k;
-  vi a(n);
-  for (auto &x : a) cin >> x;
-
-  int cnt = 0;
-  int best = 1e9;
-  int ans = -1;
-  int i = 0;
-  int cur = 0;
-  for (int j = 0; j < n; ++j) {
-    ++cnt;
-    cur += a[j];
-    if (cnt > k) {
-      --cnt;
-      cur -= a[i];
-      ++i;
+  ld x1, y1, x2, y2, x3, y3, x4, y4;
+  while (cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4) {
+    if (x1 == x3 && y1 == y3) {
+      swap(x1, x2);
+      swap(y1, y2);
+    } else if (x1 == x4 && y1 == y4) {
+      swap(x1, x2);
+      swap(y1, y2);
+      swap(x3, x4);
+      swap(y3, y4);
+    } else if (x2 == x4 && y2 == y4) {
+      swap(x3, x4);
+      swap(y3, y4);
     }
-    if (cnt == k && cur < best) {
-      best = cur;
-      ans = i;
-    }
+    ld dy = y4 - y3;
+    ld dx = x4 - x3;
+    cout << setprecision(3) << x1 + dx << ' ' << y1 + dy << '\n';
   }
-  cout << ans + 1;
 }

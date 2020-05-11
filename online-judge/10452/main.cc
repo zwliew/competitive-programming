@@ -26,7 +26,7 @@
 
 using namespace std;
 
-#ifndef ONLINE_JUDGE
+#ifdef LOCAL
 #define debug(...) cerr << '[' << #__VA_ARGS__ << "]:", _debug(__VA_ARGS__)
 #else
 #define debug(...) 0
@@ -75,7 +75,23 @@ using vi = vector<int>;
 using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
-using vll = vector<ll>;
+
+const vii edges = {{-1, 0}, {0, -1}, {0, 1}};
+const vector<string> cmds = {"forth", "left", "right"};
+void dfs(vector<vb> &grid, int r, int c, int gr, int gc) {
+  if (r == gr && c == gc) return;
+  grid[r][c] = 0;
+  for (int i = 0; i < edges.size(); ++i) {
+    auto &[dr, dc] = edges[i];
+    int nr = r + dr;
+    int nc = c + dc;
+    if (nr < 0 || nc < 0 || nr >= grid.size() || nc >= grid[0].size() ||
+        !grid[nr][nc])
+      continue;
+    cout << cmds[i] << ' ';
+    dfs(grid, nr, nc, gr, gc);
+  }
+}
 
 int main() {
   cin.tie(nullptr);
@@ -87,28 +103,36 @@ int main() {
   freopen("./output.txt", "w", stdout);
 #endif
 
-  int n, k;
-  cin >> n >> k;
-  vi a(n);
-  for (auto &x : a) cin >> x;
+  int t;
+  cin >> t;
+  while (t--) {
+    int n, m;
+    cin >> n >> m;
+    vector<vector<bool>> grid(n, vb(m));
+    int sr, sc, dr, dc;
+    for (int i = 0; i < n; ++i) {
+      for (int j = 0; j < m; ++j) {
+        char c;
+        cin >> c;
+        if (c == '@') {
+          sr = i;
+          sc = j;
+        } else if (c == '#') {
+          dr = i;
+          dc = j;
+        }
+        bool ok = 0;
+        for (char cand : {'I', 'E', 'H', 'O', 'V', 'A', '@', '#'}) {
+          if (cand == c) {
+            ok = 1;
+            break;
+          }
+        }
+        grid[i][j] = ok;
+      }
+    }
 
-  int cnt = 0;
-  int best = 1e9;
-  int ans = -1;
-  int i = 0;
-  int cur = 0;
-  for (int j = 0; j < n; ++j) {
-    ++cnt;
-    cur += a[j];
-    if (cnt > k) {
-      --cnt;
-      cur -= a[i];
-      ++i;
-    }
-    if (cnt == k && cur < best) {
-      best = cur;
-      ans = i;
-    }
+    dfs(grid, sr, sc, dr, dc);
+    cout << '\n';
   }
-  cout << ans + 1;
 }

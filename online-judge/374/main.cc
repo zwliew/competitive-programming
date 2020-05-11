@@ -75,7 +75,18 @@ using vi = vector<int>;
 using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
-using vll = vector<ll>;
+
+ll modpow(ll a, ll b, ll m) {
+  ll res = 1;
+  while (b) {
+    if (b & 1) {
+      res = (res * a) % m;
+    }
+    b >>= 1;
+    a = (a * a) % m;
+  }
+  return res;
+}
 
 int main() {
   cin.tie(nullptr);
@@ -87,28 +98,8 @@ int main() {
   freopen("./output.txt", "w", stdout);
 #endif
 
-  int n, k;
-  cin >> n >> k;
-  vi a(n);
-  for (auto &x : a) cin >> x;
-
-  int cnt = 0;
-  int best = 1e9;
-  int ans = -1;
-  int i = 0;
-  int cur = 0;
-  for (int j = 0; j < n; ++j) {
-    ++cnt;
-    cur += a[j];
-    if (cnt > k) {
-      --cnt;
-      cur -= a[i];
-      ++i;
-    }
-    if (cnt == k && cur < best) {
-      best = cur;
-      ans = i;
-    }
+  ll a, b, m;
+  while (cin >> a >> b >> m) {
+    cout << modpow(a, b, m) << '\n';
   }
-  cout << ans + 1;
 }

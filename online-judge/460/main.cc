@@ -26,7 +26,7 @@
 
 using namespace std;
 
-#ifndef ONLINE_JUDGE
+#ifdef LOCAL
 #define debug(...) cerr << '[' << #__VA_ARGS__ << "]:", _debug(__VA_ARGS__)
 #else
 #define debug(...) 0
@@ -75,7 +75,6 @@ using vi = vector<int>;
 using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
-using vll = vector<ll>;
 
 int main() {
   cin.tie(nullptr);
@@ -87,28 +86,24 @@ int main() {
   freopen("./output.txt", "w", stdout);
 #endif
 
-  int n, k;
-  cin >> n >> k;
-  vi a(n);
-  for (auto &x : a) cin >> x;
+  int t;
+  cin >> t;
+  for (int ti = 0; ti < t; ++ti) {
+    tuple<int, int, int, int> a, b;
+    auto &[ax1, ay1, ax2, ay2] = a;
+    cin >> ax1 >> ay1 >> ax2 >> ay2;
+    auto &[bx1, by1, bx2, by2] = b;
+    cin >> bx1 >> by1 >> bx2 >> by2;
 
-  int cnt = 0;
-  int best = 1e9;
-  int ans = -1;
-  int i = 0;
-  int cur = 0;
-  for (int j = 0; j < n; ++j) {
-    ++cnt;
-    cur += a[j];
-    if (cnt > k) {
-      --cnt;
-      cur -= a[i];
-      ++i;
+    int x1 = max(ax1, bx1);
+    int x2 = min(ax2, bx2);
+    int y1 = max(ay1, by1);
+    int y2 = min(ay2, by2);
+    if (x1 >= x2 || y1 >= y2) {
+      cout << "No Overlap\n";
+    } else {
+      cout << x1 << ' ' << y1 << ' ' << x2 << ' ' << y2 << '\n';
     }
-    if (cnt == k && cur < best) {
-      best = cur;
-      ans = i;
-    }
+    if (ti != t - 1) cout << "\n";
   }
-  cout << ans + 1;
 }

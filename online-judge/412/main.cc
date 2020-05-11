@@ -75,7 +75,6 @@ using vi = vector<int>;
 using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
-using vll = vector<ll>;
 
 int main() {
   cin.tie(nullptr);
@@ -87,28 +86,32 @@ int main() {
   freopen("./output.txt", "w", stdout);
 #endif
 
-  int n, k;
-  cin >> n >> k;
-  vi a(n);
-  for (auto &x : a) cin >> x;
-
-  int cnt = 0;
-  int best = 1e9;
-  int ans = -1;
-  int i = 0;
-  int cur = 0;
-  for (int j = 0; j < n; ++j) {
-    ++cnt;
-    cur += a[j];
-    if (cnt > k) {
-      --cnt;
-      cur -= a[i];
-      ++i;
+  int n;
+  while (cin >> n && n) {
+    vi arr(n);
+    for (int &x : arr) {
+      cin >> x;
     }
-    if (cnt == k && cur < best) {
-      best = cur;
-      ans = i;
+
+    ll cnt = 0;
+    for (int i = 0; i < n; ++i) {
+      for (int j = i + 1; j < n; ++j) {
+        int a = arr[i], b = arr[j];
+        while (b) {
+          a %= b;
+          swap(a, b);
+        }
+        if (a == 1) ++cnt;
+      }
+    }
+
+    ld res = (ld)3 / cnt * n * (n - 1);
+    res = sqrtl(res);
+
+    if (cnt) {
+      cout << setprecision(6) << res << '\n';
+    } else {
+      cout << "No estimate for this data set.\n";
     }
   }
-  cout << ans + 1;
 }

@@ -26,7 +26,7 @@
 
 using namespace std;
 
-#ifndef ONLINE_JUDGE
+#ifdef LOCAL
 #define debug(...) cerr << '[' << #__VA_ARGS__ << "]:", _debug(__VA_ARGS__)
 #else
 #define debug(...) 0
@@ -75,7 +75,6 @@ using vi = vector<int>;
 using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
-using vll = vector<ll>;
 
 int main() {
   cin.tie(nullptr);
@@ -87,28 +86,25 @@ int main() {
   freopen("./output.txt", "w", stdout);
 #endif
 
-  int n, k;
-  cin >> n >> k;
-  vi a(n);
-  for (auto &x : a) cin >> x;
+  int n;
+  cin >> n;
+  vb left(n);
+  for (int i = 0; i < n; ++i) {
+    char c;
+    cin >> c;
+    left[i] = c == 'L';
+  }
 
-  int cnt = 0;
-  int best = 1e9;
-  int ans = -1;
-  int i = 0;
-  int cur = 0;
-  for (int j = 0; j < n; ++j) {
-    ++cnt;
-    cur += a[j];
-    if (cnt > k) {
-      --cnt;
-      cur -= a[i];
-      ++i;
-    }
-    if (cnt == k && cur < best) {
-      best = cur;
-      ans = i;
+  vi arr(n);
+  for (auto &x : arr) cin >> x;
+
+  int ans = INT_MAX;
+  for (int i = 0; i < n - 1; ++i) {
+    if (!left[i] && left[i + 1]) {
+      debug(i);
+      ans = min(ans, (arr[i + 1] - arr[i]) / 2);
     }
   }
-  cout << ans + 1;
+
+  cout << (ans == INT_MAX ? -1 : ans);
 }

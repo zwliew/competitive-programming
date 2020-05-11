@@ -75,7 +75,6 @@ using vi = vector<int>;
 using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
-using vll = vector<ll>;
 
 int main() {
   cin.tie(nullptr);
@@ -87,28 +86,32 @@ int main() {
   freopen("./output.txt", "w", stdout);
 #endif
 
-  int n, k;
-  cin >> n >> k;
-  vi a(n);
-  for (auto &x : a) cin >> x;
-
-  int cnt = 0;
-  int best = 1e9;
-  int ans = -1;
-  int i = 0;
-  int cur = 0;
-  for (int j = 0; j < n; ++j) {
-    ++cnt;
-    cur += a[j];
-    if (cnt > k) {
-      --cnt;
-      cur -= a[i];
-      ++i;
-    }
-    if (cnt == k && cur < best) {
-      best = cur;
-      ans = i;
+  unordered_map<char, vc> lt;
+  for (int i = 0; i < 3; ++i) {
+    char x, y, cmp;
+    cin >> x >> cmp >> y;
+    if (cmp == '<') {
+      lt[x].eb(y);
+    } else {
+      lt[y].eb(x);
     }
   }
-  cout << ans + 1;
+  vc arr = {'A', 'B', 'C'};
+  do {
+    bool found = 1;
+    for (int i = 0; i < 3; ++i) {
+      for (int j = i + 1; j < 3; ++j) {
+        if (find(lt[arr[j]].begin(), lt[arr[j]].end(), arr[i]) !=
+            lt[arr[j]].end()) {
+          found = 0;
+        }
+      }
+    }
+    if (!found) continue;
+    for (char c : arr) {
+      cout << c;
+    }
+    return 0;
+  } while (next_permutation(arr.begin(), arr.end()));
+  cout << "Impossible";
 }

@@ -21,3 +21,5 @@ Sources:
 - [TopCoder](https://arena.topcoder.com/)
 - [CSES](https://cses.fi/problemset/list/)
 - [E-Olymp](https://www.e-olymp.com/)
+- [Timus](https://acm.timus.ru)
+- [ICPC Live Archie](https://icpcarchive.ecs.baylor.edu/)

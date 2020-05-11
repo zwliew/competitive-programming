@@ -26,7 +26,7 @@
 
 using namespace std;
 
-#ifndef ONLINE_JUDGE
+#ifdef LOCAL
 #define debug(...) cerr << '[' << #__VA_ARGS__ << "]:", _debug(__VA_ARGS__)
 #else
 #define debug(...) 0
@@ -75,7 +75,19 @@ using vi = vector<int>;
 using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
-using vll = vector<ll>;
+
+const vii edges = {{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
+void dfs(vector<vc> &grid, int r, int c) {
+  grid[r][c] = '.';
+  for (auto &[dr, dc] : edges) {
+    int nr = r + dr;
+    int nc = c + dc;
+    if (nr < 0 || nc < 0 || nr >= grid.size() || nc >= grid[0].size() ||
+        grid[nr][nc] == '.')
+      continue;
+    dfs(grid, nr, nc);
+  }
+}
 
 int main() {
   cin.tie(nullptr);
@@ -87,28 +99,29 @@ int main() {
   freopen("./output.txt", "w", stdout);
 #endif
 
-  int n, k;
-  cin >> n >> k;
-  vi a(n);
-  for (auto &x : a) cin >> x;
+  int t;
+  cin >> t;
+  for (int ti = 1; ti <= t; ++ti) {
+    int n;
+    cin >> n;
+    vector<vc> grid(n, vc(n));
+    for (int i = 0; i < n; ++i) {
+      for (int j = 0; j < n; ++j) {
+        char c;
+        cin >> c;
+        grid[i][j] = c;
+      }
+    }
 
-  int cnt = 0;
-  int best = 1e9;
-  int ans = -1;
-  int i = 0;
-  int cur = 0;
-  for (int j = 0; j < n; ++j) {
-    ++cnt;
-    cur += a[j];
-    if (cnt > k) {
-      --cnt;
-      cur -= a[i];
-      ++i;
+    int ans = 0;
+    for (int i = 0; i < n; ++i) {
+      for (int j = 0; j < n; ++j) {
+        if (grid[i][j] == 'x') {
+          ++ans;
+          dfs(grid, i, j);
+        }
+      }
     }
-    if (cnt == k && cur < best) {
-      best = cur;
-      ans = i;
-    }
+    cout << "Case " << ti << ": " << ans << '\n';
   }
-  cout << ans + 1;
 }

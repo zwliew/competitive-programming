@@ -75,7 +75,16 @@ using vi = vector<int>;
 using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
-using vll = vector<ll>;
+
+void add(int i, vi &x) {
+  int carry = i;
+  for (int idx = 0; idx < x.size() && carry; ++idx) {
+    int total = x[idx] + carry;
+    x[idx] = total % 10;
+    carry = total / 10;
+  }
+  if (carry) x.eb(carry);
+}
 
 int main() {
   cin.tie(nullptr);
@@ -87,28 +96,19 @@ int main() {
   freopen("./output.txt", "w", stdout);
 #endif
 
-  int n, k;
-  cin >> n >> k;
-  vi a(n);
-  for (auto &x : a) cin >> x;
-
-  int cnt = 0;
-  int best = 1e9;
-  int ans = -1;
-  int i = 0;
-  int cur = 0;
-  for (int j = 0; j < n; ++j) {
-    ++cnt;
-    cur += a[j];
-    if (cnt > k) {
-      --cnt;
-      cur -= a[i];
-      ++i;
-    }
-    if (cnt == k && cur < best) {
-      best = cur;
-      ans = i;
-    }
+  vi s;
+  char c;
+  while (cin >> c) {
+    c -= '0';
+    s.eb(c);
   }
-  cout << ans + 1;
+  reverse(s.begin(), s.end());
+  int cnt = 0;
+  while (s.size() > 1) {
+    vi x;
+    for (int i : s) add(i, x);
+    s = x;
+    ++cnt;
+  }
+  cout << cnt;
 }
