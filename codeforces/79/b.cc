@@ -83,7 +83,42 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifndef ONLINE_JUDGE
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  int n, m, k, t;
+  cin >> n >> m >> k >> t;
+
+  vi waste(k);
+  for (auto &x : waste) {
+    int r, c;
+    cin >> r >> c;
+    x = (r - 1) * m + c - 1;
+  }
+  sort(waste.begin(), waste.end());
+
+  const vector<string> fruits = {"Carrots", "Kiwis", "Grapes"};
+  while (t--) {
+    int r, c;
+    cin >> r >> c;
+    --r, --c;
+
+    int idx = r * m + c;
+    auto it = lower_bound(waste.begin(), waste.end(), idx);
+    if (*it == idx) {
+      cout << "Waste\n";
+      continue;
+    }
+
+    int wastecnt = 0;
+    if (it != waste.begin()) {
+      wastecnt = it - waste.begin();
+    }
+    idx -= wastecnt;
+
+    debug(wastecnt, idx);
+
+    cout << fruits[idx % 3] << '\n';
+  }
 }

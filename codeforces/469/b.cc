@@ -83,7 +83,39 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifndef ONLINE_JUDGE
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  int p, q, l, r;
+  cin >> p >> q >> l >> r;
+
+  vb a(1001);
+  for (int i = 0; i < p; ++i) {
+    int s, e;
+    cin >> s >> e;
+    for (int i = s; i <= e; ++i) {
+      a[i] = 1;
+    }
+  }
+
+  vb b(1001);
+  for (int i = 0; i < q; ++i) {
+    int s, e;
+    cin >> s >> e;
+    for (int i = s; i <= e; ++i) {
+      b[i] = 1;
+    }
+  }
+
+  int ans = 0;
+  for (int i = l; i <= r; ++i) {
+    for (int j = 0; j + i <= 1000; ++j) {
+      if (b[j] && j + i <= 1000 && a[j + i]) {
+        ++ans;
+        break;
+      }
+    }
+  }
+  cout << ans;
 }

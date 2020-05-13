@@ -77,13 +77,46 @@ using vc = vector<char>;
 using vb = vector<bool>;
 using vll = vector<ll>;
 
+ld backtrack(int start, int dest, int left) {
+  if (!left) {
+    return start == dest;
+  }
+
+  return backtrack(start + 1, dest, left - 1) / 2 +
+         backtrack(start - 1, dest, left - 1) / 2;
+}
+
 int main() {
   cin.tie(nullptr);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(9);
 
 #ifndef ONLINE_JUDGE
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  string a, b;
+  cin >> a >> b;
+
+  int dest = 0;
+  for (int i = 0; i < a.size(); ++i) {
+    if (a[i] == '+')
+      ++dest;
+    else
+      --dest;
+  }
+
+  int cnt = 0;
+  int start = 0;
+  for (int i = 0; i < b.size(); ++i) {
+    if (b[i] == '+')
+      ++start;
+    else if (b[i] == '-')
+      --start;
+    else
+      ++cnt;
+  }
+
+  cout << backtrack(start, dest, cnt);
 }

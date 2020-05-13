@@ -83,7 +83,25 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifndef ONLINE_JUDGE
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  int n;
+  cin >> n;
+  vi arr(n);
+  for (auto &x : arr) cin >> x;
+
+  sort(arr.begin(), arr.end());
+
+  for (int i = 0; i < n - 2; ++i) {
+    int a = arr[i];
+    int b = arr[i + 1];
+    int c = arr[i + 2];
+    if (a + b > c && a + c > b && b + c > a) {
+      cout << "YES";
+      return 0;
+    }
+  }
+  cout << "NO";
 }

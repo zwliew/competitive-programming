@@ -83,7 +83,42 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifndef ONLINE_JUDGE
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  int n, m;
+  cin >> n >> m;
+  vector<unordered_set<int>> adj(n);
+  for (int i = 0; i < m; ++i) {
+    int a, b;
+    cin >> a >> b;
+    --a, --b;
+    adj[a].emplace(b);
+    adj[b].emplace(a);
+  }
+
+  int ans = 0;
+  bool found = 1;
+  while (found) {
+    vi toclear;
+    found = 0;
+    for (int i = 0; i < n; ++i) {
+      if (adj[i].size() == 1) {
+        found = 1;
+        toclear.eb(i);
+      }
+    }
+
+    for (int x : toclear) {
+      for (int v : adj[x]) {
+        adj[v].erase(x);
+      }
+      adj[x].clear();
+    }
+
+    if (found) ++ans;
+  }
+
+  cout << ans;
 }

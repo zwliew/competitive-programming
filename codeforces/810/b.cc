@@ -83,7 +83,28 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifndef ONLINE_JUDGE
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  int n, f;
+  cin >> n >> f;
+  vector<pair<ll, ll>> a(n);
+  for (int i = 0; i < n; ++i) {
+    ll k, l;
+    cin >> k >> l;
+    a[i] = {min(l, k * 2) - min(k, l), min(k, l)};
+  }
+
+  sort(a.rbegin(), a.rend());
+
+  ll cnt = 0;
+  for (int i = 0; i < n; ++i) {
+    if (i < f) {
+      cnt += a[i].first + a[i].second;
+    } else {
+      cnt += a[i].second;
+    }
+  }
+  cout << cnt;
 }

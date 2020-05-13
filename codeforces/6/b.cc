@@ -83,7 +83,44 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifndef ONLINE_JUDGE
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  int n, m;
+  char c;
+  cin >> n >> m >> c;
+
+  vii locs;
+  vector<vc> grid(n, vc(m));
+  for (int i = 0; i < n; ++i) {
+    for (int j = 0; j < m; ++j) {
+      cin >> grid[i][j];
+      if (grid[i][j] == c) {
+        locs.emplace_back(i, j);
+      }
+    }
+  }
+
+  int cnt = 0;
+  vb seen(256);
+  for (auto &[r, c] : locs) {
+    for (int dr = -1; dr <= 1; ++dr) {
+      int nr = dr + r;
+      if (nr < 0 || nr >= n) continue;
+      for (int dc = -1; dc <= 1; ++dc) {
+        int nc = dc + c;
+        if (!dc && !dr) continue;
+        if (dr && dc) continue;
+        if (nc < 0 || nc >= m) continue;
+        if (grid[nr][nc] == '.') continue;
+        if (!seen[grid[nr][nc]]) {
+          ++cnt;
+          seen[grid[nr][nc]] = 1;
+        }
+      }
+    }
+  }
+
+  cout << cnt - seen[c];
 }

@@ -83,7 +83,23 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifndef ONLINE_JUDGE
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  int n, m;
+  cin >> n >> m;
+  unordered_set<int> seen;
+  for (int i = 0; i < n; ++i) {
+    string s;
+    cin >> s;
+    int d = s.find('G');
+    int c = s.find('S');
+    if (c < d) {
+      cout << -1;
+      return 0;
+    }
+    seen.emplace(d - c);
+  }
+  cout << seen.size();
 }

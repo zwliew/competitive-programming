@@ -77,13 +77,54 @@ using vc = vector<char>;
 using vb = vector<bool>;
 using vll = vector<ll>;
 
+const vector<tuple<int, int, int>> win = {
+    {0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6},
+    {1, 4, 7}, {2, 5, 8}, {0, 4, 8}, {2, 4, 6},
+};
+
+bool backtrack(vc &start, vc &end, bool turn) {
+  if (start == end) {
+    return 1;
+  }
+
+  for (auto &[a, b, c] : win) {
+    if (start[a] == start[b] && start[a] == start[c] && start[a] != '.') {
+      return 0;
+    }
+  }
+
+  char player = turn ? 'X' : 'O';
+
+  for (int i = 0; i < 9; ++i) {
+    if (start[i] == '.') {
+      start[i] = player;
+      if (backtrack(start, end, !turn)) return 1;
+      start[i] = '.';
+    }
+  }
+
+  return 0;
+}
+
 int main() {
   cin.tie(nullptr);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(9);
 
 #ifndef ONLINE_JUDGE
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  int n;
+  cin >> n;
+  while (n--) {
+    vc end(9);
+    for (int i = 0; i < 9; ++i) {
+      cin >> end[i];
+    }
+
+    vc start(9, '.');
+    cout << (backtrack(start, end, 1) ? "yes" : "no") << '\n';
+  }
 }

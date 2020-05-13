@@ -77,13 +77,49 @@ using vc = vector<char>;
 using vb = vector<bool>;
 using vll = vector<ll>;
 
+const vector<tuple<int, int, int>> win = {
+    {0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6},
+    {1, 4, 7}, {2, 5, 8}, {0, 4, 8}, {2, 4, 6},
+};
+unordered_set<string> valid;
+void backtrack(string &s, bool turn) {
+  for (auto &[a, b, c] : win) {
+    if (s[a] == s[b] && s[a] == s[c] && s[a] != '.') {
+      valid.emplace(s);
+      return;
+    }
+  }
+
+  bool found = 0;
+  char player = turn ? 'X' : 'O';
+  for (int i = 0; i < 9; ++i) {
+    if (s[i] == '.') {
+      s[i] = player;
+      backtrack(s, !turn);
+      s[i] = '.';
+      found = 1;
+    }
+  }
+
+  if (!found) {
+    valid.emplace(s);
+  }
+}
+
 int main() {
   cin.tie(nullptr);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(9);
 
 #ifndef ONLINE_JUDGE
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  string s;
+  string start = ".........";
+  backtrack(start, 1);
+  while (cin >> s && s != "end") {
+    cout << (valid.count(s) ? "valid\n" : "invalid\n");
+  }
 }

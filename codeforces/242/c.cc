@@ -83,7 +83,54 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifndef ONLINE_JUDGE
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  int sr, sc, gr, gc;
+  cin >> sr >> sc >> gr >> gc;
+  --sr, --sc, --gr, --gc;
+
+  int n;
+  cin >> n;
+  set<ii> allowed;
+  while (n--) {
+    int r, a, b;
+    cin >> r >> a >> b;
+    --r, --a, --b;
+    for (int i = a; i <= b; ++i) {
+      allowed.emplace(r, i);
+    }
+  }
+
+  map<ii, int> dist;
+  queue<ii> q;
+  q.emplace(sr, sc);
+  dist[{sr, sc}] = 0;
+  while (q.size()) {
+    auto p = q.front();
+    auto &[r, c] = p;
+    q.pop();
+
+    if (r == gr && c == gc) {
+      cout << dist[p];
+      return 0;
+    }
+
+    int ndist = dist[p] + 1;
+    for (int dr = -1; dr <= 1; ++dr) {
+      for (int dc = -1; dc <= 1; ++dc) {
+        if (!dr && !dc) continue;
+        int nr = r + dr;
+        int nc = c + dc;
+        auto np = make_pair(nr, nc);
+        if (!allowed.count(np)) continue;
+        if (dist.count(np)) continue;
+        dist[np] = ndist;
+        q.emplace(nr, nc);
+      }
+    }
+  }
+
+  cout << -1;
 }

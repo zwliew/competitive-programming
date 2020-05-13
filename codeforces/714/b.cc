@@ -83,7 +83,47 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifndef ONLINE_JUDGE
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  // Official solution
+  int n;
+  cin >> n;
+  unordered_set<int> hs;
+  for (int i = 0; i < n; ++i) {
+    int x;
+    cin >> x;
+    hs.emplace(x);
+  }
+
+  if (hs.size() <= 2) {
+    cout << "YES";
+  } else if (hs.size() >= 4) {
+    cout << "NO";
+  } else {
+    vi arr(hs.begin(), hs.end());
+    sort(arr.begin(), arr.end());
+    cout << (arr.front() + arr.back() == arr[1] * 2 ? "YES" : "NO");
+  }
+
+  // Solution I used
+  // int n;
+  // cin >> n;
+  // vi arr(n);
+  // for (auto &x : arr) cin >> x;
+  // sort(arr.begin(), arr.end());
+
+  // int diff = arr.back() - arr.front();
+  // if (diff % 2 == 0) diff /= 2;
+
+  // int target = arr.front() + diff;
+  // for (int i = 0; i < n; ++i) {
+  //   if (arr[i] != target && arr[i] - diff != target &&
+  //       arr[i] + diff != target) {
+  //     cout << "NO";
+  //     return 0;
+  //   }
+  // }
+  // cout << "YES";
 }

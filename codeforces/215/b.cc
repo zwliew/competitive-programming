@@ -83,7 +83,28 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifndef ONLINE_JUDGE
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  int n, m, k, a, b;
+  cin >> n;
+  vi r1(n);
+  for (auto &x : r1) cin >> x;
+  cin >> m;
+  vi p1(m);
+  for (auto &x : p1) cin >> x;
+  cin >> k;
+  vi p2(k);
+  for (auto &x : p2) cin >> x;
+  cin >> a >> b;
+
+  nth_element(r1.begin(), r1.end() - 1, r1.end());
+  nth_element(p2.begin(), p2.begin(), p2.end());
+  nth_element(p1.begin(), p1.end() - 1, p1.end());
+
+  ld r1sq = (ld)r1.back() * r1.back();
+  ld p2frac = (ld)p2.front() * a / b;
+  ld ans = r1sq * p1.back() / (p1.back() + p2frac);
+  cout << sqrtl(ans);
 }

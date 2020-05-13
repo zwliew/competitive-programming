@@ -83,7 +83,50 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifndef ONLINE_JUDGE
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  const vii edges = {
+      {1, 2}, {1, -2}, {-1, 2}, {-1, -2}, {2, 1}, {-2, 1}, {2, -1}, {-2, -1},
+  };
+  vector<vector<vector<vi>>> dist(
+      8, vector<vector<vi>>(8, vector<vi>(8, vi(8, 1e9))));
+  for (int i = 0; i < 8; ++i)
+    for (int j = 0; j < 8; ++j) dist[i][j][i][j] = 0;
+  string s, d;
+  while (cin >> s >> d) {
+    int sr = s.front() - 'a';
+    int sc = s.back() - '0' - 1;
+    int dr = d.front() - 'a';
+    int dc = d.back() - '0' - 1;
+
+    if (dist[sr][sc][dr][dc] < 1e9) {
+      cout << "To get from " << s << " to " << d << " takes "
+           << dist[sr][sc][dr][dc] << " knight moves.\n";
+      continue;
+    }
+
+    queue<ii> q;
+    q.emplace(sr, sc);
+    while (q.size()) {
+      auto [r, c] = q.front();
+      q.pop();
+
+      if (r == dr && c == dc) {
+        cout << "To get from " << s << " to " << d << " takes "
+             << dist[sr][sc][dr][dc] << " knight moves.\n";
+        break;
+      }
+
+      for (auto &[der, dec] : edges) {
+        int nr = r + der;
+        int nc = c + dec;
+        if (nr < 0 || nc < 0 || nr >= 8 || nc >= 8) continue;
+        if (dist[sr][sc][nr][nc] < 1e9) continue;
+        dist[sr][sc][nr][nc] = dist[sr][sc][r][c] + 1;
+        q.emplace(nr, nc);
+      }
+    }
+  }
 }

@@ -83,7 +83,55 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifndef ONLINE_JUDGE
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  int n, m, x;
+  cin >> n >> m >> x;
+  vii shifts;
+  vector<vii> keys(256);
+  for (int i = 0; i < n; ++i) {
+    for (int j = 0; j < m; ++j) {
+      char c;
+      cin >> c;
+      if (c != 'S') {
+        keys[tolower(c)].emplace_back(i, j);
+      } else {
+        shifts.emplace_back(i, j);
+      }
+    }
+  }
+
+  vi can(256, -1);
+  int cnt = 0;
+  int q;
+  cin >> q;
+  while (q--) {
+    char c;
+    cin >> c;
+    char look = tolower(c);
+    if ((isupper(c) && shifts.empty()) || keys[look].empty()) {
+      cout << "-1\n";
+      return 0;
+    }
+
+    if (isupper(c)) {
+      if (can[look] == -1) {
+        can[look] = 0;
+        for (auto &[kr, kc] : keys[look]) {
+          if (can[look]) break;
+          for (auto &[sr, sc] : shifts) {
+            if (sqrt((sr - kr) * (sr - kr) + (sc - kc) * (sc - kc)) <= x) {
+              can[look] = 1;
+              break;
+            }
+          }
+        }
+      }
+      if (!can[look]) ++cnt;
+    }
+  }
+
+  cout << cnt;
 }
