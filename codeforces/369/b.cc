@@ -83,7 +83,26 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifdef LOCAL
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  int n, k, l, r, sall, sk;
+  cin >> n >> k >> l >> r >> sall >> sk;
+
+  int rem = sk % k;
+  for (int i = 0; i < k; ++i) {
+    cout << sk / k + (rem > 0) << ' ';
+    --rem;
+  }
+
+  if (n > k) {
+    sall -= sk;
+    n -= k;
+    rem = sall % n;
+    for (int i = 0; i < n; ++i) {
+      cout << sall / n + (rem > 0) << ' ';
+      --rem;
+    }
+  }
 }

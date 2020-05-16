@@ -77,13 +77,32 @@ using vc = vector<char>;
 using vb = vector<bool>;
 using vll = vector<ll>;
 
+ll modpow(ll a, ll b, ll mod) {
+  ll ans = 1;
+  while (b) {
+    if (b & 1) {
+      ans *= a;
+      ans %= mod;
+    }
+    a *= a;
+    a %= mod;
+    b /= 2;
+  }
+  return ans;
+}
+
 int main() {
   cin.tie(nullptr);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(9);
 
 #ifdef LOCAL
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  const ll mod = 1e9 + 7;
+  int n;
+  cin >> n;
+  cout << (modpow(3, n * 3, mod) - modpow(7, n, mod) + mod) % mod;
 }

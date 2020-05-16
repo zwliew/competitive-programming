@@ -83,7 +83,39 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifdef LOCAL
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  int a, x, y;
+  cin >> a >> x >> y;
+
+  if (y % a == 0 || x >= a || x <= -a) {
+    cout << -1;
+    return 0;
+  }
+
+  if (y < a) {
+    cout << (x * 2 < a && x * 2 > -a ? 1 : -1);
+    return 0;
+  }
+
+  y -= a;
+  int q = y / a;
+  int q2 = q / 2 * 3;
+  if (q % 2) {
+    if (!x) {
+      cout << -1;
+    } else if (x < 0) {
+      cout << 3 + q2;
+    } else {
+      cout << 4 + q2;
+    }
+  } else {
+    if (x * 2 < a && x * 2 > -a) {
+      cout << 2 + q2;
+    } else {
+      cout << -1;
+    }
+  }
 }

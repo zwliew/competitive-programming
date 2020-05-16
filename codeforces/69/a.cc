@@ -83,7 +83,19 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifdef LOCAL
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  int n;
+  cin >> n;
+  int x = 0, y = 0, z = 0;
+  while (n--) {
+    int a, b, c;
+    cin >> a >> b >> c;
+    x += a;
+    y += b;
+    z += c;
+  }
+  cout << (!x && !y && !z ? "YES" : "NO");
 }

@@ -26,7 +26,9 @@
 
 using namespace std;
 
-#ifdef LOCAL
+#define ONLINE_JUDGE
+
+#ifndef ONLINE_JUDGE
 #define debug(...) cerr << '[' << #__VA_ARGS__ << "]:", _debug(__VA_ARGS__)
 #else
 #define debug(...) 0
@@ -82,8 +84,30 @@ int main() {
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(9);
 
-#ifdef LOCAL
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+#ifndef ONLINE_JUDGE
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  int n, k;
+  cin >> n >> k;
+
+  vii arr(n);
+  for (auto &[e, s] : arr) cin >> s >> e;
+  sort(arr.begin(), arr.end());
+
+  int ans = 0;
+  multiset<int> jobs;
+  for (auto &[e, s] : arr) {
+    auto it = jobs.upper_bound(s);
+    if (jobs.size() && it != jobs.begin()) {
+      jobs.erase(prev(it));
+      jobs.emplace(e);
+      ++ans;
+    } else if (jobs.size() < k) {
+      jobs.emplace(e);
+      ++ans;
+    }
+  }
+  cout << ans;
 }

@@ -83,7 +83,35 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifdef LOCAL
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  int n;
+  while (cin >> n && n) {
+    int x, y;
+    vii arr;
+    for (int i = 0; i < n; ++i) {
+      int cx, cy;
+      cin >> cx >> cy;
+      if (i == n / 2) {
+        x = cx;
+        y = cy;
+      } else {
+        arr.eb(cx, cy);
+      }
+    }
+
+    int stan = 0, ollie = 0;
+    for (int i = 0; i < arr.size(); ++i) {
+      auto [cx, cy] = arr[i];
+      if ((cy > y && cx > x) || (cy < y && cx < x)) {
+        ++stan;
+      } else if ((cx > x && cy < y) || (cy > y && cx < x)) {
+        ++ollie;
+      }
+    }
+
+    cout << stan << ' ' << ollie << '\n';
+  }
 }

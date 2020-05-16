@@ -83,7 +83,12 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifdef LOCAL
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  string s;
+  cin >> s;
+  s[0] = toupper(s[0]);
+  cout << s;
 }

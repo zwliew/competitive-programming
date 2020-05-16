@@ -82,8 +82,23 @@ int main() {
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(9);
 
-#ifdef LOCAL
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
-#endif
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
+
+  int n;
+  cin >> n;
+  vi arr(n);
+  for (auto &x : arr) cin >> x;
+  sort(arr.begin(), arr.end());
+
+  int ans = 1e9;
+  for (int i = 0; i < n; ++i) {
+    int hi = arr[i] * 2;
+    auto it = upper_bound(arr.begin(), arr.end(), hi);
+    if (it != arr.begin()) {
+      ans = min<int>(ans, i + arr.end() - it);
+    }
+  }
+
+  cout << ans;
 }

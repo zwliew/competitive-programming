@@ -77,13 +77,60 @@ using vc = vector<char>;
 using vb = vector<bool>;
 using vll = vector<ll>;
 
+int rows, cols, mi, ma;
+int ans(vector<vector<vi>> &dp, vi &blacks, int idx, int columns, bool black) {
+  if (idx >= cols) {
+    return (columns >= mi ? 0 : 1e9);
+  }
+  if (columns > ma) {
+    return 1e9;
+  }
+
+  if (dp[idx][columns][black] != -1) {
+    return dp[idx][columns][black];
+  }
+
+  dp[idx][columns][black] = ans(dp, blacks, idx + 1, columns + 1, black);
+  if (black) {
+    dp[idx][columns][black] += rows - blacks[idx];
+  } else {
+    dp[idx][columns][black] += blacks[idx];
+  }
+  if (columns >= mi) {
+    int next = ans(dp, blacks, idx + 1, 1, !black);
+    if (black) {
+      next += blacks[idx];
+    } else {
+      next += rows - blacks[idx];
+    }
+    dp[idx][columns][black] = min(dp[idx][columns][black], next);
+  }
+  return dp[idx][columns][black];
+}
+
 int main() {
   cin.tie(nullptr);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(9);
 
 #ifdef LOCAL
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  cin >> rows >> cols >> mi >> ma;
+
+  vector<vc> grid(rows, vc(cols));
+  vi blacks(cols);
+  for (int i = 0; i < rows; ++i) {
+    for (int j = 0; j < cols; ++j) {
+      cin >> grid[i][j];
+      if (grid[i][j] == '#') {
+        blacks[j]++;
+      }
+    }
+  }
+
+  vector<vector<vi>> dp(cols, vector<vi>(ma + 1, vi(2, -1)));
+  cout << min(ans(dp, blacks, 0, 0, 1), ans(dp, blacks, 0, 0, 0));
 }

@@ -83,7 +83,42 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifdef LOCAL
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  string a, b;
+  cin >> a >> b;
+
+  unordered_map<char, int> am, bm;
+  for (char c : a) am[c]++;
+  for (char c : b) bm[c]++;
+
+  for (auto &[k, v] : bm) {
+    if (!am.count(k) || am[k] < v) {
+      cout << "need tree";
+      return 0;
+    }
+  }
+
+  bool automaton = am != bm;
+  bool array = false;
+  int j = 0;
+  for (int i = 0; i < b.size(); ++i) {
+    while (j < a.size() && a[j] != b[i]) ++j;
+
+    if (j >= a.size()) {
+      array = true;
+      break;
+    }
+    ++j;
+  }
+
+  if (array && !automaton) {
+    cout << "array";
+  } else if (automaton && !array) {
+    cout << "automaton";
+  } else {
+    cout << "both";
+  }
 }

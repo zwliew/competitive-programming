@@ -83,7 +83,23 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifdef LOCAL
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  int l, r, a;
+  cin >> l >> r >> a;
+
+  int ans = min(l, r);
+  l -= ans;
+  r -= ans;
+  if (r) swap(l, r);
+  int delta = min(l, a);
+  ans += delta;
+  l -= delta;
+  a -= delta;
+  if (a) {
+    ans += a / 2;
+  }
+  cout << ans * 2;
 }

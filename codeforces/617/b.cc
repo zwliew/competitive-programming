@@ -26,7 +26,7 @@
 
 using namespace std;
 
-#ifdef LOCAL
+#ifndef ONLINE_JUDGE
 #define debug(...) cerr << '[' << #__VA_ARGS__ << "]:", _debug(__VA_ARGS__)
 #else
 #define debug(...) 0
@@ -82,8 +82,24 @@ int main() {
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(9);
 
-#ifdef LOCAL
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+#ifndef ONLINE_JUDGE
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  int n;
+  cin >> n;
+  int prev = -1;
+  ll ans = 1;
+  for (int i = 0; i < n; ++i) {
+    int x;
+    cin >> x;
+    if (x) {
+      if (prev != -1) {
+        ans *= i - prev;
+      }
+      prev = i;
+    }
+  }
+  cout << (prev == -1 ? 0 : ans);
 }

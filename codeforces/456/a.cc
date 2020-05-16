@@ -83,7 +83,23 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifdef LOCAL
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  int n;
+  cin >> n;
+  vii arr(n);
+  for (auto &[p, q] : arr) cin >> p >> q;
+  sort(arr.begin(), arr.end());
+
+  int maxq = -1e9;
+  for (int i = 0; i < n; ++i) {
+    if (maxq > arr[i].second) {
+      cout << "Happy Alex";
+      return 0;
+    }
+    maxq = max(maxq, arr[i].second);
+  }
+  cout << "Poor Alex";
 }

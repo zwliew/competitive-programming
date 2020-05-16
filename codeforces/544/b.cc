@@ -83,7 +83,33 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifdef LOCAL
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  int n, k;
+  cin >> n >> k;
+
+  vector<vc> grid(n, vc(n, 'S'));
+  int cnt = 0;
+  for (int i = 0; i < n && cnt < k; ++i) {
+    for (int j = 0; j < n && cnt < k; ++j) {
+      if ((i + j) % 2 == 0) {
+        grid[i][j] = 'L';
+        ++cnt;
+      }
+    }
+  }
+
+  if (cnt < k) {
+    cout << "NO";
+  } else {
+    cout << "YES\n";
+    for (int i = 0; i < n; ++i) {
+      for (int j = 0; j < n; ++j) {
+        cout << grid[i][j];
+      }
+      cout << '\n';
+    }
+  }
 }

@@ -83,7 +83,46 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifdef LOCAL
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  int n;
+  cin >> n;
+  vii arr(n + 2);
+  arr[0] = {INT_MIN, 0};
+  for (int i = 1; i <= n; ++i) {
+    int x, h;
+    cin >> x >> h;
+    arr[i] = {x, h};
+  }
+  arr[n + 1] = {INT_MAX, 0};
+
+  int ans = 0;
+  vector<vi> dp(n + 2,
+                vi(3));  // 0 =dont fell, 1=fell to right, 2= fell to left
+
+  for (int i = n; i; --i) {
+    dp[i][0] = max({dp[i + 1][2], dp[i + 1][0], dp[i + 1][1]});
+
+    if (arr[i].first - arr[i].second > arr[i - 1].first) {
+      dp[i][2] = max({dp[i + 1][0], dp[i + 1][1], dp[i + 1][2]}) + 1;
+    } else {
+      dp[i][2] = INT_MIN;
+    }
+
+    if (arr[i].first + arr[i].second < arr[i + 1].first) {
+      dp[i][1] = max(dp[i + 1][0], dp[i + 1][1]);
+      if (arr[i].first + arr[i].second < arr[i + 1].first - arr[i + 1].second) {
+        dp[i][1] = max(dp[i][1], dp[i + 1][2]);
+      }
+      ++dp[i][1];
+    } else {
+      dp[i][1] = INT_MIN;
+    }
+
+    ans = max({ans, dp[i][0], dp[i][1], dp[i][2]});
+  }
+  debug(dp);
+  cout << ans;
 }

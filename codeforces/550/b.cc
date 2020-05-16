@@ -77,13 +77,55 @@ using vc = vector<char>;
 using vb = vector<bool>;
 using vll = vector<ll>;
 
+int n, l, r, x;
+vi arr;
+
+int count(int sum, int idx, int cmin, int cmax) {
+  if (sum > r) return 0;
+  if (idx >= n) {
+    return sum >= l && cmax - cmin >= x;
+  }
+
+  return count(sum + arr[idx], idx + 1, min(cmin, arr[idx]),
+               max(cmax, arr[idx])) +
+         count(sum, idx + 1, cmin, cmax);
+}
+
 int main() {
   cin.tie(nullptr);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(9);
 
 #ifdef LOCAL
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  cin >> n >> l >> r >> x;
+  for (int i = 0; i < n; ++i) {
+    int c;
+    cin >> c;
+    arr.eb(c);
+  }
+
+  int ans = 0;
+  for (int i = 0; i < (1 << n); ++i) {
+    int sum = 0;
+    int cmin = INT_MAX;
+    int cmax = INT_MIN;
+
+    for (int j = 0; j < n; ++j) {
+      if (i & (1 << j)) {
+        sum += arr[j];
+        cmin = min(cmin, arr[j]);
+        cmax = max(cmax, arr[j]);
+      }
+    }
+
+    ans += sum >= l && sum <= r && cmax - cmin >= x;
+  }
+  cout << ans;
+
+  // Alternative recursive backtracking solution
+  // cout << count(0, 0, INT_MAX, INT_MIN);
 }

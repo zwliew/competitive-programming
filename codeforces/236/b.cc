@@ -26,7 +26,7 @@
 
 using namespace std;
 
-#ifdef LOCAL
+#ifndef ONLINE_JUDGE
 #define debug(...) cerr << '[' << #__VA_ARGS__ << "]:", _debug(__VA_ARGS__)
 #else
 #define debug(...) 0
@@ -82,8 +82,40 @@ int main() {
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(9);
 
-#ifdef LOCAL
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+#ifndef ONLINE_JUDGE
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  const ll mod = 1073741824;
+  ll ans = 0;
+  int a, b, c;
+  cin >> a >> b >> c;
+
+  vll divisors(a * b * c + 1);
+  for (int i = 1; i <= a * b * c; ++i) {
+    ll div = 1;
+    int cur = i;
+    for (int d = 2; d * d <= cur; ++d) {
+      if (cur % d == 0) {
+        ll curdiv = 1;
+        while (cur % d == 0) {
+          cur /= d;
+          ++curdiv;
+        }
+        div *= curdiv;
+      }
+    }
+    if (cur > 1) div *= 2;
+    divisors[i] = div;
+  }
+
+  for (int i = 1; i <= a; ++i) {
+    for (int j = 1; j <= b; ++j) {
+      for (int k = 1; k <= c; ++k) {
+        ans = (ans + divisors[i * j * k]) % mod;
+      }
+    }
+  }
+  cout << ans;
 }

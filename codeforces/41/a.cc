@@ -83,7 +83,12 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifdef LOCAL
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  string a, b;
+  cin >> a >> b;
+  reverse(a.begin(), a.end());
+  cout << (a == b ? "YES" : "NO");
 }

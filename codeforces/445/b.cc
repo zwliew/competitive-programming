@@ -77,13 +77,45 @@ using vc = vector<char>;
 using vb = vector<bool>;
 using vll = vector<ll>;
 
+int dfs(vector<vi> &adj, vb &vis, int u) {
+  vis[u] = true;
+  int cnt = 1;
+  for (int v : adj[u]) {
+    if (!vis[v]) {
+      cnt += dfs(adj, vis, v);
+    }
+  }
+  return cnt;
+}
+
 int main() {
   cin.tie(nullptr);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(9);
 
 #ifdef LOCAL
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  int n, m;
+  cin >> n >> m;
+  vector<vi> adj(n);
+  for (int i = 0; i < m; ++i) {
+    int x, y;
+    cin >> x >> y;
+    --x, --y;
+    adj[x].eb(y);
+    adj[y].eb(x);
+  }
+
+  vb vis(n);
+  ll ans = 1;
+  for (int i = 0; i < n; ++i) {
+    if (!vis[i]) {
+      int cnt = dfs(adj, vis, i);
+      ans *= (ll)powl(2, cnt - 1);
+    }
+  }
+  cout << ans;
 }

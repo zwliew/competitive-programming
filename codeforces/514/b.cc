@@ -83,7 +83,41 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifdef LOCAL
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  int n, x0, y0;
+  cin >> n >> x0 >> y0;
+  vii troops;
+  for (int i = 0; i < n; ++i) {
+    int x, y;
+    cin >> x >> y;
+    troops.emplace_back(x, y);
+  }
+
+  vb removed(n);
+  int left = n;
+  int cnt = 0;
+  while (left) {
+    int dx, dy;
+    for (int i = 0; i < n; ++i) {
+      if (removed[i]) continue;
+      dx = troops[i].first - x0;
+      dy = troops[i].second - y0;
+      break;
+    }
+    ++cnt;
+
+    for (int i = 0; i < n; ++i) {
+      if (removed[i]) continue;
+      int cdx = troops[i].first - x0;
+      int cdy = troops[i].second - y0;
+      if (dx * cdy != cdx * dy) continue;
+      removed[i] = 1;
+      left--;
+    }
+  }
+
+  cout << cnt;
 }

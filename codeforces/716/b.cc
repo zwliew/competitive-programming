@@ -83,7 +83,57 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifdef LOCAL
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  string s;
+  cin >> s;
+
+  unordered_map<char, int> letters;
+  int qns = 0;
+  for (int i = 0; i < 25; ++i) {
+    if (s[i] == '?')
+      ++qns;
+    else
+      ++letters[s[i]];
+  }
+  for (int i = 25; i < s.size(); ++i) {
+    if (s[i] == '?')
+      ++qns;
+    else
+      ++letters[s[i]];
+
+    if (i > 25) {
+      if (s[i - 26] == '?')
+        --qns;
+      else {
+        --letters[s[i - 26]];
+        if (letters[s[i - 26]] == 0) {
+          letters.erase(s[i - 26]);
+        }
+      }
+    }
+
+    if (qns + letters.size() == 26) {
+      for (int k = i - 25; k <= i; ++k) {
+        for (char c = 'A'; c <= 'Z'; ++c) {
+          if (s[k] == '?' && !letters.count(c)) {
+            s[k] = c;
+            letters[c]++;
+            break;
+          }
+        }
+      }
+
+      for (int k = 0; k < s.size(); ++k) {
+        if (s[k] == '?') {
+          s[k] = 'A';
+        }
+      }
+      cout << s;
+      return 0;
+    }
+  }
+  cout << -1;
 }

@@ -83,7 +83,17 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifdef LOCAL
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  int n, k;
+  cin >> n >> k;
+  vi arr(n);
+  for (auto &x : arr) cin >> x;
+  int ans = 0;
+  for (int i = 0; i < n && arr[i] >= arr[k - 1] && arr[i] > 0; ++i) {
+    ++ans;
+  }
+  cout << ans;
 }

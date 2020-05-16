@@ -83,7 +83,31 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifdef LOCAL
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  ll n, m;
+  cin >> n >> m;
+
+  vi dist(1e6, 1e9);
+  dist[n] = 0;
+  queue<int> q;
+  q.emplace(n);
+  while (q.size()) {
+    int cur = q.front();
+    if (cur == m) {
+      cout << dist[m];
+      return 0;
+    }
+    q.pop();
+    if (cur < m && dist[cur * 2] == 1e9) {
+      dist[cur * 2] = dist[cur] + 1;
+      q.emplace(cur * 2);
+    }
+    if (cur > 1 && dist[cur - 1] == 1e9) {
+      dist[cur - 1] = dist[cur] + 1;
+      q.emplace(cur - 1);
+    }
+  }
 }

@@ -83,7 +83,21 @@ int main() {
   cout << fixed << setprecision(9);
 
 #ifdef LOCAL
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  int n;
+  cin >> n;
+  int x = 0;
+  while (n--) {
+    string s;
+    cin >> s;
+    if (s.find('++') != s.npos) {
+      ++x;
+    } else {
+      --x;
+    }
+  }
+  cout << x;
 }

@@ -77,13 +77,54 @@ using vc = vector<char>;
 using vb = vector<bool>;
 using vll = vector<ll>;
 
+int dfs(vector<vc> &grid, vector<vb> &vis, int n, int m, char l, int r, int c) {
+  vis[r][c] = true;
+  int cnt = 1;
+  for (int dr = -1; dr <= 1; ++dr) {
+    for (int dc = -1; dc <= 1; ++dc) {
+      if (dr && dc) continue;
+      int nr = r + dr;
+      int nc = (c + dc + m) % m;
+      if (nr < 0 || nr >= n || vis[nr][nc] || grid[nr][nc] != l) continue;
+      cnt += dfs(grid, vis, n, m, l, nr, nc);
+    }
+  }
+  return cnt;
+}
+
 int main() {
   cin.tie(nullptr);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(9);
 
 #ifdef LOCAL
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+  freopen("./input.txt", "r", stdin);
+  freopen("./output.txt", "w", stdout);
 #endif
+
+  int n, m;
+  while (cin >> n >> m) {
+    vector<vc> grid(n, vc(m));
+    for (int i = 0; i < n; ++i) {
+      for (int j = 0; j < m; ++j) {
+        cin >> grid[i][j];
+      }
+    }
+
+    int sr, sc;
+    cin >> sr >> sc;
+    char l = grid[sr][sc];
+    vector<vb> vis(n, vb(m));
+    dfs(grid, vis, n, m, l, sr, sc);
+
+    int ans = 0;
+    for (int i = 0; i < n; ++i) {
+      for (int j = 0; j < m; ++j) {
+        if (!vis[i][j] && grid[i][j] == l) {
+          ans = max(ans, dfs(grid, vis, n, m, l, i, j));
+        }
+      }
+    }
+    cout << ans << '\n';
+  }
 }
