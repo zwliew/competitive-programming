@@ -5,6 +5,8 @@
 a.txt
 input.txt
 output.txt
+test.in
+test.out
 
 # Build outputs
 a.out
