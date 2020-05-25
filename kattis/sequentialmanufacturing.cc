@@ -40,4 +40,15 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  ll n, p;
+  cin >> n >> p;
+  ll worst = 0, ans = 0;
+  for (ll i = 0; i < n; ++i) {
+    ll x;
+    cin >> x;
+    ans += x;
+    worst = max(worst, x);
+  }
+  cout << ans + worst * (p - 1);
 }

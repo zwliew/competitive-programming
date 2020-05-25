@@ -40,4 +40,29 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  string s;
+  vi needed = {5, 7, 5};
+  vc vowels = {'a', 'e', 'i', 'o', 'u'};
+  for (int i = 0; i < 3; ++i) {
+    getline(cin, s);
+    int cnt = 0;
+    for (char c : s) {
+      bool ok = false;
+      for (char v : vowels) {
+        if (c == v) {
+          ok = true;
+          break;
+        }
+      }
+      if (ok) {
+        cnt++;
+      }
+    }
+    if (cnt != needed[i]) {
+      cout << "NO";
+      return 0;
+    }
+  }
+  cout << "YES";
 }

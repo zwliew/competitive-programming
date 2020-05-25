@@ -40,4 +40,14 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int t;
+  cin >> t;
+  while (t--) {
+    ll l, r;
+    cin >> l >> r;
+    ll tot = l + r;
+    ll start = tot * (tot + 1) / 2 + 1;
+    cout << start + r << '\n';
+  }
 }

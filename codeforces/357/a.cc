@@ -40,4 +40,22 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int m;
+  cin >> m;
+  vi scores(m);
+  for (auto &x : scores) cin >> x;
+  int x, y;
+  cin >> x >> y;
+
+  int total = accumulate(scores.begin(), scores.end(), 0);
+  int cur = 0;
+  for (int i = 0; i < m; ++i) {
+    cur += scores[i];
+    if (cur >= x && cur <= y && total - cur >= x && total - cur <= y) {
+      cout << i + 2 << '\n';
+      return 0;
+    }
+  }
+  cout << 0;
 }

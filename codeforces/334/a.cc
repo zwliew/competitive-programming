@@ -40,4 +40,13 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int n;
+  cin >> n;
+  for (int i = 1; i <= n; ++i) {
+    for (int j = 0; j < n / 2; ++j) {
+      cout << j * n + i << ' ' << n * n - j * n - i + 1 << ' ';
+    }
+    cout << '\n';
+  }
 }

@@ -40,4 +40,22 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int n;
+  cin >> n;
+  unordered_set<int> turned;
+  for (int i = 1; i <= n; ++i) {
+    for (int j = 1; j <= n; ++j) {
+      int x;
+      cin >> x;
+      if (x == 1 || x == 3) {
+        turned.emplace(i);
+      }
+      if (x == 2 || x == 3) {
+        turned.emplace(j);
+      }
+    }
+  }
+
+  cout << n - turned.size() << '\n';
 }

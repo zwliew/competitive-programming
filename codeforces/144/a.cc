@@ -40,4 +40,23 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int n;
+  cin >> n;
+  int maxEl = INT_MIN, maxIdx = -1;
+  int minEl = INT_MAX, minIdx = -1;
+  for (int i = 0; i < n; ++i) {
+    int x;
+    cin >> x;
+    if (x > maxEl) {
+      maxEl = x;
+      maxIdx = i;
+    }
+    if (x <= minEl) {
+      minEl = x;
+      minIdx = i;
+    }
+  }
+
+  cout << maxIdx + n - minIdx - 1 - (maxIdx > minIdx);
 }

@@ -40,4 +40,16 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int n, m;
+  cin >> n >> m;
+  int ans = 0;
+  while (n) {
+    ++ans;
+    --n;
+    if (ans % m == 0) {
+      ++n;
+    }
+  }
+  cout << ans;
 }

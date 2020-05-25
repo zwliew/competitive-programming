@@ -40,4 +40,25 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int n, k;
+  cin >> n >> k;
+  vi arr(k);
+  vb taken(n * k + 1);
+  for (auto &x : arr) {
+    cin >> x;
+    taken[x] = true;
+  }
+
+  for (int i = 0; i < k; ++i) {
+    cout << arr[i] << ' ';
+    int left = n - 1;
+    for (int j = 1; j <= n * k && left; ++j) {
+      if (taken[j]) continue;
+      cout << j << ' ';
+      left--;
+      taken[j] = true;
+    }
+    cout << '\n';
+  }
 }

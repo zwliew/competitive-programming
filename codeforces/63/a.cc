@@ -40,4 +40,25 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int n;
+  cin >> n;
+  vector<pair<string, string>> v;
+  for (int i = 0; i < n; ++i) {
+    string a, b;
+    cin >> a >> b;
+    v.eb(a, b);
+  }
+
+  vector<vector<string>> order = {
+      {"rat"}, {"woman", "child"}, {"man"}, {"captain"}};
+  for (int i = 0; i < order.size(); ++i) {
+    for (int k = 0; k < n; ++k) {
+      for (string &x : order[i]) {
+        if (x == v[k].second) {
+          cout << v[k].first << '\n';
+        }
+      }
+    }
+  }
 }

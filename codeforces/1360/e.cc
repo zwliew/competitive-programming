@@ -40,4 +40,32 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int t;
+  cin >> t;
+  while (t--) {
+    int n;
+    cin >> n;
+    vector<vb> grid(n, vb(n));
+    for (int i = 0; i < n; ++i) {
+      for (int j = 0; j < n; ++j) {
+        char c;
+        cin >> c;
+        grid[i][j] = c == '1';
+      }
+    }
+
+    bool ok = true;
+    for (int i = 0; i < n && ok; ++i) {
+      for (int j = 0; j < n && ok; ++j) {
+        ok = !grid[i][j] || i == n - 1 || j == n - 1 || grid[i][j + 1] ||
+             grid[i + 1][j];
+      }
+    }
+
+    if (ok)
+      cout << "yes\n";
+    else
+      cout << "no\n";
+  }
 }

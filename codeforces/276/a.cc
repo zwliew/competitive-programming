@@ -40,4 +40,14 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  ll n, k;
+  cin >> n >> k;
+  ll best = INT_MIN;
+  for (ll i = 0; i < n; ++i) {
+    ll f, t;
+    cin >> f >> t;
+    best = max(best, f - max(0ll, t - k));
+  }
+  cout << best;
 }

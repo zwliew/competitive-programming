@@ -40,4 +40,18 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int n;
+  cin >> n;
+  int a_pos, b_pos;
+  for (int i = 0; i < n; ++i) {
+    int x;
+    cin >> x;
+    if (x == 1) a_pos = i;
+    else if (x == n) b_pos = i;
+  }
+
+  if (a_pos > b_pos) swap(a_pos, b_pos);
+
+  cout << max(b_pos, n - 1 - a_pos);
 }

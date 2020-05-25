@@ -40,4 +40,30 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  vector<vb> grid(3, vb(3, true));
+  for (int i = 0; i < 3; ++i) {
+    for (int j = 0; j < 3; ++j) {
+      int x;
+      cin >> x;
+      if (x % 2) {
+        for (int dr = -1; dr <= 1; ++dr) {
+          for (int dc = -1; dc <= 1; ++dc) {
+            if (dr && dc) continue;
+            int nr = dr + i;
+            int nc = dc + j;
+            if (nr < 0 || nc < 0 || nr >= 3 || nc >= 3) continue;
+            grid[nr][nc] = !grid[nr][nc];
+          }
+        }
+      }
+    }
+  }
+
+  for (int i = 0; i < 3; ++i) {
+    for (int j = 0; j < 3; ++j) {
+      cout << grid[i][j];
+    }
+    cout << '\n';
+  }
 }

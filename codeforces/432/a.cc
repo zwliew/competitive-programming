@@ -40,4 +40,14 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int n, k;
+  cin >> n >> k;
+  int cnt = 0;
+  for (int i = 0; i < n; ++i) {
+    int x;
+    cin >> x;
+    if (x <= 5 - k) ++cnt;
+  }
+  cout << cnt / 3;
 }

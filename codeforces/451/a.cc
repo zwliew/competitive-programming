@@ -40,4 +40,12 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int n, m;
+  cin >> n >> m;
+  int x = min(n, m);
+  if (x % 2 == 0)
+    cout << "Malvika";
+  else
+    cout << "Akshat";
 }

@@ -40,4 +40,41 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int h, w;
+  cin >> h >> w;
+  ld total = 0;
+  int cnt = 0;
+  for (int i = 0; i < h - 1; ++i) {
+    for (int j = 0; j < w; ++j) {
+      char c;
+      cin >> c;
+      if (c != '.') {
+        total += j + (ld)0.5;
+        ++cnt;
+      }
+    }
+  }
+
+  int first = -1, last;
+  for (int i = 0; i < w; ++i) {
+    char c;
+    cin >> c;
+    if (c != '.') {
+      if (first == -1) first = i;
+      last = i;
+      total += i + (ld)0.5;
+      ++cnt;
+    }
+  }
+
+  ld mean = total / cnt;
+  debug(total, cnt, mean, first, last);
+  if (mean < first) {
+    cout << "left";
+  } else if (mean > last + 1) {
+    cout << "right";
+  } else {
+    cout << "balanced";
+  }
 }

@@ -40,4 +40,20 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int p, n;
+  cin >> p >> n;
+  vi arr(p, -1);
+  for (int i = 0; i < n; ++i) {
+    int x;
+    cin >> x;
+    int y = x;
+    x %= p;
+    if (arr[x] != -1) {
+      cout << i + 1;
+      return 0;
+    }
+    arr[x] = y;
+  }
+  cout << -1;
 }

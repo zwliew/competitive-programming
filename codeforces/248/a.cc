@@ -40,4 +40,16 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int n;
+  cin >> n;
+  int lopen = 0, ropen = 0;
+  for (int i = 0; i < n; ++i) {
+    int l, r;
+    cin >> l >> r;
+    if (l) ++lopen;
+    if (r) ++ropen;
+  }
+
+  cout << min(lopen, n - lopen) + min(ropen, n - ropen);
 }

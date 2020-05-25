@@ -40,4 +40,10 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int n;
+  cin >> n;
+  int rem = n % 7;
+  int q = n / 7;
+  cout << q * 2 + max(0, rem - 5) << ' ' << q * 2 + min(rem, 2);
 }

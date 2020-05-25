@@ -40,4 +40,20 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int n;
+  cin >> n;
+  vi dist(n);
+  for (auto &x : dist) cin >> x;
+  int s, t;
+  cin >> s >> t;
+  --s, --t;
+  if (s > t) swap(s, t);
+
+  int d = 0;
+  for (int i = s; i < t; ++i) {
+    d += dist[i];
+  }
+
+  cout << min(d, accumulate(dist.begin(), dist.end(), 0) - d);
 }

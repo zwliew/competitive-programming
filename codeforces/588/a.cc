@@ -40,4 +40,17 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int n;
+  cin >> n;
+
+  int ans = 0;
+  int minp = INT_MAX;
+  for (int i = 0; i < n; ++i) {
+    int a, p;
+    cin >> a >> p;
+    minp = min(minp, p);
+    ans += a * minp;
+  }
+  cout << ans;
 }

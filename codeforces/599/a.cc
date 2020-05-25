@@ -40,4 +40,8 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int a, b, c;
+  cin >> a >> b >> c;
+  cout << min({a + b + c, a * 2 + c * 2, b * 2 + c * 2, a * 2 + b * 2});
 }

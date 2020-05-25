@@ -40,4 +40,15 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int n;
+  cin >> n;
+  int level = 0;
+  int needed = 1;
+  while (n >= needed) {
+    n -= needed;
+    ++level;
+    needed += level + 1;
+  }
+  cout << level;
 }

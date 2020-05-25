@@ -40,4 +40,9 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  string s;
+  cin >> s;
+  unordered_set<char> x(s.begin(), s.end());
+  cout << ((x.count('H') || x.count('Q') || x.count('9')) ? "YES" : "NO");
 }

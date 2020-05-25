@@ -40,4 +40,26 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int n, m;
+  cin >> n >> m;
+  char prev = -1;
+  for (int i = 0; i < n; ++i) {
+    char cur = -1;
+    for (int j = 0; j < m; ++j) {
+      char x;
+      cin >> x;
+      if (cur != -1 && x != cur) {
+        cout << "NO";
+        return 0;
+      }
+      cur = x;
+    }
+    if (cur == prev) {
+      cout << "NO";
+      return 0;
+    }
+    prev = cur;
+  }
+  cout << "YES";
 }

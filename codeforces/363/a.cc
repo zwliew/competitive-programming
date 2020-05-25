@@ -40,4 +40,27 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int n;
+  cin >> n;
+  bool printed = false;
+  while (n || !printed) {
+    int rem = n % 10;
+    if (rem >= 5) {
+      cout << "-O|";
+      rem -= 5;
+    } else {
+      cout << "O-|";
+    }
+    for (int i = 0; i < rem; ++i) {
+      cout << 'O';
+    }
+    cout << '-';
+    for (int i = rem; i < 4; ++i) {
+      cout << 'O';
+    }
+    cout << '\n';
+    n /= 10;
+    printed = true;
+  }
 }

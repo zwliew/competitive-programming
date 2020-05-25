@@ -40,4 +40,9 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  ll n, p, q;
+  cin >> n >> p >> q;
+  ll tot = p + q;
+  cout << ((tot / n) % 2 == 0 ? "paul" : "opponent");
 }

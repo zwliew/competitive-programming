@@ -40,4 +40,34 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int n;
+  cin >> n;
+  vc pos(n);
+  int up = 0;
+  for (int i = 0; i < n; ++i) {
+    cin >> pos[i];
+    if (pos[i] == 'X') ++up;
+  }
+
+  char from, to;
+  int left = abs(up - n / 2);
+  if (up < n / 2) {
+    from = 'x';
+    to = 'X';
+  } else {
+    from = 'X';
+    to = 'x';
+  }
+  cout << left << '\n';
+  for (int i = 0; i < n; ++i) {
+    if (left && pos[i] == from) {
+      cout << to;
+      --left;
+    } else {
+      cout << pos[i];
+    }
+  }
 }
+
+
