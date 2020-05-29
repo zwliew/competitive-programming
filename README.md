@@ -24,3 +24,4 @@ Sources:
 - [E-Olymp](https://www.e-olymp.com/)
 - [Timus](https://acm.timus.ru)
 - [ICPC Live Archie](https://icpcarchive.ecs.baylor.edu/)
+- [Google Tech Dev Guide](https://techdevguide.withgoogle.com/)
