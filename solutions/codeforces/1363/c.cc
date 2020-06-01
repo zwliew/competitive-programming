@@ -23,9 +23,9 @@ using namespace std;
 
 using ll = long long;
 using ld = long double;
-using pi = pair<int, int>;
+using ii = pair<int, int>;
 using vi = vector<int>;
-using vpi = vector<pi>;
+using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
 using vll = vector<ll>;
@@ -40,4 +40,28 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int t;
+  cin >> t;
+  while (t--) {
+    int n, x;
+    cin >> n >> x;
+    vi deg(n + 1);
+    for (int i = 1; i < n; ++i) {
+      int u, v;
+      cin >> u >> v;
+      deg[u]++;
+      deg[v]++;
+    }
+
+    if (deg[x] <= 1) {
+      cout << "Ayush\n";
+      continue;
+    }
+
+    if (n % 2)
+      cout << "Ashish\n";
+    else
+      cout << "Ayush\n";
+  }
 }

@@ -40,4 +40,36 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  unordered_map<char, int> nti = {{'B', 0}, {'S', 1}, {'C', 2}};
+  string ns;
+  cin >> ns;
+  vi needed(3);
+  for (char c : ns) {
+    needed[nti[c]]++;
+  }
+
+  int b, s, c;
+  cin >> b >> s >> c;
+  int pb, ps, pc;
+  cin >> pb >> ps >> pc;
+  ll r;
+  cin >> r;
+
+  ll lo = 0, hi = 1e14;
+  ll ans = 0;
+  while (lo <= hi) {
+    ll mid = lo + (hi - lo) / 2;
+    ll cost = max(0ll, needed[0] * mid - b) * pb +
+              max(0ll, needed[1] * mid - s) * ps +
+              max(0ll, needed[2] * mid - c) * pc;
+    if (cost <= r) {
+      ans = mid;
+      lo = mid + 1;
+    } else {
+      hi = mid - 1;
+    }
+  }
+
+  cout << ans;
 }

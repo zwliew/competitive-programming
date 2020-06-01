@@ -23,9 +23,9 @@ using namespace std;
 
 using ll = long long;
 using ld = long double;
-using pi = pair<int, int>;
+using ii = pair<int, int>;
 using vi = vector<int>;
-using vpi = vector<pi>;
+using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
 using vll = vector<ll>;
@@ -40,4 +40,41 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  ll a, b;
+  cin >> a >> b;
+  ll at = 0, bt = 0;
+  ll pw = 1;
+  while (a) {
+    at = (a % 3) * pw + at;
+    pw *= 10;
+    a /= 3;
+  }
+
+  pw = 1;
+  while (b) {
+    bt = (b % 3) * pw + bt;
+    b /= 3;
+    pw *= 10;
+  }
+
+  ll anst = 0;
+  pw = 1;
+  while (at || bt) {
+    ll c = ((bt % 10) - (at % 10) + 3) % 3;
+    anst = c * pw + anst;
+    pw *= 10;
+    at /= 10;
+    bt /= 10;
+  }
+
+  pw = 1;
+  ll ans = 0;
+  while (anst) {
+    ans += (anst % 10) * pw;
+    pw *= 3;
+    anst /= 10;
+  }
+
+  cout << ans;
 }

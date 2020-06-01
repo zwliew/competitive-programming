@@ -23,9 +23,9 @@ using namespace std;
 
 using ll = long long;
 using ld = long double;
-using pi = pair<int, int>;
+using ii = pair<int, int>;
 using vi = vector<int>;
-using vpi = vector<pi>;
+using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
 using vll = vector<ll>;
@@ -40,4 +40,19 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int n;
+  cin >> n;
+  vi arr(n);
+  for (auto &x : arr) cin >> x;
+
+  int ans = 0;
+  int smallest = INT_MAX;
+  for (int i = 0; i < n - 1; ++i) {
+    ans = max(ans, arr[i + 1] - arr[i]);
+    if (i >= 1 && i < n - 1) {
+      smallest = min(smallest, arr[i + 1] - arr[i - 1]);
+    }
+  }
+  cout << max(ans, smallest);
 }

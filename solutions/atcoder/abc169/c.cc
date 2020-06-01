@@ -23,9 +23,9 @@ using namespace std;
 
 using ll = long long;
 using ld = long double;
-using pi = pair<int, int>;
+using ii = pair<int, int>;
 using vi = vector<int>;
-using vpi = vector<pi>;
+using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
 using vll = vector<ll>;
@@ -40,4 +40,11 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  ll a, b;
+  int c;
+  char d;
+  cin >> a >> b >> d >> c;
+  b = b * 100 + c;
+  cout << (a * b) / 100;
 }

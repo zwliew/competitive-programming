@@ -40,4 +40,22 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int t;
+  cin >> t;
+  while (t--) {
+    int n;
+    cin >> n;
+    vi arr(n);
+    for (int &x : arr) cin >> x;
+    sort(arr.begin(), arr.end());
+    int ans = 1;
+    for (int i = n - 1; i >= 0; --i) {
+      if (i + 1 >= arr[i]) {
+        ans = i + 2;
+        break;
+      }
+    }
+    cout << ans << '\n';
+  }
 }

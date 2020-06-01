@@ -40,4 +40,35 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int n, k;
+  cin >> n >> k;
+  string s;
+  cin >> s;
+
+  vector<queue<int>> pos(10);
+  for (int i = 0; i < (int)s.size(); ++i) {
+    pos[s[i] - '0'].emplace(i);
+  }
+
+  int end = n - k;
+  int j = 0;
+  for (int i = 0; i < end; ++i, ++j) {
+    bool found = false;
+    for (int digit = !i && end != i + 1; digit < 10 && !found; ++digit) {
+      while (pos[digit].size() && pos[digit].front() < j) {
+        pos[digit].pop();
+      }
+      if (pos[digit].size() && pos[digit].front() <= j + k) {
+        cout << digit;
+        k -= pos[digit].front() - j;
+        j = pos[digit].front();
+        pos[digit].pop();
+        found = true;
+      }
+    }
+    if (!found) {
+      cout << s[j];
+    }
+  }
 }

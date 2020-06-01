@@ -23,9 +23,9 @@ using namespace std;
 
 using ll = long long;
 using ld = long double;
-using pi = pair<int, int>;
+using ii = pair<int, int>;
 using vi = vector<int>;
-using vpi = vector<pi>;
+using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
 using vll = vector<ll>;
@@ -40,4 +40,27 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int w, h;
+  cin >> w >> h;
+  int fx = 1e9, fy = 1e9, lx = -1, ly = -1;
+  vector<vc> grid(w, vc(h));
+  for (int i = 0; i < w; ++i) {
+    for (int j = 0; j < h; ++j) {
+      cin >> grid[i][j];
+      if (grid[i][j] == '*') {
+        fx = min(fx, i);
+        fy = min(fy, j);
+        lx = max(lx, i);
+        ly = max(ly, j);
+      }
+    }
+  }
+
+  for (int i = fx; i <= lx; ++i) {
+    for (int j = fy; j <= ly; ++j) {
+      cout << grid[i][j];
+    }
+    cout << '\n';
+  }
 }

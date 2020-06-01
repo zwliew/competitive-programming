@@ -23,9 +23,9 @@ using namespace std;
 
 using ll = long long;
 using ld = long double;
-using pi = pair<int, int>;
+using ii = pair<int, int>;
 using vi = vector<int>;
-using vpi = vector<pi>;
+using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
 using vll = vector<ll>;
@@ -40,4 +40,15 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int w, h;
+  cin >> w >> h;
+  ll ans = 0;
+  for (int i = 2; i <= w; i += 2) {
+    for (int j = 2; j <= h; j += 2) {
+      ll cur = (ll)(w - i + 1) * (h - j + 1);
+      ans += cur;
+    }
+  }
+  cout << ans;
 }

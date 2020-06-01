@@ -23,9 +23,9 @@ using namespace std;
 
 using ll = long long;
 using ld = long double;
-using pi = pair<int, int>;
+using ii = pair<int, int>;
 using vi = vector<int>;
-using vpi = vector<pi>;
+using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
 using vll = vector<ll>;
@@ -40,4 +40,29 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int t;
+  cin >> t;
+  while (t--) {
+    string s;
+    cin >> s;
+    int totzero = 0, totone = 0;
+    for (int i = 0; i < (int)s.size(); ++i) {
+      if (s[i] == '0')
+        ++totzero;
+      else
+        ++totone;
+    }
+
+    int zerocnt = 0, onecnt = 0;
+    int ans = min(totzero, totone);
+    for (int i = 0; i < (int)s.size(); ++i) {
+      ans = min({ans, zerocnt + totone - onecnt, onecnt + totzero - zerocnt});
+      if (s[i] == '0')
+        ++zerocnt;
+      else
+        ++onecnt;
+    }
+    cout << ans << '\n';
+  }
 }

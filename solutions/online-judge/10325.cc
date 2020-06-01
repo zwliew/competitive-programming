@@ -30,6 +30,7 @@ using vc = vector<char>;
 using vb = vector<bool>;
 using vll = vector<ll>;
 
+ll lcm(ll a, ll b) { return a * b / __gcd(a, b); }
 int main() {
   cin.tie(nullptr);
   ios::sync_with_stdio(false);
@@ -40,4 +41,28 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  ll n, m;
+  while (cin >> n >> m) {
+    vi arr(m);
+    for (auto &x : arr) cin >> x;
+
+    ll ans = 0;
+    for (ll i = 0; i < (1 << m); ++i) {
+      ll clcm = 1;
+      ll bit_cnt = 0;
+      for (ll j = 0; j < m; ++j) {
+        if (i & (1 << j)) {
+          ++bit_cnt;
+          clcm = lcm(clcm, arr[j]);
+        }
+      }
+      if (bit_cnt % 2) {
+        ans -= n / clcm;
+      } else {
+        ans += n / clcm;
+      }
+    }
+    cout << ans << '\n';
+  }
 }

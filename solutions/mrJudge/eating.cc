@@ -40,4 +40,17 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int n;
+  cin >> n;
+  string s;
+  cin >> s;
+
+  if (s.size() == 1) {
+    cout << "Weiliang";
+  } else if (s.front() == s.back()) {
+    cout << (s.size() % 2 ? "Weiliang" : "Rar");
+  } else {
+    cout << (s.size() % 2 ? "Rar" : "Weiliang");
+  }
 }

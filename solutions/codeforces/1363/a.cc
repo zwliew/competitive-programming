@@ -23,9 +23,9 @@ using namespace std;
 
 using ll = long long;
 using ld = long double;
-using pi = pair<int, int>;
+using ii = pair<int, int>;
 using vi = vector<int>;
-using vpi = vector<pi>;
+using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
 using vll = vector<ll>;
@@ -40,4 +40,30 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int t;
+  cin >> t;
+  while (t--) {
+    int n, x;
+    cin >> n >> x;
+    int odd = 0, even = 0;
+    for (int i = 0; i < n; ++i) {
+      int c;
+      cin >> c;
+      if (c % 2 == 0)
+        ++even;
+      else
+        ++odd;
+    }
+
+    int d = max(0, x - even);
+    if (d % 2 == 0) {
+      ++d;
+    }
+    if (odd < d || d > x) {
+      cout << "No\n";
+    } else {
+      cout << "Yes\n";
+    }
+  }
 }

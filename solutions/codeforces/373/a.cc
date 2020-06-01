@@ -23,9 +23,9 @@ using namespace std;
 
 using ll = long long;
 using ld = long double;
-using pi = pair<int, int>;
+using ii = pair<int, int>;
 using vi = vector<int>;
-using vpi = vector<pi>;
+using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
 using vll = vector<ll>;
@@ -40,4 +40,24 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int k;
+  cin >> k;
+  k *= 2;
+  vi count(10);
+  for (int i = 0; i < 4; ++i) {
+    for (int j = 0; j < 4; ++j) {
+      char c;
+      cin >> c;
+      if (c != '.') {
+        c -= '0';
+        count[c]++;
+        if (count[c] > k) {
+          cout << "NO";
+          return 0;
+        }
+      }
+    }
+  }
+  cout << "YES";
 }

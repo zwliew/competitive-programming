@@ -40,9 +40,9 @@ using namespace std;
 
 using ll = long long;
 using ld = long double;
-using ii = pair<int, int>;
+using pi = pair<int, int>;
 using vi = vector<int>;
-using vii = vector<ii>;
+using vpi = vector<pi>;
 using vc = vector<char>;
 using vb = vector<bool>;
 using vll = vector<ll>;

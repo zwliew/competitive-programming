@@ -23,12 +23,15 @@ using namespace std;
 
 using ll = long long;
 using ld = long double;
-using pi = pair<int, int>;
+using ii = pair<int, int>;
 using vi = vector<int>;
-using vpi = vector<pi>;
+using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
 using vll = vector<ll>;
+
+const int sz = 2e7;
+bitset<sz + 1> primes;
 
 int main() {
   cin.tie(nullptr);
@@ -40,4 +43,33 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  primes.set();
+  primes[0] = primes[1] = 0;
+  for (ll i = 2; i * i <= sz; ++i) {
+    if (primes[i]) {
+      for (ll j = i * i; j <= sz; j += i) {
+        primes[j] = 0;
+      }
+    }
+  }
+
+  vi ans(100001);
+  int cnt = 1;
+  int prev = 2;
+  for (int i = 3; i <= sz; i += 2) {
+    if (primes[i]) {
+      if (i - prev == 2) {
+        ans[cnt] = prev;
+        ++cnt;
+        if (cnt > 100000) break;
+      }
+      prev = i;
+    }
+  }
+
+  int x;
+  while (cin >> x) {
+    cout << '(' << ans[x] << ", " << ans[x] + 2 << ")\n";
+  }
 }

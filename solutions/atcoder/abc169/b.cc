@@ -23,9 +23,9 @@ using namespace std;
 
 using ll = long long;
 using ld = long double;
-using pi = pair<int, int>;
+using ii = pair<int, int>;
 using vi = vector<int>;
-using vpi = vector<pi>;
+using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
 using vll = vector<ll>;
@@ -40,4 +40,27 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int n;
+  cin >> n;
+  vll x(n);
+  ll ans = 1;
+  const ll lim = 1e18;
+  for (int i = 0; i < n; ++i) {
+    cin >> x[i];
+    if (!x[i]) {
+      cout << 0;
+      return 0;
+    }
+  }
+  for (int i = 0; i < n; ++i) {
+    ll next = ans * x[i];
+    if (next > lim || next < ans) {
+      cout << -1;
+      return 0;
+    }
+    ans = next;
+  }
+
+  cout << ans;
 }

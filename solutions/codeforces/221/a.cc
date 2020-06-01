@@ -23,9 +23,9 @@ using namespace std;
 
 using ll = long long;
 using ld = long double;
-using pi = pair<int, int>;
+using ii = pair<int, int>;
 using vi = vector<int>;
-using vpi = vector<pi>;
+using vii = vector<ii>;
 using vc = vector<char>;
 using vb = vector<bool>;
 using vll = vector<ll>;
@@ -40,4 +40,11 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int n;
+  cin >> n;
+  cout << n;
+  for (int i = 1; i < n; ++i) {
+    cout << ' ' << i;
+  }
 }
