@@ -42,4 +42,22 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int t;
+  cin >> t;
+  while (t--) {
+    ll a, k;
+    cin >> a >> k;
+    for (ll i = 1; i < k && a; ++i) {
+      ll max_dig = 0, min_dig = 9;
+      for (ll j = a; j; j /= 10) {
+        max_dig = max(max_dig, j % 10);
+        min_dig = min(min_dig, j % 10);
+      }
+      if (max_dig * min_dig == 0)
+        break;
+      a += max_dig * min_dig;
+    }
+    cout << a << '\n';
+  }
 }

@@ -36,6 +36,8 @@ using namespace std;
 #define debug(...) 0
 #endif
 
+#define f first
+#define s second
 #define eb emplace_back
 
 using ll = long long;

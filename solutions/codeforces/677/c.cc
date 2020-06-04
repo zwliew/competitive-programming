@@ -19,8 +19,6 @@ using namespace std;
 #define debug(...) 0
 #endif
 
-#define f first
-#define s second
 #define eb emplace_back
 
 using ll = long long;
@@ -42,4 +40,32 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  string s;
+  cin >> s;
+  const ll mod = 1e9 + 7;
+  ll cnt = 1;
+  for (char c : s) {
+    int val = 0;
+    if (c >= '0' && c <= '9') {
+      val = c - '0';
+    } else if (c >= 'A' && c <= 'Z') {
+      val = c - 'A' + 10;
+    } else if (c >= 'a' && c <= 'z') {
+      val = c - 'a' + 36;
+    } else if (c == '-') {
+      val = 62;
+    } else if (c == '_') {
+      val = 63;
+    }
+
+    for (int i = 0; i < 6; ++i) {
+      if (!(val & 1)) {
+        cnt *= 3;
+        cnt %= mod;
+      }
+      val >>= 1;
+    }
+  }
+  cout << cnt;
 }

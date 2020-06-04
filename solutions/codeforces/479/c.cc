@@ -19,8 +19,6 @@ using namespace std;
 #define debug(...) 0
 #endif
 
-#define f first
-#define s second
 #define eb emplace_back
 
 using ll = long long;
@@ -42,4 +40,23 @@ int main() {
   freopen("test.out", "w", stdout);
 #else
 #endif
+
+  int n;
+  cin >> n;
+  vpi exams(n);
+  for (auto &[x, y] : exams) {
+    cin >> x >> y;
+  }
+  sort(exams.begin(), exams.end());
+
+  int prev = 0;
+  int ans = 0;
+  for (auto &[x, y] : exams) {
+    if (y >= ans) {
+      ans = y;
+    } else {
+      ans = x;
+    }
+  }
+  cout << ans;
 }
