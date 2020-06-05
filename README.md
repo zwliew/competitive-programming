@@ -26,3 +26,4 @@ Sources:
 - [ICPC Live Archie](https://icpcarchive.ecs.baylor.edu/)
 - [Google Tech Dev Guide](https://techdevguide.withgoogle.com/)
 - [CodeChef](https://www.codechef.com/)
+- [Library-Checker](https://judge.yosupo.jp/)
