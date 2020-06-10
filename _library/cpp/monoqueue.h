@@ -1,10 +1,11 @@
 #include <deque>
 #include <utility>
 
+template <typename T>
 struct MonoQueue {
-  std::deque<std::pair<int, int>> q;
+  std::deque<std::pair<T, int>> q;
 
-  void push(int val) {
+  void push(T val) {
     int count = 1;
     while (q.size() && q.back().first >= val) {
       count += q.back().second;
@@ -20,5 +21,5 @@ struct MonoQueue {
     }
   }
 
-  int min() { return q.front().first; }
-}
+  T min() { return q.front().first; }
+};

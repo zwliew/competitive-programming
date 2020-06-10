@@ -1,6 +1,7 @@
 #include <utility>
 
-long long gcd(long long a, long long b) {
+template <typename T>
+T gcd(T a, T &b) {
   while (b) {
     a %= b;
     std::swap(a, b);
@@ -8,10 +9,14 @@ long long gcd(long long a, long long b) {
   return a;
 }
 
-long long lcm(long long a, long long b) { return a / gcd(a, b) * b; }
+template <typename T>
+T lcm(T a, T b) {
+  return a / gcd(a, b) * b;
+}
 
-long long mexp(long long a, long long b, long long m) {
-  long long res = 1;
+template <typename T>
+T mexp(T a, T b, T m) {
+  T res = 1;
   while (b) {
     if (b & 1) {
       res = (res * a) % m;
@@ -22,4 +27,7 @@ long long mexp(long long a, long long b, long long m) {
   return res;
 }
 
-long long modinv(long long x, long long m) { return mexp(x, m - 2, m); }
+template <typename T>
+T modinv(T x, T m) {
+  return mexp(x, m - 2, m);
+}

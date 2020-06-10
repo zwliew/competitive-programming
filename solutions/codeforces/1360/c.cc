@@ -140,5 +140,27 @@ int main() {
         cout << "no\n";
     }
   }
-}
 
+  // Alternative solution using hashsets. Cleaner.
+  // int t;
+  // cin >> t;
+  // while (t--) {
+  //   int n;
+  //   cin >> n;
+  //   int odd = 0, even = 0;
+  //   unordered_set<int> distinct;
+  //   bool consecutive = false;
+  //   while (n--) {
+  //     int x;
+  //     cin >> x;
+  //     if (x % 2)
+  //       ++odd;
+  //     else
+  //       ++even;
+  //     distinct.emplace(x);
+  //     if (distinct.count(x - 1) || distinct.count(x + 1)) consecutive = true;
+  //   }
+  //   cout << (odd % 2 == 0 && even % 2 == 0 || consecutive ? "YES\n" :
+  //   "NO\n");
+  // }
+}
