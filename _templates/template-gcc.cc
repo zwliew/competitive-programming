@@ -19,23 +19,10 @@ using namespace std;
 #define debug(...) 0
 #endif
 
-#define f first
-#define s second
-#define eb emplace_back
-
-using ll = long long;
-using ld = long double;
-using pi = pair<int, int>;
-using vi = vector<int>;
-using vpi = vector<pi>;
-using vc = vector<char>;
-using vb = vector<bool>;
-using vll = vector<ll>;
-
 int main() {
   cin.tie(nullptr);
   ios::sync_with_stdio(false);
-  cout << fixed << setprecision(9);
+  cout << fixed;
 
 #ifdef LOCAL
   freopen("test.in", "r", stdin);
