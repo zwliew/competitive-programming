@@ -1,9 +1,10 @@
 CXX = g++
 CXXFLAGS = \
-	--std=c++17 \
 	-DLOCAL \
+	--std=c++17 \
 	-pipe \
 	-O2 \
+	-Winvalid-pch \
 	-Wall \
 	-Wextra \
 	-pedantic \
@@ -22,9 +23,9 @@ CXXFLAGS = \
 	-fsanitize=address \
 	-fsanitize=undefined \
 	-fno-sanitize-recover \
-	-fstack-protector
+	-fstack-protector-strong
 
 SRCDIR = _work/cpp
 
-a: $(SRCDIR)/$(x).o
+a: $(SRCDIR)/$(x).cc
 	$(CXX) $(CXXFLAGS) $^

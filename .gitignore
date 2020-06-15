@@ -16,6 +16,7 @@ a.exp
 a.lib
 a.pdb
 test.class
+*.gch
 
 # Python
 __pycache__
