@@ -27,16 +27,21 @@ int main() {
 
   int a, b, c;
   cin >> a >> b >> c;
-  int lo = 0, hi = c * a / b;
-  int ans = 1e9;
-  while (lo <= hi) {
-    int mid = lo + (hi - lo) / 2;
-    if (c + mid > mid * a / (a - b)) {
-      lo = mid + 1;
-    } else {
-      ans = mid;
-      hi = mid - 1;
-    }
-  }
-  cout << ans;
+
+  // Better solution
+  cout << (-c * (b - a) + b - 1) / b;
+
+  // Binary search solution
+  // int lo = 0, hi = c * a / b;
+  // int ans = 1e9;
+  // while (lo <= hi) {
+  //   int mid = lo + (hi - lo) / 2;
+  //   if (c + mid > mid * a / (a - b)) {
+  //     lo = mid + 1;
+  //   } else {
+  //     ans = mid;
+  //     hi = mid - 1;
+  //   }
+  // }
+  // cout << ans;
 }

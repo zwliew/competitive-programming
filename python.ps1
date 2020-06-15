@@ -1,3 +1,3 @@
 param([string]$file = "a")
 
-python _work/python/$file.py
+python _work/py/$file.py
