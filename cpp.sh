@@ -2,4 +2,5 @@
 
 file=${1:-"a"}
 
-make x=$file && ./a.out
+make x=$file
+./a.out

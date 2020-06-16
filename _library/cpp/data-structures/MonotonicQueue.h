@@ -58,3 +58,20 @@ struct MaxMonotonicQueue {
 
   T max() { return top(); }
 };
+
+template <typename T>
+struct MinMaxMonotonicQueue {
+  MinMonotonicQueue<T> minq;
+  MaxMonotonicQueue<T> maxq;
+
+  void push(T x) {
+    minq.push(x);
+    maxq.push(x);
+  }
+
+  std::pair<T, T> pop() { return {minq.pop(), maxq.pop()}; }
+
+  std::pair<T, T> top() { return {minq.top(), maxq.top()}; }
+
+  std::pair<T, T> minMax() { return top() : }
+}

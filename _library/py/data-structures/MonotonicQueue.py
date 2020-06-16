@@ -43,6 +43,25 @@ class MaxMonotonicQueue(collections.deque):
         return self.top()
 
 
+class MinMaxMonotonicQueue:
+    def __init__(self):
+        self.minq = MinMonotonicQueue()
+        self.maxq = MaxMonotonicQueue()
+
+    def enqueue(self, val: int) -> None:
+        self.minq.enqueue(val)
+        self.maxq.enqueue(val)
+
+    def dequeue(self) -> tuple:
+        return (self.minq.dequeue(), self.maxq.dequeue())
+
+    def top(self) -> tuple:
+        return (self.minq.top(), self.maxq.top())
+
+    def minMax(self) -> tuple:
+        return self.top()
+
+
 # Test code
 q = MaxMonotonicQueue()
 nums = [4, 8, 3, 6, 0, 1, 0]

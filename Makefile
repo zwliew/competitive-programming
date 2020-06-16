@@ -27,5 +27,5 @@ CXXFLAGS = \
 
 SRCDIR = _work/cpp
 
-a: $(SRCDIR)/$(x).cc
+a: $(SRCDIR)/$(x).o
 	$(CXX) $(CXXFLAGS) $^
