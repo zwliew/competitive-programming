@@ -3,11 +3,9 @@ ID: zhaowei10
 TASK:
 LANG: C++14
 */
-#include "bits/extc++.h"
+#include "bits/stdc++.h"
 
 using namespace std;
-using namespace __gnu_cxx;
-using namespace __gnu_pbds;
 
 #ifdef LOCAL
 #include "../../_library/cpp/debug.h"
