@@ -27,3 +27,4 @@ Sources:
 - [Google Tech Dev Guide](https://techdevguide.withgoogle.com/)
 - [CodeChef](https://www.codechef.com/)
 - [Library-Checker](https://judge.yosupo.jp/)
+- [URI Online Judge](https://www.urionlinejudge.com.br/judge/en)

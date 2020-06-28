@@ -37,7 +37,9 @@ std::vector<T> sieveOfEratosthenes() {
 
   // Faster alternative if using GCC
   // Uses bitset._Find_first and bitset._Find_next(int)
-  for (T i = isPrime._Find_first(); i <= N; i = isPrime._Find_next(i)) {
-    primes.emplace_back(i);
-  }
+  // for (T i = isPrime._Find_first(); i <= N; i = isPrime._Find_next(i)) {
+  //   primes.emplace_back(i);
+  // }
+
+  return primes;
 }
