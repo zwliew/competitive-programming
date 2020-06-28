@@ -20,8 +20,8 @@ CXXFLAGS = \
 	-D_GLIBCXX_DEBUG \
 	-D_GLIBCXX_DEBUG_PEDANTIC \
 	-D_FORTIFY_SOURCE=2 \
-	-fsanitize=address \
 	-fsanitize=undefined \
+	-fsanitize-undefined-trap-on-error \
 	-fno-sanitize-recover \
 	-fstack-protector-strong
 
