@@ -25,7 +25,7 @@ CXXFLAGS = \
 	-fno-sanitize-recover \
 	-fstack-protector-strong
 
-SRCDIR = _work/cpp
+SRCDIR = _work/cc
 
 a: $(SRCDIR)/$(x).o
 	$(CXX) $(CXXFLAGS) $^

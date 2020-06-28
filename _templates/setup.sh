@@ -2,19 +2,17 @@
 
 # Run this script from the root project directory
 
-# Setup working directories
-mkdir -p _work/cpp
-mkdir -p _work/py
-
 # Set up C++ working directory
-cp _templates/template.cc _work/cpp/a.cc
-cp _templates/template.cc _work/cpp/b.cc
-cp _templates/template.cc _work/cpp/c.cc
-cp _templates/template.cc _work/cpp/d.cc
-cp _templates/template.cc _work/cpp/e.cc
-cp _templates/template.cc _work/cpp/f.cc
+mkdir -p _work/cc
+cp _templates/template.cc _work/cc/a.cc
+cp _templates/template.cc _work/cc/b.cc
+cp _templates/template.cc _work/cc/c.cc
+cp _templates/template.cc _work/cc/d.cc
+cp _templates/template.cc _work/cc/e.cc
+cp _templates/template.cc _work/cc/f.cc
 
 # Set up Python working directory
+mkdir -p _work/py
 cp _templates/template.py _work/py/a.py
 cp _templates/template.py _work/py/b.py
 cp _templates/template.py _work/py/c.py
