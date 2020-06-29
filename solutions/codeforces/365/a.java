@@ -36,6 +36,14 @@ public class template {
     return Double.parseDouble(next());
   }
 
+  private static int[] nextArray(int n) {
+    int[] arr = new int[n];
+    for (int i = 0; i < n; ++i) {
+      arr[i] = nextInt();
+    }
+    return arr;
+  }
+
   private static String nextLine() {
     final String res = null;
     while (res == null || res.isEmpty()) {
@@ -49,6 +57,19 @@ public class template {
   }
 
   public static void main(final String[] args) {
+    int n = nextInt();
+    int[] arr = nextArray(n);
+    int cur = 0, best = 0;
+    for (int i = 0; i < n; ++i) {
+      boolean ok = i <= 1 || (arr[i] == arr[i - 1] + arr[i - 2]);
+      if (ok) {
+        ++cur;
+      } else {
+        cur = 2;
+      }
+      best = Math.max(cur, best);
+    }
+    out.println(best);
     out.close();
   }
 }

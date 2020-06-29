@@ -1,1 +1,3 @@
-javac test.java; java test
+param([string]$file="a")
+
+java _work/java/$file.java
