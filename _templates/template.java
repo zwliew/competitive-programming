@@ -16,7 +16,7 @@ public class template {
     while (st == null || !st.hasMoreElements()) {
       try {
         st = new StringTokenizer(br.readLine());
-      } catch (IOException e) {
+      } catch (final IOException e) {
         e.printStackTrace();
       }
     }
@@ -36,17 +36,17 @@ public class template {
   }
 
   private static String nextLine() {
-    String res = null;
+    final String res = null;
     while (res == null || res.isEmpty()) {
       try {
         return br.readLine();
-      } catch (IOException e) {
+      } catch (final IOException e) {
         e.printStackTrace();
       }
     }
     return res;
   }
 
-  public static void main(String[] args) {
+  public static void main(final String[] args) {
   }
 }
