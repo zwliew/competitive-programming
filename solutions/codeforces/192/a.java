@@ -54,5 +54,17 @@ public class template {
   }
 
   void solve(InputReader in, PrintWriter out) {
+    int n = in.nextInt();
+    final var hs = new HashSet<Long>();
+    for (long i = 1, j = i * (i + 1) / 2; j < n; ++i, j = i * (i + 1) / 2) {
+      hs.add(j);
+      long k = n - j;
+      if (hs.contains(k)) {
+        out.print("YES");
+        return;
+      }
+    }
+
+    out.print("NO");
   }
 }

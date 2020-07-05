@@ -54,5 +54,47 @@ public class template {
   }
 
   void solve(InputReader in, PrintWriter out) {
+    var s = in.nextLine();
+    int m = in.nextInt();
+    var avail = new ArrayList<Integer>();
+    for (int i = 1; i <= 10; ++i) {
+      if (s.charAt(i - 1) == '1') {
+        avail.add(i);
+      }
+    }
+
+    var ans = new ArrayList<Integer>();
+    if (dfs(avail, ans, m, 0, 0)) {
+      out.println("YES");
+      for (int x : ans) {
+        out.print(x + " ");
+      }
+    } else {
+      out.print("NO");
+    }
+  }
+
+  boolean dfs(ArrayList<Integer> avail, ArrayList<Integer> ans, int left, int bal, int prev) {
+    if (left == 0) {
+      return true;
+    }
+    for (int candidate : avail) {
+      if (prev == candidate)
+        continue;
+      if (bal <= 0 && bal + candidate > 0) {
+        ans.add(candidate);
+        if (dfs(avail, ans, left - 1, bal + candidate, candidate)) {
+          return true;
+        }
+        ans.remove(ans.size() - 1);
+      } else if (bal > 0 && bal - candidate < 0) {
+        ans.add(candidate);
+        if (dfs(avail, ans, left - 1, bal - candidate, candidate)) {
+          return true;
+        }
+        ans.remove(ans.size() - 1);
+      }
+    }
+    return false;
   }
 }

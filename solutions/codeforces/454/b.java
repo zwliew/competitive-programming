@@ -54,5 +54,34 @@ public class template {
   }
 
   void solve(InputReader in, PrintWriter out) {
+    int n = in.nextInt();
+    int[] arr = new int[n];
+    for (int i = 0; i < n; ++i) {
+      arr[i] = in.nextInt();
+    }
+
+    int foundIdx = n;
+    for (int i = 1; i < n; ++i) {
+      if (arr[i - 1] > arr[i]) {
+        if (foundIdx < n) {
+          out.print(-1);
+          return;
+        }
+        foundIdx = i;
+      }
+    }
+    
+    int curMin = Integer.MAX_VALUE;
+    for (int i = 0; i < foundIdx; ++i) {
+      curMin = Math.min(curMin, arr[i]);
+    }
+    for (int i = foundIdx; i < n; ++i) {
+      if (arr[i] > curMin) {
+        out.print(-1);
+        return;
+      }
+    }
+
+    out.print(n - foundIdx);
   }
 }

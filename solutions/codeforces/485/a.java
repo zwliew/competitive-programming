@@ -1,5 +1,13 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.StringTokenizer;
 
 public class template {
   static class InputReader {
@@ -47,12 +55,21 @@ public class template {
   }
 
   public static void main(final String[] args) {
-    final var in = new InputReader(System.in);
-    final var out = new PrintWriter(System.out);
-    new template().solve(in, out);
-    out.close();
+    final var reader = new InputReader(System.in);
+    final var writer = new PrintWriter(System.out);
+    solve(reader, writer);
+    writer.close();
   }
 
-  void solve(InputReader in, PrintWriter out) {
+  static void solve(InputReader in, PrintWriter out) {
+    int a = in.nextInt(), m = in.nextInt();
+    var hs = new HashSet<Integer>();
+    int next = a % m;
+    while (!hs.contains(next)) {
+      hs.add(next);
+      a = (a + next) % m;
+      next = a % m;
+    }
+    out.print(a == 0 ? "Yes" : "No");
   }
 }
