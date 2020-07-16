@@ -1,33 +1,43 @@
 #include <vector>
 
+struct Value {
+  long long sum;
+};
+
 // Range sum Segment Tree
 template <typename T>
 struct SegmentTree {
-  std::vector<T> sums;
+  std::vector<Value> vals;
   int n;
+
+  const Value NEUTRAL = {0};
+
+  Value single(T x) { return {x}; }
+
+  Value merge(Value a, Value b) { return {a.sum + b.sum}; }
 
   SegmentTree(std::vector<T>& a) {
     n = a.size();
-    sums.assign(n * 4, 0);
+    vals.resize(n * 4);
     build(a, 0, 0, n - 1);
   }
 
   void build(std::vector<T>& a, int ti, int tl, int tr) {
     if (tl == tr) {
-      sums[ti] = a[tl];
+      vals[ti] = single(a[tl]);
       return;
     }
     int tm = tl + (tr - tl) / 2;
     build(a, ti * 2 + 1, tl, tm);
     build(a, ti * 2 + 2, tm + 1, tr);
-    compute(ti);
+    vals[ti] = merge(vals[ti * 2 + 1], vals[ti * 2 + 2]);
   }
 
   void update(int i, T val) { update(i, val, 0, 0, n - 1); }
 
   void update(int i, T val, int ti, int tl, int tr) {
     if (tl == tr) {
-      sums[ti] = val;
+      vals[ti] = single(val);
       return;
     }
     int tm = tl + (tr - tl) / 2;
@@ -36,22 +46,20 @@ struct SegmentTree {
     } else {
       update(i, val, ti * 2 + 2, tm + 1, tr);
     }
-    compute(ti);
+    vals[ti] = merge(vals[ti * 2 + 1], vals[ti * 2 + 2]);
   }
 
-  void compute(int ti) { sums[ti] = sums[ti * 2 + 1] + sums[ti * 2 + 2]; }
+  Value query(int l, int r) { return query(l, r, 0, 0, n - 1); }
 
-  T query(int l, int r) { return query(l, r, 0, 0, n - 1); }
-
-  T query(int l, int r, int ti, int tl, int tr) {
+  Value query(int l, int r, int ti, int tl, int tr) {
     if (tl > r || tr < l) {
-      return 0;
+      return NEUTRAL;
     }
     if (tl >= l && tr <= r) {
-      return sums[ti];
+      return vals[ti];
     }
     int tm = tl + (tr - tl) / 2;
-    return query(l, r, ti * 2 + 1, tl, tm) +
-           query(l, r, ti * 2 + 2, tm + 1, tr);
+    return merge(query(l, r, ti * 2 + 1, tl, tm),
+                 query(l, r, ti * 2 + 2, tm + 1, tr));
   }
 };
