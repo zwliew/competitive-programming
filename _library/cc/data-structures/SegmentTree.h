@@ -16,6 +16,8 @@ struct SegmentTree {
 
   Value merge(Value a, Value b) { return {a.sum + b.sum}; }
 
+  SegmentTree(int sz) : n(sz) { vals.resize(sz * 4); }
+
   SegmentTree(std::vector<T>& a) {
     n = a.size();
     vals.resize(n * 4);
