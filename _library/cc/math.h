@@ -1,7 +1,8 @@
 #include <utility>
 
+// Note: use C++17 gcd() or GNU __gcd() instead.
 template <typename T>
-T gcd(T a, T &b) {
+T gcd(T a, T& b) {
   while (b) {
     a %= b;
     std::swap(a, b);
@@ -14,6 +15,7 @@ T lcm(T a, T b) {
   return a / gcd(a, b) * b;
 }
 
+// Note: use GNU __gnu_cxx::power() instead.
 template <typename T>
 T mexp(T a, T b, T m) {
   T res = 1;

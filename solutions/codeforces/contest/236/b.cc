@@ -32,9 +32,15 @@ using namespace std;
 #define debug(...) 0
 #endif
 
-string to_string(string s) { return '"' + s + '"'; }
-string to_string(const char *s) { return to_string((string)s); }
-string to_string(bool b) { return (b ? "true" : "false"); }
+string to_string(string s) {
+  return '"' + s + '"';
+}
+string to_string(const char* s) {
+  return to_string((string)s);
+}
+string to_string(bool b) {
+  return (b ? "true" : "false");
+}
 template <typename A, typename B>
 string to_string(pair<A, B> p) {
   return "(" + to_string(p.first) + ", " + to_string(p.second) + ")";
@@ -48,7 +54,7 @@ template <typename A>
 string to_string(A v) {
   bool first = true;
   string res = "{";
-  for (const auto &x : v) {
+  for (const auto& x : v) {
     if (!first) {
       res += ", ";
     }
@@ -59,7 +65,9 @@ string to_string(A v) {
   return res;
 }
 
-void _debug() { cerr << '\n'; }
+void _debug() {
+  cerr << '\n';
+}
 template <typename Head, typename... Tail>
 void _debug(Head H, Tail... T) {
   cerr << ' ' << to_string(H);
@@ -87,35 +95,62 @@ int main() {
   freopen("./output.txt", "w", stdout);
 #endif
 
-  const ll mod = 1073741824;
-  ll ans = 0;
+  // Faster solution: for each divisor, find its products.
   int a, b, c;
   cin >> a >> b >> c;
 
-  vll divisors(a * b * c + 1);
-  for (int i = 1; i <= a * b * c; ++i) {
-    ll div = 1;
-    int cur = i;
-    for (int d = 2; d * d <= cur; ++d) {
-      if (cur % d == 0) {
-        ll curdiv = 1;
-        while (cur % d == 0) {
-          cur /= d;
-          ++curdiv;
-        }
-        div *= curdiv;
-      }
+  int n = a * b * c;
+  const int mod = 1073741824;
+  vector<int> divcnt(n + 1);
+  for (int i = 1; i <= n; ++i) {
+    for (int j = i; j <= n; j += i) {
+      divcnt[j]++;
     }
-    if (cur > 1) div *= 2;
-    divisors[i] = div;
   }
 
+  int64_t sum = 0;
   for (int i = 1; i <= a; ++i) {
     for (int j = 1; j <= b; ++j) {
       for (int k = 1; k <= c; ++k) {
-        ans = (ans + divisors[i * j * k]) % mod;
+        sum += divcnt[i * j * k];
+        sum %= mod;
       }
     }
   }
-  cout << ans;
+
+  cout << sum;
+}
+
+// Much slower solution: for each product, find all its divisors.
+// const ll mod = 1073741824;
+// ll ans = 0;
+// int a, b, c;
+// cin >> a >> b >> c;
+
+// vll divisors(a * b * c + 1);
+// for (int i = 1; i <= a * b * c; ++i) {
+//   ll div = 1;
+//   int cur = i;
+//   for (int d = 2; d * d <= cur; ++d) {
+//     if (cur % d == 0) {
+//       ll curdiv = 1;
+//       while (cur % d == 0) {
+//         cur /= d;
+//         ++curdiv;
+//       }
+//       div *= curdiv;
+//     }
+//   }
+//   if (cur > 1) div *= 2;
+//   divisors[i] = div;
+// }
+
+// for (int i = 1; i <= a; ++i) {
+//   for (int j = 1; j <= b; ++j) {
+//     for (int k = 1; k <= c; ++k) {
+//       ans = (ans + divisors[i * j * k]) % mod;
+//     }
+//   }
+// }
+// cout << ans;
 }
