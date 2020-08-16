@@ -6,13 +6,21 @@
 
 using namespace std;
 
-std::string to_string(char c) { return std::string(1, c); }
+std::string to_string(char c) {
+  return std::string(1, c);
+}
 
-std::string to_string(std::string s) { return '"' + s + '"'; }
+std::string to_string(std::string s) {
+  return '"' + s + '"';
+}
 
-std::string to_string(const char *s) { return to_string((std::string)s); }
+std::string to_string(const char* s) {
+  return to_string((std::string)s);
+}
 
-std::string to_string(bool b) { return (b ? "true" : "false"); }
+std::string to_string(bool b) {
+  return (b ? "true" : "false");
+}
 
 std::string to_string(std::vector<bool> v) {
   std::string res = "{";
@@ -54,7 +62,7 @@ template <typename A>
 std::string to_string(A v) {
   bool first = true;
   std::string res = "{";
-  for (const auto &x : v) {
+  for (const auto& x : v) {
     if (!first) {
       res += ", ";
     }
@@ -65,7 +73,9 @@ std::string to_string(A v) {
   return res;
 }
 
-void _debug() { std::cerr << '\n'; }
+void _debug() {
+  std::cerr << '\n';
+}
 
 template <typename Head, typename... Tail>
 void _debug(Head H, Tail... T) {
