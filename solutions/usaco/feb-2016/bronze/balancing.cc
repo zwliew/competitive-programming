@@ -34,14 +34,14 @@ int main() {
     int x = coords[xi][0] + 1;
     for (int yi = 0; yi < n; ++yi) {
       int y = coords[yi][1] + 1;
-      array<int, 4> cnt{0, 0, 0, 0};
+      array<int, 4> cnt{};
       for (int i = 0; i < n; ++i) {
         int cx = coords[i][0];
         int cy = coords[i][1];
         if (cx < x && cy < y) {
-          cnt[0]++;
-        } else if (cx < x && cy > y) {
-          cnt[1]++;
+          ++cnt[0];
+        } else if (cx < x) {
+          ++cnt[1];
         } else if (cy < y) {
           ++cnt[2];
         } else {

@@ -12,7 +12,7 @@ using namespace std;
 #define FILE "test"
 #else
 #define debug(...) 0
-#define FILE "circlecross"
+#define FILE "balancing"
 #endif
 
 int main() {
@@ -22,17 +22,18 @@ int main() {
     freopen(FILE ".out", "w", stdout);
   }
 
-  int n, q;
-  cin >> n >> q;
-  vector<int64_t> a(n + 1);
-  for (int i = 1; i <= n; ++i) {
-    cin >> a[i];
-  }
-  partial_sum(a.begin(), a.end(), a.begin());
+  int n, x, y;
+  cin >> n >> x >> y;
 
-  while (q--) {
-    int l, r;
-    cin >> l >> r;
-    cout << a[r] - a[l] << '\n';
+  --n;
+  int lo = 0, hi = 1e9;
+  while (lo < hi) {
+    int m = lo + (hi - lo) / 2;
+    if (m / x + m / y >= n) {
+      hi = m;
+    } else {
+      lo = m + 1;
+    }
   }
+  cout << hi + min(x, y);
 }

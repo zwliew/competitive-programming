@@ -65,3 +65,45 @@ struct SegmentTree {
                  query(l, r, ti * 2 + 2, tm + 1, tr));
   }
 };
+
+// It may be easier to code this as there are fewer variables
+// to keep track of when recursing.
+template <typename T>
+struct PtrSegmentTree {
+  int l, r;
+  PtrSegmentTree *lChild, *rChild;
+  T val;
+
+  PtrSegmentTree(std::vector<T>& a, int cl, int cr) : l(cl), r(cr) {
+    if (l == r) {
+      val = a[l];
+      return;
+    }
+    int m = l + (r - l) / 2;
+    lChild = new SegmentTree(a, cl, m);
+    rChild = new SegmentTree(a, m, cr);
+    val = lChild->val + rChild->val;
+  }
+
+  void update(int idx, int cval) {
+    if (l == r) {
+      val = cval;
+      return;
+    }
+    int m = l + (r - l) / 2;
+    if (idx <= m) {
+      lChild->update(idx, cval);
+    } else {
+      rChild->update(idx, cval);
+    }
+    val = lChild->val + rChild->val;
+  }
+
+  T query(int cl, int cr) {
+    if (l > cr || r < cl)
+      return 0;
+    if (l >= cl && r <= cr)
+      return val;
+    return lChild->query(cl, cr) + rChild->query(cl, cr);
+  }
+};

@@ -12,7 +12,7 @@ using namespace std;
 #define FILE "test"
 #else
 #define debug(...) 0
-#define FILE "circlecross"
+#define FILE "div7"
 #endif
 
 int main() {
@@ -22,17 +22,26 @@ int main() {
     freopen(FILE ".out", "w", stdout);
   }
 
-  int n, q;
-  cin >> n >> q;
-  vector<int64_t> a(n + 1);
-  for (int i = 1; i <= n; ++i) {
-    cin >> a[i];
+  int n;
+  cin >> n;
+  array<int, 7> rem;
+  rem[0] = 0;
+  for (int i = 1; i < 7; ++i) {
+    rem[i] = -1;
   }
-  partial_sum(a.begin(), a.end(), a.begin());
 
-  while (q--) {
-    int l, r;
-    cin >> l >> r;
-    cout << a[r] - a[l] << '\n';
+  int cur = 0;
+  int best = 0;
+  for (int i = 1; i <= n; ++i) {
+    int x;
+    cin >> x;
+    cur += x;
+    cur %= 7;
+    if (rem[cur] != -1) {
+      best = max(best, i - rem[cur]);
+    } else {
+      rem[cur] = i;
+    }
   }
+  cout << best;
 }
