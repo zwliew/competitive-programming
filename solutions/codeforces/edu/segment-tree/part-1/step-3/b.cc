@@ -54,18 +54,14 @@ struct SegmentTree {
   int kthLargest(int k) { return kthLargest(k, 0, 0, n - 1); }
 
   int kthLargest(int k, int ti, int tl, int tr) {
-    if (sum[ti] < k) {
-      return -1;
-    }
     if (tl == tr) {
       return tl;
     }
     int tm = tl + (tr - tl) / 2;
-    int ans = kthLargest(k, ti * 2 + 2, tm + 1, tr);
-    if (ans == -1) {
-      ans = kthLargest(k - sum[ti * 2 + 2], ti * 2 + 1, tl, tm);
+    if (sum[ti * 2 + 2] >= k) {
+      return kthLargest(k, ti * 2 + 2, tm + 1, tr);
     }
-    return ans;
+    return kthLargest(k - sum[ti * 2 + 2], ti * 2 + 1, tl, tm);
   }
 };
 

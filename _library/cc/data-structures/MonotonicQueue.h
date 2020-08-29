@@ -73,5 +73,5 @@ struct MinMaxMonotonicQueue {
 
   std::pair<T, T> top() { return {minq.top(), maxq.top()}; }
 
-  std::pair<T, T> minMax() { return top() : }
-}
+  std::pair<T, T> minMax() { return top(); }
+};
