@@ -38,4 +38,33 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int t;
+  cin >> t;
+  for (int ti = 1; ti <= t; ++ti) {
+    int n, k;
+    cin >> n >> k;
+    vector<int> a(n);
+    for (auto& x : a)
+      cin >> x;
+
+    int l = 0, r = 1e9;
+    while (l < r - 1) {
+      int m = l + (r - l) / 2;
+
+      int total = 0;
+      for (int i = 0; i < n - 1; ++i) {
+        int d = (a[i + 1] - a[i] + m - 1) / m - 1;
+        total += d;
+      }
+
+      if (total <= k) {
+        r = m;
+      } else {
+        l = m;
+      }
+    }
+
+    cout << "Case #" << ti << ": " << r << "\n";
+  }
 }

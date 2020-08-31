@@ -43,4 +43,17 @@ int main() {
     }
     cout << "Case #" << i << ": " << cnt << '\n';
   }
+
+  // Using STL methods
+  // for (int ti = 1; ti <= t; ++ti) {
+  //   int n, b;
+  //   cin >> n >> b;
+  //   vector<int> a(n);
+  //   for (auto& x : a)
+  //     cin >> x;
+  //   sort(a.begin(), a.end());
+  //   partial_sum(a.begin(), a.end(), a.begin());
+  //   cout << "Case #" << ti << ": "
+  //        << distance(a.begin(), upper_bound(a.begin(), a.end(), b)) << '\n';
+  // }
 }
