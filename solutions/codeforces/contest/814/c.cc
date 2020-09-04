@@ -1,8 +1,3 @@
-/*
-ID: zhaowei10
-TASK:
-LANG: C++14
-*/
 #include <algorithm>
 #include <array>
 #include <bitset>
@@ -32,7 +27,7 @@ using namespace std;
 #define FILE "test"
 #else
 #define debug(...) 0
-#define FILE ""
+#define FILE "diamond"
 #endif
 
 int main() {
@@ -42,15 +37,38 @@ int main() {
     freopen(FILE ".out", "w", stdout);
   }
 
+  int n;
+  cin >> n;
   string s;
   cin >> s;
-  vector<int> dp(s.size());
-  for (int i = 0; i < s.size(); ++i) {
-    for (int j = 0; j < i; ++j) {
-      if (s[i] > s[j])
-        dp[i] = max(dp[i], dp[j]);
+  array<vector<int>, 26> cnt;
+  for (int i = 0; i < n; ++i) {
+    for (int j = 0; j < 26; ++j) {
+      cnt[j].emplace_back((cnt[j].empty() ? 0 : cnt[j].back()) +
+                          (s[i] - 'a' != j));
     }
-    ++dp[i];
   }
-  cout << 26 - *max_element(dp.begin(), dp.end());
+
+  array<vector<int>, 26> ans;
+  for (int m = 1; m <= n; ++m) {
+    for (int c = 0; c < 26; ++c) {
+      int best = 0;
+      for (int i = 0, j = 1; i < n; ++i) {
+        while (j < n && cnt[c][j] - (i ? cnt[c][i - 1] : 0) <= m) {
+          ++j;
+        }
+        best = max(best, j - i);
+      }
+      ans[c].emplace_back(best);
+    }
+  }
+
+  int q;
+  cin >> q;
+  while (q--) {
+    int m;
+    char c;
+    cin >> m >> c;
+    cout << ans[c - 'a'][m - 1] << '\n';
+  }
 }

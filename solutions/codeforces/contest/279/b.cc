@@ -27,7 +27,7 @@ using namespace std;
 #define FILE "test"
 #else
 #define debug(...) 0
-#define FILE ""
+#define FILE "measurement"
 #endif
 
 int main() {
@@ -36,4 +36,26 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int n, t;
+  cin >> n >> t;
+  vector<int> a(n);
+  for (auto& x : a)
+    cin >> x;
+
+  int sum = 0;
+  int ans = 0;
+  for (int i = 0, j = 0; i < n; ++i) {
+    if (i) {
+      sum -= a[i - 1];
+    }
+
+    while (j < n && sum + a[j] <= t) {
+      sum += a[j];
+      ++j;
+    }
+
+    ans = max(ans, j - i);
+  }
+  cout << ans;
 }

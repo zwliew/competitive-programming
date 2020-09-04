@@ -1,8 +1,3 @@
-/*
-ID: zhaowei10
-TASK:
-LANG: C++14
-*/
 #include <algorithm>
 #include <array>
 #include <bitset>
@@ -32,7 +27,7 @@ using namespace std;
 #define FILE "test"
 #else
 #define debug(...) 0
-#define FILE ""
+#define FILE "diamond"
 #endif
 
 int main() {
@@ -42,15 +37,40 @@ int main() {
     freopen(FILE ".out", "w", stdout);
   }
 
-  string s;
-  cin >> s;
-  vector<int> dp(s.size());
-  for (int i = 0; i < s.size(); ++i) {
-    for (int j = 0; j < i; ++j) {
-      if (s[i] > s[j])
-        dp[i] = max(dp[i], dp[j]);
-    }
-    ++dp[i];
+  int n, k;
+  cin >> n >> k;
+  vector<int> a(n);
+  for (int i = 0; i < n; ++i) {
+    cin >> a[i];
   }
-  cout << 26 - *max_element(dp.begin(), dp.end());
+  sort(a.begin(), a.end());
+
+  vector<int> best(n), bestRev(n);
+  for (int i = 0, j = 1; i < n; ++i) {
+    while (j < n && a[j] - a[i] <= k) {
+      ++j;
+    }
+    best[i] = j - i;
+  }
+
+  for (int i = n - 2; i >= 0; --i) {
+    best[i] = max(best[i + 1], best[i]);
+  }
+
+  for (int i = 0, j = 0; i < n; ++i) {
+    while (j < i && a[i] - a[j] > k) {
+      ++j;
+    }
+    bestRev[i] = i - j + 1;
+  }
+
+  for (int i = 1; i < n; ++i) {
+    bestRev[i] = max(bestRev[i - 1], bestRev[i]);
+  }
+
+  int ans = 0;
+  for (int i = 0; i < n; ++i) {
+    ans = max(ans, best[i] + (i ? bestRev[i - 1] : 0));
+  }
+  cout << ans;
 }

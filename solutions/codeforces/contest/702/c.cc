@@ -27,7 +27,7 @@ using namespace std;
 #define FILE "test"
 #else
 #define debug(...) 0
-#define FILE ""
+#define FILE "pairup"
 #endif
 
 int main() {
@@ -36,4 +36,25 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int n, m;
+  cin >> n >> m;
+  vector<int> cities(n), towers(m);
+  for (auto& x : cities)
+    cin >> x;
+  for (auto& x : towers)
+    cin >> x;
+
+  int ans = 0;
+  int j = -1;
+  for (int i = 0; i < n; ++i) {
+    while (j + 1 < m && towers[j + 1] <= cities[i]) {
+      ++j;
+    }
+
+    ans = max(ans, min(j >= 0 ? cities[i] - towers[j] : INT_MAX,
+                       j + 1 < m ? towers[j + 1] - cities[i] : INT_MAX));
+  }
+
+  cout << ans;
 }

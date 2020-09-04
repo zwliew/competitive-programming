@@ -38,6 +38,28 @@ struct Graph {
     }
     return dist;
   }
+
+  void dfs(std::vector<bool>& vis, std::vector<int>& order, int u) {
+    vis[u] = true;
+    for (auto& e : adj[u]) {
+      if (!vis[e.v]) {
+        dfs(vis, order, v);
+      }
+    }
+    order.emplace_back(u);
+  }
+
+  std::vector<int> topoSort() {
+    std::vector<bool> vis(n);
+    std::vector<int> order;
+    for (int i = 0; i < n; ++i) {
+      if (!vis[i]) {
+        dfs(vis, order, i);
+      }
+    }
+    reverse(order.begin(), order.end());
+    return order;
+  }
 };
 
 struct Tree : Graph {

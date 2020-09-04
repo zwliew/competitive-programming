@@ -27,7 +27,7 @@ using namespace std;
 #define FILE "test"
 #else
 #define debug(...) 0
-#define FILE ""
+#define FILE "pairup"
 #endif
 
 int main() {
@@ -36,4 +36,29 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int n;
+  cin >> n;
+  vector<pair<int, int>> cows(n);
+  for (int i = 0; i < n; ++i) {
+    cin >> cows[i].second >> cows[i].first;
+  }
+  sort(cows.begin(), cows.end());
+
+  int i, j;
+  int ans = 0;
+  for (i = 0, j = n - 1; i <= j;) {
+    int d = min(cows[i].second, cows[j].second);
+    if (i == j)
+      d /= 2;
+    ans = max(ans, cows[i].first + cows[j].first);
+    cows[i].second -= d;
+    cows[j].second -= d;
+    if (!cows[i].second)
+      ++i;
+    if (!cows[j].second)
+      --j;
+  }
+
+  cout << ans;
 }

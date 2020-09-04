@@ -27,7 +27,7 @@ using namespace std;
 #define FILE "test"
 #else
 #define debug(...) 0
-#define FILE ""
+#define FILE "pairup"
 #endif
 
 int main() {
@@ -36,4 +36,28 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  array<int, 3> avail;
+  cin >> avail[0] >> avail[1] >> avail[2];
+  int m;
+  cin >> m;
+  vector<pair<int, bool>> mice(m);
+  for (int i = 0; i < m; ++i) {
+    int cost;
+    string type;
+    cin >> cost >> type;
+    mice[i] = {cost, type != "USB"};
+  }
+  sort(mice.begin(), mice.end());
+
+  int bought = 0;
+  int64_t cost = 0;
+  for (auto& [x, type] : mice) {
+    if (avail[type] || avail[2]) {
+      cost += x;
+      ++bought;
+      --avail[avail[type] ? type : 2];
+    }
+  }
+  cout << bought << " " << cost;
 }
