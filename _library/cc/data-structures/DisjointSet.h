@@ -25,7 +25,8 @@ struct DisjointSet {
   bool join(T x, T y) {
     x = find(x);
     y = find(y);
-    if (x == y) return false;
+    if (x == y)
+      return false;
     if (r[x] < r[y])
       std::swap(x, y);
     else if (r[x] == r[y])
@@ -41,8 +42,10 @@ struct DisjointSet {
   bool joinTo(T x, T y) {
     x = find(x);
     y = find(y);
-    if (x == y) return false;
-    if (r[x] == r[y]) ++r[y];
+    if (x == y)
+      return false;
+    if (r[x] == r[y])
+      ++r[y];
     p[x] = y;
     sz[y] += sz[x];
     --count;

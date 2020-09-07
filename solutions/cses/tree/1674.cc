@@ -27,23 +27,17 @@ using namespace std;
 #define FILE "test"
 #else
 #define debug(...) 0
-#define FILE "mootube"
+#define FILE "maxflow"
 #endif
 
-unordered_map<string, int> vis;
-unordered_map<string, vector<string>> adj;
+vector<int> ans;
+vector<vector<int>> adj;
 
-bool dfs(string u) {
-  vis[u] = 1;
-  for (auto& v : adj[u]) {
-    if (!vis[v] && dfs(v)) {
-      return true;
-    } else if (vis[v] == 1) {
-      return true;
-    }
+void dfs(int u) {
+  for (int v : adj[u]) {
+    dfs(v);
+    ans[u] += ans[v] + 1;
   }
-  vis[u] = 2;
-  return false;
 }
 
 int main() {
@@ -53,23 +47,22 @@ int main() {
     freopen(FILE ".out", "w", stdout);
   }
 
+  // Construct the tree and traverse it.
   int n;
   cin >> n;
-  for (int i = 0; i < n; ++i) {
-    string u, v;
-    cin >> u >> v;
-    adj[u].push_back(v);
+  ans.resize(n);
+  adj.resize(n);
+
+  for (int i = 1; i < n; ++i) {
+    int x;
+    cin >> x;
+    --x;
+    adj[x].push_back(i);
   }
 
-  string s;
-  while (cin >> s) {
-    vis.clear();
-    cout << s << " ";
-    if (dfs(s)) {
-      cout << "safe";
-    } else {
-      cout << "trapped";
-    }
-    cout << '\n';
+  dfs(0);
+
+  for (int x : ans) {
+    cout << x << ' ';
   }
 }

@@ -30,19 +30,24 @@ using namespace std;
 #define FILE "mootube"
 #endif
 
-unordered_map<string, int> vis;
 unordered_map<string, vector<string>> adj;
+unordered_set<string> vis;
+unordered_map<string, string> p;
+string t;
 
 bool dfs(string u) {
-  vis[u] = 1;
+  if (u == t) {
+    return true;
+  }
+  vis.emplace(u);
   for (auto& v : adj[u]) {
-    if (!vis[v] && dfs(v)) {
-      return true;
-    } else if (vis[v] == 1) {
-      return true;
+    if (!vis.count(v)) {
+      p[v] = u;
+      if (dfs(v)) {
+        return true;
+      }
     }
   }
-  vis[u] = 2;
   return false;
 }
 
@@ -53,23 +58,42 @@ int main() {
     freopen(FILE ".out", "w", stdout);
   }
 
+  // DFS for the path between the source and destination
   int n;
   cin >> n;
+  string s;
+  getline(cin, s);
   for (int i = 0; i < n; ++i) {
-    string u, v;
-    cin >> u >> v;
-    adj[u].push_back(v);
+    getline(cin, s);
+    stringstream ss(s);
+    string u;
+    bool first = true;
+    while (ss >> s) {
+      if (first) {
+        u = s;
+        first = false;
+      } else {
+        adj[u].push_back(s);
+        adj[s].push_back(u);
+      }
+    }
   }
 
-  string s;
-  while (cin >> s) {
-    vis.clear();
-    cout << s << " ";
-    if (dfs(s)) {
-      cout << "safe";
-    } else {
-      cout << "trapped";
-    }
-    cout << '\n';
+  cin >> s >> t;
+  if (!dfs(s)) {
+    cout << "no route found";
+    return 0;
+  }
+
+  stack<string> path;
+  while (t != s) {
+    path.emplace(t);
+    t = p[t];
+  }
+  path.emplace(s);
+
+  while (path.size()) {
+    cout << path.top() << ' ';
+    path.pop();
   }
 }

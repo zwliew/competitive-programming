@@ -43,7 +43,7 @@ struct Graph {
     vis[u] = true;
     for (auto& e : adj[u]) {
       if (!vis[e.v]) {
-        dfs(vis, order, v);
+        dfs(vis, order, e.v);
       }
     }
     order.emplace_back(u);

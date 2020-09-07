@@ -30,22 +30,6 @@ using namespace std;
 #define FILE "mootube"
 #endif
 
-unordered_map<string, int> vis;
-unordered_map<string, vector<string>> adj;
-
-bool dfs(string u) {
-  vis[u] = 1;
-  for (auto& v : adj[u]) {
-    if (!vis[v] && dfs(v)) {
-      return true;
-    } else if (vis[v] == 1) {
-      return true;
-    }
-  }
-  vis[u] = 2;
-  return false;
-}
-
 int main() {
   cin.tie(nullptr)->sync_with_stdio(false);
   if (fopen(FILE ".in", "r")) {
@@ -53,23 +37,36 @@ int main() {
     freopen(FILE ".out", "w", stdout);
   }
 
-  int n;
-  cin >> n;
+  // Use binary lifting to compute the nodes we end up on for every 2^k
+  // distance.
+  int n, q;
+  cin >> n >> q;
+  vector<vector<int>> up(n, vector<int>(30));
   for (int i = 0; i < n; ++i) {
-    string u, v;
-    cin >> u >> v;
-    adj[u].push_back(v);
+    int t;
+    cin >> t;
+    --t;
+    up[i][0] = t;
   }
 
-  string s;
-  while (cin >> s) {
-    vis.clear();
-    cout << s << " ";
-    if (dfs(s)) {
-      cout << "safe";
-    } else {
-      cout << "trapped";
+  for (int i = 1; i < 30; ++i) {
+    for (int j = 0; j < n; ++j) {
+      up[j][i] = up[up[j][i - 1]][i - 1];
     }
-    cout << '\n';
+  }
+
+  while (q--) {
+    int x, k;
+    cin >> x >> k;
+    --x;
+    int i = 0;
+    while (k) {
+      if (k & 1) {
+        x = up[x][i];
+      }
+      k >>= 1;
+      ++i;
+    }
+    cout << x + 1 << '\n';
   }
 }

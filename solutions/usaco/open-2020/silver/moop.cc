@@ -27,24 +27,8 @@ using namespace std;
 #define FILE "test"
 #else
 #define debug(...) 0
-#define FILE "mootube"
+#define FILE "moop"
 #endif
-
-unordered_map<string, int> vis;
-unordered_map<string, vector<string>> adj;
-
-bool dfs(string u) {
-  vis[u] = 1;
-  for (auto& v : adj[u]) {
-    if (!vis[v] && dfs(v)) {
-      return true;
-    } else if (vis[v] == 1) {
-      return true;
-    }
-  }
-  vis[u] = 2;
-  return false;
-}
 
 int main() {
   cin.tie(nullptr)->sync_with_stdio(false);
@@ -55,21 +39,27 @@ int main() {
 
   int n;
   cin >> n;
+  vector<pair<int, int>> a(n);
   for (int i = 0; i < n; ++i) {
-    string u, v;
-    cin >> u >> v;
-    adj[u].push_back(v);
+    cin >> a[i].first >> a[i].second;
+  }
+  sort(a.begin(), a.end());
+
+  vector<int> minl(n), maxr(n);
+  minl[0] = a[0].second;
+  for (int i = 1; i < n; ++i) {
+    minl[i] = min(minl[i - 1], a[i].second);
+  }
+  maxr[n - 1] = a[n - 1].second;
+  for (int i = n - 2; i >= 0; --i) {
+    maxr[i] = max(maxr[i + 1], a[i].second);
   }
 
-  string s;
-  while (cin >> s) {
-    vis.clear();
-    cout << s << " ";
-    if (dfs(s)) {
-      cout << "safe";
-    } else {
-      cout << "trapped";
+  int ans = 1;
+  for (int i = 0; i < n - 1; ++i) {
+    if (minl[i] > maxr[i + 1]) {
+      ++ans;
     }
-    cout << '\n';
   }
+  cout << ans;
 }
