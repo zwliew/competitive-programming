@@ -41,6 +41,8 @@ int main() {
 #else
 #endif
 
+  // Simple binary search for the max number of burgers
+  // Beware of overflow
   unordered_map<char, int> nti = {{'B', 0}, {'S', 1}, {'C', 2}};
   string ns;
   cin >> ns;

@@ -28,7 +28,7 @@ using namespace std;
 #define FILE "test"
 #else
 #define debug(...) 0
-#define FILE ""
+#define FILE "perimeter"
 #endif
 
 int main() {
@@ -37,4 +37,16 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int n;
+  cin >> n;
+  int ans = 0;
+  while (n) {
+    ans <<= 1;
+    if (n & 1) {
+      ++ans;
+    }
+    n >>= 1;
+  }
+  cout << ans;
 }

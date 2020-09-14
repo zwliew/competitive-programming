@@ -4,7 +4,6 @@
 #include <chrono>
 #include <climits>
 #include <cmath>
-#include <cstring>
 #include <deque>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <fstream>
@@ -37,4 +36,32 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int t;
+  cin >> t;
+  while (t--) {
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (auto& x : a)
+      cin >> x;
+
+    int cd = 0;
+    for (int i = 0; i < n; ++i) {
+      int cand = i;
+      int candCd = gcd(cd, a[i]);
+      for (int j = i + 1; j < n; ++j) {
+        int nxtCd = gcd(cd, a[j]);
+        if (nxtCd > candCd) {
+          candCd = nxtCd;
+          cand = j;
+        }
+      }
+      swap(a[i], a[cand]);
+      cd = candCd;
+      cout << a[i] << ' ';
+    }
+    cout << '\n';
+  }
 }
+

@@ -28,7 +28,7 @@ using namespace std;
 #define FILE "test"
 #else
 #define debug(...) 0
-#define FILE ""
+#define FILE "perimeter"
 #endif
 
 int main() {
@@ -36,5 +36,35 @@ int main() {
   if (fopen(FILE ".in", "r")) {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
+  }
+
+  // Simulate the process using a linked list
+  int t;
+  cin >> t;
+  string s;
+  getline(cin, s);
+  while (t--) {
+    getline(cin, s);
+
+    list<char> l;
+    auto cur = l.begin();
+    for (char c : s) {
+      if (c == '<') {
+        if (cur != l.begin()) {
+          l.erase(prev(cur));
+        }
+      } else if (c == '[') {
+        cur = l.begin();
+      } else if (c == ']') {
+        cur = l.end();
+      } else {
+        l.insert(cur, c);
+      }
+    }
+
+    for (char c : l) {
+      cout << c;
+    }
+    cout << '\n';
   }
 }

@@ -37,4 +37,29 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  // Simulate the process and use a hashset to keep track of people in the
+  // building
+  int n;
+  cin >> n;
+  unordered_set<string> entered;
+  while (n--) {
+    string a, b;
+    cin >> a >> b;
+    if (a == "entry") {
+      cout << b << " entered";
+      if (entered.count(b)) {
+        cout << " (ANOMALY)";
+      }
+      cout << "\n";
+      entered.emplace(b);
+    } else {
+      cout << b << " exited";
+      if (!entered.count(b)) {
+        cout << " (ANOMALY)";
+      }
+      cout << "\n";
+      entered.erase(b);
+    }
+  }
 }

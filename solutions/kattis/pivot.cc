@@ -4,7 +4,6 @@
 #include <chrono>
 #include <climits>
 #include <cmath>
-#include <cstring>
 #include <deque>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <fstream>
@@ -37,4 +36,26 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  // Use prefix and suffix max/mins for every index i
+  int n;
+  cin >> n;
+  vector<int> a(n);
+  for (auto& x : a)
+    cin >> x;
+
+  vector<bool> ok(n);
+  int cmax = 0;
+  for (int i = 0; i < n; ++i) {
+    ok[i] = a[i] > cmax;
+    cmax = max(a[i], cmax);
+  }
+
+  int cmin = INT_MAX;
+  for (int i = n - 1; i >= 0; --i) {
+    ok[i] = ok[i] && a[i] < cmin;
+    cmin = min(a[i], cmin);
+  }
+
+  cout << accumulate(ok.begin(), ok.end(), 0);
 }

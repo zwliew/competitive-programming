@@ -28,6 +28,7 @@ int main() {
   cin.tie(nullptr);
   ios::sync_with_stdio(false);
 
+  // minCoins[i] = the min number of coins needed to make a sum of i
   int n, x;
   cin >> n >> x;
   vector<int> minCoins(x + 1, 1e9);

@@ -24,23 +24,43 @@ int main() {
     freopen(FILE ".out", "w", stdout);
   }
 
+  // Sort by ascending order of start times.
   int n;
   cin >> n;
   vector<tuple<int, int, int>> projects(n);
-  for (auto &[s, e, p] : projects) {
+  for (auto& [s, e, p] : projects) {
     cin >> s >> e >> p;
   }
   sort(projects.begin(), projects.end());
-
   vector<long long> dp(n + 1);
   for (int i = n - 1; ~i; --i) {
     dp[i] = dp[i + 1];
-    auto &[s, e, p] = projects[i];
+    auto& [s, e, p] = projects[i];
     auto it = lower_bound(projects.begin() + i + 1, projects.end(),
                           make_tuple(e + 1, 0, 0));
-    dp[i] =
-        max(dp[i], (it == projects.end() ? 0 : dp[it - projects.begin()]) + p);
+    dp[i] = max(dp[i], dp[it - projects.begin()] + p);
   }
-
   cout << dp.front();
+
+  // Alternative solution: dp[i] = max profit considering the first i projects
+  // Sort projects in ascending order of end-times
+  // If we take project i, we need to binary search for the last project that we
+  // can take. We can take project j if project[i].start > project[j].end.
+  //
+  // int n;
+  // cin >> n;
+  // vector<tuple<int, int, int>> a(n);
+  // for (auto& [e, s, p] : a) {
+  //   cin >> s >> e >> p;
+  // }
+  // sort(a.begin(), a.end());
+  // vector<int64_t> dp(n + 1);
+  // for (int i = 1; i <= n; ++i) {
+  //   dp[i] = dp[i - 1];
+  //   auto it = lower_bound(a.begin(), a.begin() + i,
+  //                         make_tuple(get<1>(a[i - 1]), 0, 0)) -
+  //             a.begin();
+  //   dp[i] = max(dp[i], dp[it] + get<2>(a[i - 1]));
+  // }
+  // cout << dp[n];
 }

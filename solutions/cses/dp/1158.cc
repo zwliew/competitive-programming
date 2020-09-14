@@ -28,17 +28,23 @@ int main() {
   cin.tie(nullptr);
   ios::sync_with_stdio(false);
 
+  // maxPages[i][j] = max number of pages I can get considering the first i
+  // books and spending at most j.
   int n, x;
   cin >> n >> x;
   vector<int> h(n), s(n);
-  for (int &i : h) cin >> i;
-  for (int &i : s) cin >> i;
+  for (int& i : h)
+    cin >> i;
+  for (int& i : s)
+    cin >> i;
   vector<vector<int>> maxPages(n + 1, vector<int>(x + 1));
   for (int i = 1; i <= n; ++i) {
     for (int j = 1; j <= x; ++j) {
-      maxPages[i][j] =
-          max(maxPages[i - 1][j],
-              (j >= h[i - 1] ? maxPages[i - 1][j - h[i - 1]] + s[i - 1] : 0));
+      maxPages[i][j] = maxPages[i - 1][j];
+      if (h[i - 1] <= j) {
+        maxPages[i][j] =
+            max(maxPages[i][j], maxPages[i - 1][j - h[i - 1]] + s[i - 1]);
+      }
     }
   }
   cout << maxPages[n][x];

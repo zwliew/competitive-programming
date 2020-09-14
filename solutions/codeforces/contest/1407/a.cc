@@ -4,7 +4,6 @@
 #include <chrono>
 #include <climits>
 #include <cmath>
-#include <cstring>
 #include <deque>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <fstream>
@@ -28,7 +27,7 @@ using namespace std;
 #define FILE "test"
 #else
 #define debug(...) 0
-#define FILE ""
+#define FILE "mooyomooyo"
 #endif
 
 int main() {
@@ -36,5 +35,31 @@ int main() {
   if (fopen(FILE ".in", "r")) {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
+  }
+
+  int t;
+  cin >> t;
+  while (t--) {
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    int cnt = 0;
+    for (int i = 0; i < n; ++i) {
+      cin >> a[i];
+      cnt += a[i];
+    }
+
+    if (cnt * 2 <= n) {
+      cout << n - cnt << '\n';
+      for (int i = 0; i < n - cnt; ++i) {
+        cout << "0 ";
+      }
+    } else {
+      cout << cnt - (cnt % 2) << '\n';
+      for (int i = 0; i < cnt - (cnt % 2); ++i) {
+        cout << "1 ";
+      }
+    }
+    cout << '\n';
   }
 }

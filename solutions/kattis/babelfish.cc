@@ -37,4 +37,24 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  // Use a hashmap to efficiently map foreign words to english words
+  unordered_map<string, string> m;
+  string s;
+  while (getline(cin, s) && !s.empty()) {
+    stringstream ss(s);
+    vector<string> v;
+    while (ss >> s) {
+      v.push_back(s);
+    }
+    m[v[1]] = v[0];
+  }
+
+  while (cin >> s) {
+    if (m.count(s)) {
+      cout << m[s] << '\n';
+    } else {
+      cout << "eh\n";
+    }
+  }
 }

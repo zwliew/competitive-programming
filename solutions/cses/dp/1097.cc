@@ -31,7 +31,7 @@ int main() {
   int n;
   cin >> n;
   vector<int> x(n);
-  for (int &i : x) {
+  for (int& i : x) {
     cin >> i;
   }
   vector<vector<ll>> dp(n, vector<ll>(n));
@@ -45,4 +45,19 @@ int main() {
     }
   }
   cout << (accumulate(x.begin(), x.end(), 0ll) + dp[0][n - 1]) / 2;
+
+  // Alternative DP solution
+  // for (int i = n - 1; i >= 0; --i) {
+  //   for (int j = i; j < n; ++j) {
+  //     if (i == j) {
+  //       dp[i][j] = a[i];
+  //     } else {
+  //       dp[i][j] = max(
+  //           a[i] + min(i + 2 < n ? dp[i + 2][j] : INT_MAX, dp[i + 1][j - 1]),
+  //           a[j] + min(dp[i + 1][j - 1], j - 2 >= 0 ? dp[i][j - 2] :
+  //           INT_MAX));
+  //     }
+  //   }
+  // }
+  // cout << dp[0][n - 1];
 }

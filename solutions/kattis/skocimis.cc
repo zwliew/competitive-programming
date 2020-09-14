@@ -28,7 +28,7 @@ using namespace std;
 #define FILE "test"
 #else
 #define debug(...) 0
-#define FILE ""
+#define FILE "berries"
 #endif
 
 int main() {
@@ -37,4 +37,17 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  // Try 2 possible outermost jumps, then move 1 block at a time
+  array<int, 3> x;
+  cin >> x[0] >> x[1] >> x[2];
+  sort(x.begin(), x.end());
+  int ans = 0;
+  if (x[1] < x[2] - 1) {
+    ans = x[2] - x[1] - 1;
+  }
+  if (x[0] < x[1] - 1) {
+    ans = max(ans, x[1] - x[0] - 1);
+  }
+  cout << ans;
 }

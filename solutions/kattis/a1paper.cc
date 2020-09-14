@@ -37,4 +37,32 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  // Compute how much of each paper we need, and how much tape we need.
+  int n;
+  cin >> n;
+  vector<int64_t> a(n + 1);
+  for (int i = 2; i <= n; ++i) {
+    cin >> a[i];
+  }
+
+  long double x = pow(2, (long double)-3 / 4);
+  long double y = pow(2, (long double)-5 / 4);
+  long double ans = 0;
+  int64_t needed = 1;
+  for (int i = 1; i <= n; ++i) {
+    needed -= min(needed, a[i]);
+    if (needed) {
+      ans += needed * x;
+      needed *= 2;
+    }
+    x /= 2;
+    swap(x, y);
+  }
+
+  if (needed) {
+    cout << "impossible";
+  } else {
+    cout << fixed << setprecision(5) << ans;
+  }
 }

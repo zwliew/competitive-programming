@@ -28,6 +28,7 @@ int main() {
   cin.tie(nullptr);
   ios::sync_with_stdio(false);
 
+  // Similar to finding the longest non-decreasing subsequence
   // It is optimal to always place the next cube on top of the next grater cube.
   // Use a BST to efficiently search for the next greater cube.
   // Can also use a sorted array and binary search.

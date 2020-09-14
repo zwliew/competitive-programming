@@ -37,4 +37,12 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  // Simply compute the p-norm distance using the given formula
+  long double x1, y1, x2, y2, p;
+  while (cin >> x1 && x1) {
+    cin >> y1 >> x2 >> y2 >> p;
+    cout << fixed << setprecision(5)
+         << pow(pow(abs(x1 - x2), p) + pow(abs(y1 - y2), p), 1 / p) << '\n';
+  }
 }

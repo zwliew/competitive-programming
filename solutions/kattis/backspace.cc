@@ -28,7 +28,7 @@ using namespace std;
 #define FILE "test"
 #else
 #define debug(...) 0
-#define FILE ""
+#define FILE "perimeter"
 #endif
 
 int main() {
@@ -37,4 +37,22 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  // Simulate the process with a stack
+  string s;
+  cin >> s;
+
+  vector<char> st;
+  for (char c : s) {
+    if (c == '<') {
+      st.pop_back();
+    } else {
+      st.push_back(c);
+    }
+  }
+
+  for (char c : st) {
+    cout << c;
+  }
 }
+

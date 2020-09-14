@@ -37,4 +37,21 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  // Rotate the struck point and use trigonometry and circles
+  const long double pi = 2 * acos(0);
+  long double r, x, y;
+  while (cin >> r >> x >> y) {
+    auto d = hypot(x, y);
+    if (d > r) {
+      cout << "miss";
+    } else {
+      auto area = pi * r * r;
+      auto clen = 2 * sqrt(r * r - d * d);
+      auto theta = 2 * asin(clen / 2 / r);
+      auto darea = (theta - sin(theta)) / 2 * r * r;
+      cout << max(area - darea, darea) << ' ' << min(area - darea, darea);
+    }
+    cout << "\n";
+  }
 }

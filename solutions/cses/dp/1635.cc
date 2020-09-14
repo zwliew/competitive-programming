@@ -28,18 +28,20 @@ int main() {
   cin.tie(nullptr);
   ios::sync_with_stdio(false);
 
-  int mod = 1e9 + 7;
+  // ways(i) = number of ways to sum up to i
+  const int mod = 1e9 + 7;
   int n, x;
   cin >> n >> x;
   vector<int> c(n);
-  for (int &i : c) cin >> i;
-  // ways(i) = number of ways to sum up to i
+  for (int& i : c)
+    cin >> i;
   vector<int> ways(x + 1);
   ways[0] = 1;
   for (int i = 1; i <= x; ++i) {
-    for (int j = 0; j < n; ++j) {
-      if (c[j] <= i) {
-        ways[i] = (ways[i] + ways[i - c[j]]) % mod;
+    for (int ci : c) {
+      if (ci <= i) {
+        ways[i] += ways[i - ci];
+        ways[i] %= mod;
       }
     }
   }

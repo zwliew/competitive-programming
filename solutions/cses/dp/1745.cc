@@ -28,6 +28,7 @@ int main() {
   cin.tie(nullptr);
   ios::sync_with_stdio(false);
 
+  // dp[i][j] = is it possible to make a sum of i using only the first j coins?
   int n;
   cin >> n;
   vector<int> x(n);
@@ -58,4 +59,30 @@ int main() {
   for (int i : res) {
     cout << i << ' ';
   }
+
+  // Alternative with trivial differences
+  // int n;
+  // cin >> n;
+  // vector<int> c(n);
+  // for (auto& x : c)
+  //   cin >> x;
+
+  // int mx = n * *max_element(c.begin(), c.end());
+  // vector<vector<bool>> dp(n + 1, vector<bool>(mx + 1));
+  // dp[0][0] = true;
+  // for (int i = 1; i <= n; ++i) {
+  //   for (int j = 0; j <= mx; ++j) {
+  //     dp[i][j] = dp[i - 1][j];
+  //     if (c[i - 1] <= j) {
+  //       dp[i][j] = dp[i][j] || dp[i - 1][j - c[i - 1]];
+  //     }
+  //   }
+  // }
+
+  // cout << accumulate(dp[n].begin(), dp[n].end(), 0) - 1 << '\n';
+  // for (int i = 1; i <= mx; ++i) {
+  //   if (dp[n][i]) {
+  //     cout << i << " ";
+  //   }
+  // }
 }

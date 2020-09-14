@@ -37,4 +37,9 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  // Simple square math
+  long double a;
+  cin >> a;
+  cout << fixed << setprecision(6) << 4 * sqrt(a);
 }

@@ -28,6 +28,7 @@ int main() {
   cin.tie(nullptr);
   ios::sync_with_stdio(false);
 
+  // ways[i] = ways[i - j] for j in [1, min(i, 6)]
   int mod = 1e9 + 7;
   int n;
   cin >> n;

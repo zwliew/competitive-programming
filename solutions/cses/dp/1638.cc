@@ -28,7 +28,9 @@ int main() {
   cin.tie(nullptr);
   ios::sync_with_stdio(false);
 
-  int mod = 1e9 + 7;
+  // numWays[i][j] = numWays[i - 1][j] + numWays[i][j - 1] if grid[i][j] is not
+  // a star
+  const int mod = 1e9 + 7;
   int n;
   cin >> n;
 

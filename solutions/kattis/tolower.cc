@@ -28,7 +28,7 @@ using namespace std;
 #define FILE "test"
 #else
 #define debug(...) 0
-#define FILE ""
+#define FILE "berries"
 #endif
 
 int main() {
@@ -37,4 +37,24 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  // For each problem, check if every test case satisfies the constraints
+  int p, t;
+  cin >> p >> t;
+  int ans = 0;
+  while (p--) {
+    bool ok = true;
+    for (int i = 0; i < t; ++i) {
+      string s;
+      cin >> s;
+      for (int j = 0; j < s.size(); ++j) {
+        if (j && tolower(s[j]) != s[j]) {
+          ok = false;
+          break;
+        }
+      }
+    }
+    ans += ok;
+  }
+  cout << ans;
 }

@@ -4,7 +4,6 @@
 #include <chrono>
 #include <climits>
 #include <cmath>
-#include <cstring>
 #include <deque>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <fstream>
@@ -36,5 +35,32 @@ int main() {
   if (fopen(FILE ".in", "r")) {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
+  }
+
+  // Slot the missing numbers in lexicographical order using a BST
+  int n, m;
+  cin >> n >> m;
+
+  set<int> removed;
+  for (int i = 1; i <= n; ++i) {
+    removed.emplace(i);
+  }
+
+  vector<int> v(m);
+  for (auto& x : v) {
+    cin >> x;
+    removed.erase(x);
+  }
+
+  for (int x : v) {
+    while (removed.size() && *removed.begin() < x) {
+      cout << *removed.begin() << '\n';
+      removed.erase(removed.begin());
+    }
+    cout << x << '\n';
+  }
+
+  for (int x : removed) {
+    cout << x << '\n';
   }
 }
