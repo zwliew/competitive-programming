@@ -30,3 +30,4 @@ Sources:
 - [URI Online Judge](https://www.urionlinejudge.com.br/judge/en)
 - [Aizu Online Judge](http://judge.u-aizu.ac.jp)
 - [DMOJ](https://dmoj.ca/)
+- [oj.uz](https://oj.uz/)

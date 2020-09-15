@@ -22,8 +22,7 @@ int main() {
     if (p.second >= k) {
       cout << p.first;
       return 0;
-    } else {
-      k -= p.second;
     }
+    k -= p.second;
   }
 }
