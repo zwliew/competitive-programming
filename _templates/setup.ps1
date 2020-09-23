@@ -27,6 +27,10 @@ Copy-Item _templates/template.java -Destination _work/java/d.java
 Copy-Item _templates/template.java -Destination _work/java/e.java
 Copy-Item _templates/template.java -Destination _work/java/f.java
 
+# Set up JavaScript working directory
+md _work/js -ea 0
+Copy-Item _templates/template.js -Destination _work/js/a.js
+
 # Set up test I/O files
 New-Item test.in -ea 0
 New-Item test.out -ea 0

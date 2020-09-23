@@ -10,10 +10,9 @@ struct SegmentTree {
   std::vector<Value> vals;
   int n;
 
+  // Edit these
   const Value NEUTRAL = {0};
-
   Value single(T x) { return {x}; }
-
   Value merge(Value a, Value b) { return {a.sum + b.sum}; }
 
   SegmentTree(int sz) : n(sz) { vals.resize(sz * 4); }

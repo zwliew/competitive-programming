@@ -22,10 +22,12 @@ struct SqrtDecomposition {
     }
   }
 
+  // Computed value in the range [l, r).
+  // Note: r is excluded in the range.
   T query(int l, int r) {
     T res = INITIAL_VAL;
-    for (int i = l; i <= r;) {
-      if (i % len == 0 && i + len - 1 <= r) {
+    for (int i = l; i < r;) {
+      if (i % len == 0 && i + len <= r) {
         res = compute(res, comp[i / len]);
         i += len;
       } else {
