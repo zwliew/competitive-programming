@@ -36,4 +36,23 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int t;
+  cin >> t;
+  for (int ti = 1; ti <= t; ++ti) {
+    cout << "Case #" << ti << ": ";
+    int n, x;
+    cin >> n >> x;
+    vector<pair<int, int>> arr(n);
+    for (int i = 0; i < n; ++i) {
+      int cur;
+      cin >> cur;
+      arr[i] = {(cur + x - 1) / x, i};
+    }
+    sort(arr.begin(), arr.end());
+    for (auto& y : arr) {
+      cout << y.second + 1 << " ";
+    }
+    cout << "\n";
+  }
 }

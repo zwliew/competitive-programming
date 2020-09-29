@@ -27,7 +27,7 @@ using namespace std;
 #define FILE "test"
 #else
 #define debug(...) 0
-#define FILE ""
+#define FILE "feast"
 #endif
 
 int main() {
@@ -36,4 +36,40 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int t, a, b;
+  cin >> t >> a >> b;
+
+  vector<bool> dp(t + 1);
+  dp[0] = true;
+  for (int i = 1; i <= t; ++i) {
+    if (i >= a) {
+      dp[i] = dp[i] || dp[i - a];
+    }
+    if (i >= b) {
+      dp[i] = dp[i] || dp[i - b];
+    }
+  }
+  for (int i = 1; i <= t; ++i) {
+    if (i * 2 <= t) {
+      dp[i] = dp[i] || dp[i * 2];
+    }
+    if (i * 2 < t) {
+      dp[i] = dp[i] || dp[i * 2 + 1];
+    }
+  }
+
+  int ans = 0;
+  for (int i = 1; i <= t; ++i) {
+    if (i >= a) {
+      dp[i] = dp[i] || dp[i - a];
+    }
+    if (i >= b) {
+      dp[i] = dp[i] || dp[i - b];
+    }
+    if (dp[i]) {
+      ans = max(ans, i);
+    }
+  }
+  cout << ans;
 }

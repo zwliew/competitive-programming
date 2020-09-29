@@ -36,4 +36,15 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+  
+  int n;
+  cin >> n;
+  vector<int> a(n);
+  for (auto &x : a) cin >> x;
+  sort(a.begin(), a.end());
+  double prev = a[0];
+  for (int i = 1; i < n; ++i) {
+    prev = (prev + a[i]) / 2;
+  }
+  cout << fixed << setprecision(6) << prev;
 }

@@ -36,4 +36,34 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int t, n;
+  cin >> t >> n;
+  char c;
+  cin >> c;
+  vector<int> pos;
+  if (c == 'A') {
+    for (int i = 0; i < n; ++i) {
+      int x;
+      cin >> x;
+      pos.push_back(x);
+    }
+  } else {
+    string s;
+    cin >> s;
+    int curNum = 0;
+    for (char c : s) {
+      if (isdigit(c)) {
+        curNum = curNum * 10 + c - '0';
+      } else {
+        if (curNum) {
+          pos.push_back(curNum);
+        }
+        curNum = 0;
+      }
+    }
+  }
+
+  sort(pos.begin(), pos.end());
+  cout << max(pos[n - 1] - pos[1], pos[n - 2] - pos[0]) - n + 2;
 }

@@ -27,7 +27,7 @@ using namespace std;
 #define FILE "test"
 #else
 #define debug(...) 0
-#define FILE ""
+#define FILE "teamwork"
 #endif
 
 int main() {
@@ -36,4 +36,20 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int n, k;
+  cin >> n >> k;
+  vector<int> skill(n);
+  for (int i = 0; i < n; ++i)
+    cin >> skill[i];
+
+  vector<int> dp(n + 1);
+  for (int i = 1; i <= n; ++i) {
+    int curMax = 0;
+    for (int j = 1; j <= min(i, k); ++j) {
+      curMax = max(curMax, skill[i - j]);
+      dp[i] = max(dp[i], dp[i - j] + curMax * j);
+    }
+  }
+  cout << dp[n];
 }

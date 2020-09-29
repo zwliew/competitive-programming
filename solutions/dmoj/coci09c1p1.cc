@@ -36,4 +36,24 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int prev;
+  cin >> prev;
+  bool ascending = true;
+  bool descending = true;
+  for (int i = 1; i < 8; ++i) {
+    int cur;
+    cin >> cur;
+    ascending = ascending && cur > prev;
+    descending = descending && cur < prev;
+    prev = cur;
+  }
+
+  if (ascending) {
+    cout << "ascending";
+  } else if (descending) {
+    cout << "descending";
+  } else {
+    cout << "mixed";
+  }
 }
