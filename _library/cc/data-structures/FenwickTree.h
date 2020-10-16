@@ -1,5 +1,6 @@
 #include <vector>
 
+// Note: a Fenwick Tree can also be used for querying prefix min/max
 // For updating point indices, querying range sums
 template <typename T>
 struct PURQFenwickTree {

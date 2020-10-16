@@ -1,5 +1,9 @@
-bool rectCircleIntersect(long double rad, long double cx, long double cy,
-                         long double x1, long double y1, long double x2,
+bool rectCircleIntersect(long double rad,
+                         long double cx,
+                         long double cy,
+                         long double x1,
+                         long double y1,
+                         long double x2,
                          long double y2) {
   long double x, y;
   if (cx < x1)
