@@ -19,7 +19,6 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
-#include <iterator>
 
 using namespace std;
 
@@ -36,5 +35,30 @@ int main() {
   if (fopen(FILE ".in", "r")) {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
+  }
+
+  int t;
+  cin >> t;
+  while (t--) {
+    int ti, idx;
+    cin >> ti >> idx;
+    cout << ti << " ";
+
+    stack<bool> moves;
+    while (idx > 1) {
+      moves.push(idx & 1);
+      idx >>= 1;
+    }
+
+    int num = 1, denom = 1;
+    while (moves.size()) {
+      if (moves.top()) {
+        num += denom;
+      } else {
+        denom += num;
+      }
+      moves.pop();
+    }
+    cout << num << "/" << denom << "\n";
   }
 }

@@ -19,7 +19,6 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
-#include <iterator>
 
 using namespace std;
 
@@ -37,4 +36,33 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  vector<pair<int, int>> deltas;
+  for (int x = 0; x <= 2018; ++x) {
+    int y = 4072324 - x * x;
+    int rt = sqrt(y);
+    if (rt * rt == y) {
+      deltas.emplace_back(x, rt);
+    }
+  }
+
+  int n;
+  cin >> n;
+  set<pair<int, int>> s;
+  int cnt = 0;
+  for (int i = 0; i < n; ++i) {
+    int x, y;
+    cin >> x >> y;
+    for (auto& [dx, dy] : deltas) {
+      cnt += s.count({x + dx, y + dy});
+      if (dx)
+        cnt += s.count({x - dx, y + dy});
+      if (dy)
+        cnt += s.count({x + dx, y - dy});
+      if (dx && dy)
+        cnt += s.count({x - dx, y - dy});
+    }
+    s.emplace(x, y);
+  }
+  cout << cnt;
 }

@@ -19,7 +19,6 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
-#include <iterator>
 
 using namespace std;
 
@@ -37,4 +36,22 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int n;
+  cin >> n;
+  unordered_set<string> seen;
+  char prev = 0;
+  bool player = false;
+  while (n--) {
+    string s;
+    cin >> s;
+    if ((prev && s[0] != prev) || seen.count(s)) {
+      cout << "Player " << player + 1 << " lost";
+      return 0;
+    }
+    player = !player;
+    prev = s.back();
+    seen.insert(s);
+  }
+  cout << "Fair Game";
 }

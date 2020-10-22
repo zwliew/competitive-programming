@@ -10,6 +10,7 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <iterator>
 #include <map>
 #include <numeric>
 #include <queue>
@@ -19,7 +20,6 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
-#include <iterator>
 
 using namespace std;
 
@@ -37,4 +37,20 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int n;
+  cin >> n;
+  unordered_set<string> conclusions;
+  for (int ni = 1; ni <= n; ++ni) {
+    string s;
+    while (cin >> s && s != "->") {
+      if (!conclusions.count(s)) {
+        cout << ni;
+        return 0;
+      }
+    }
+    cin >> s;
+    conclusions.insert(s);
+  }
+  cout << "correct";
 }

@@ -19,7 +19,6 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
-#include <iterator>
 
 using namespace std;
 
@@ -36,5 +35,30 @@ int main() {
   if (fopen(FILE ".in", "r")) {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
+  }
+
+  auto lower = [](string s) {
+    string res;
+    for (char c : s) {
+      res += tolower(c);
+    }
+    return res;
+  };
+
+  unordered_set<string> seen;
+  string s;
+  while (getline(cin, s)) {
+    istringstream ss(s);
+    while (ss >> s) {
+      auto lowered = lower(s);
+      if (seen.count(lowered)) {
+        cout << ".";
+      } else {
+        cout << s;
+      }
+      cout << " ";
+      seen.insert(lowered);
+    }
+    cout << "\n";
   }
 }

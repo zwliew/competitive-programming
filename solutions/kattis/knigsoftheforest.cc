@@ -19,7 +19,6 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
-#include <iterator>
 
 using namespace std;
 
@@ -37,4 +36,31 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int k, n;
+  cin >> k >> n;
+
+  priority_queue<pair<int, bool>> q;
+  vector<tuple<int, int, bool>> moose;
+  for (int i = 0; i < n + k - 2; ++i) {
+    int year, strength;
+    cin >> year >> strength;
+    moose.emplace_back(year, strength, !i);
+  }
+  sort(moose.begin(), moose.end());
+
+  for (int i = 0; i < n + k - 2;) {
+    int j = i;
+    while (j < n + k - 2 && get<0>(moose[j]) == get<0>(moose[i])) {
+      q.emplace(get<1>(moose[j]), get<2>(moose[j]));
+      ++j;
+    }
+    if (q.top().second) {
+      cout << get<0>(moose[i]);
+      return 0;
+    }
+    q.pop();
+    i = j;
+  }
+  cout << "unknown";
 }

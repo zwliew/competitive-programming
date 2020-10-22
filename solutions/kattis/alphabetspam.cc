@@ -19,7 +19,6 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
-#include <iterator>
 
 using namespace std;
 
@@ -37,4 +36,25 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  char c;
+  int totalCnt = 0;
+  int whitespace = 0, lowercase = 0, uppercase = 0, symbol = 0;
+  while (cin >> c) {
+    ++totalCnt;
+    if (islower(c)) {
+      ++lowercase;
+    } else if (isupper(c)) {
+      ++uppercase;
+    } else if (c == '_') {
+      ++whitespace;
+    } else {
+      ++symbol;
+    }
+  }
+  cout << fixed << setprecision(6);
+  cout << (double)whitespace / totalCnt << "\n"
+       << (double)lowercase / totalCnt << "\n"
+       << (double)uppercase / totalCnt << "\n"
+       << (double)symbol / totalCnt << "\n";
 }
