@@ -1,6 +1,32 @@
 import collections
 
 
+class MonotonicQueue(collections.deque):
+    def __init__(self, cmp=lambda x, y: x > y):
+        super().__init__()
+        # Defaults to min monotonic queue
+        self.cmp = cmp
+
+    def enqueue(self, val: int) -> None:
+        cnt = 1
+        while self and self.cmp(self[-1][0], val):
+            cnt += self.pop()[1]
+        self.append([val, cnt])
+
+    def dequeue(self) -> int:
+        res = self.top()
+        self[0][1] -= 1
+        if self[0][1] == 0:
+            self.popleft()
+        return res
+
+    def top(self) -> int:
+        return self[0][0]
+
+    def min(self) -> int:
+        return self.top()
+
+
 class MinMonotonicQueue(collections.deque):
     def enqueue(self, val: int) -> None:
         cnt = 1
