@@ -29,6 +29,7 @@ T mexp(T a, T b, T m) {
   return res;
 }
 
+// Only works if m is prime since phi(m) = m - 1 for all prime m.
 template <typename T>
 T modinv(T x, T m) {
   return mexp(x, m - 2, m);

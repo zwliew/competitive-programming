@@ -20,32 +20,32 @@ struct SegmentTree {
   SegmentTree(std::vector<T>& a) {
     n = a.size();
     vals.resize(n * 4);
-    build(a, 0, 0, n - 1);
+    build(a, 0, 0, n);
   }
 
   void build(std::vector<T>& a, int ti, int tl, int tr) {
-    if (tl == tr) {
+    if (tl == tr - 1) {
       vals[ti] = single(a[tl]);
       return;
     }
     int tm = tl + (tr - tl) / 2;
     build(a, ti * 2 + 1, tl, tm);
-    build(a, ti * 2 + 2, tm + 1, tr);
+    build(a, ti * 2 + 2, tm, tr);
     vals[ti] = merge(vals[ti * 2 + 1], vals[ti * 2 + 2]);
   }
 
-  void update(int i, T val) { update(i, val, 0, 0, n - 1); }
+  void update(int i, T val) { update(i, val, 0, 0, n); }
 
   void update(int i, T val, int ti, int tl, int tr) {
-    if (tl == tr) {
+    if (tl == tr - 1) {
       vals[ti] = single(val);
       return;
     }
     int tm = tl + (tr - tl) / 2;
-    if (i <= tm) {
+    if (i < tm) {
       update(i, val, ti * 2 + 1, tl, tm);
     } else {
-      update(i, val, ti * 2 + 2, tm + 1, tr);
+      update(i, val, ti * 2 + 2, tm, tr);
     }
     vals[ti] = merge(vals[ti * 2 + 1], vals[ti * 2 + 2]);
   }
@@ -53,7 +53,7 @@ struct SegmentTree {
   Value query(int l, int r) { return query(l, r, 0, 0, n - 1); }
 
   Value query(int l, int r, int ti, int tl, int tr) {
-    if (tl > r || tr < l) {
+    if (tl >= r || tr <= l) {
       return NEUTRAL;
     }
     if (tl >= l && tr <= r) {
@@ -61,7 +61,7 @@ struct SegmentTree {
     }
     int tm = tl + (tr - tl) / 2;
     return merge(query(l, r, ti * 2 + 1, tl, tm),
-                 query(l, r, ti * 2 + 2, tm + 1, tr));
+                 query(l, r, ti * 2 + 2, tm, tr));
   }
 };
 
@@ -74,7 +74,7 @@ struct PtrSegmentTree {
   T val;
 
   PtrSegmentTree(std::vector<T>& a, int cl, int cr) : l(cl), r(cr) {
-    if (l == r) {
+    if (l == r - 1) {
       val = a[l];
       return;
     }
@@ -85,12 +85,12 @@ struct PtrSegmentTree {
   }
 
   void update(int idx, int cval) {
-    if (l == r) {
+    if (l == r - 1) {
       val = cval;
       return;
     }
     int m = l + (r - l) / 2;
-    if (idx <= m) {
+    if (idx < m) {
       lChild->update(idx, cval);
     } else {
       rChild->update(idx, cval);
@@ -99,7 +99,7 @@ struct PtrSegmentTree {
   }
 
   T query(int cl, int cr) {
-    if (l > cr || r < cl)
+    if (l >= cr || r <= cl)
       return 0;
     if (l >= cl && r <= cr)
       return val;
