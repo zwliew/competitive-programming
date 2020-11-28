@@ -6,7 +6,7 @@
 //
 // Uses integer factorization.
 template <typename T>
-T phi(T n) {
+T phi(const T n) {
   T res = n;
   if (n % 2 == 0) {
     while (n % 2 == 0) {
@@ -22,7 +22,8 @@ T phi(T n) {
       res -= res / i;
     }
   }
-  if (n > 1) res -= res / n;
+  if (n > 1)
+    res -= res / n;
   return res;
 }
 
@@ -32,7 +33,7 @@ T phi(T n) {
 // Uses the divisor sum property:
 // Sum of totient functions of all divisors of N = N.
 template <typename T>
-std::vector<T> phi1ToNDivisorSum(T n) {
+std::vector<T> phi1ToNDivisorSum(const T n) {
   std::vector<T> phi(n + 1);
   phi[0] = 0;
   phi[1] = 1;
@@ -52,7 +53,7 @@ std::vector<T> phi1ToNDivisorSum(T n) {
 //
 // Uses an idea similar to the Sieve of Eratosthenes.
 template <typename T>
-std::vector<T> phi1ToNSieve(T n) {
+std::vector<T> phi1ToNSieve(const T n) {
   std::vector<T> phi(n + 1);
   std::iota(phi.begin(), phi.end(), 0);
 

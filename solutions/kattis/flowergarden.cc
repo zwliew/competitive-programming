@@ -38,4 +38,40 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  const int MAXN = 2e4;
+  vector<bool> p(MAXN + 1, 1);
+  p[0] = p[1] = 0;
+  for (int i = 2; i * i <= MAXN; ++i) {
+    if (p[i]) {
+      for (int j = i * i; j <= MAXN; j += i) {
+        p[j] = 0;
+      }
+    }
+  }
+
+  int T;
+  cin >> T;
+  while (T--) {
+    int N, D;
+    cin >> N >> D;
+    vector<int> px(N), py(N);
+    for (int i = 0; i < N; ++i) {
+      cin >> px[i] >> py[i];
+    }
+
+    int cx = 0, cy = 0;
+    double dist = 0;
+    int best = 0;
+    for (int i = 0; i < N && dist <= D; ++i) {
+      double cd = hypot(px[i] - cx, py[i] - cy);
+      dist += cd;
+      if (dist <= D && p[i + 1]) {
+        best = i + 1;
+      }
+      cx = px[i];
+      cy = py[i];
+    }
+    cout << best << "\n";
+  }
 }

@@ -14,7 +14,6 @@
 #include <map>
 #include <numeric>
 #include <queue>
-#include <random>
 #include <set>
 #include <stack>
 #include <string>
@@ -37,5 +36,22 @@ int main() {
   if (fopen(FILE ".in", "r")) {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
+  }
+
+  int t;
+  cin >> t;
+  while (t--) {
+    int n;
+    cin >> n;
+    int alice = (((n / 2) * (n / 2) + 1) / 2) * 4;
+    int bob = n * n - alice;
+    if (alice == bob) {
+      cout << "Draw";
+    } else if (alice > bob) {
+      cout << "Alice";
+    } else {
+      cout << "Bob";
+    }
+    cout << "\n";
   }
 }

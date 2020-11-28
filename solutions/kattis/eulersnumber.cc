@@ -38,4 +38,14 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int n;
+  cin >> n;
+  long double ans = 1;
+  long double cur = 1;
+  for (int i = 1; i <= n; ++i) {
+    cur /= i;
+    ans += cur;
+  }
+  cout << fixed << setprecision(12) << ans;
 }

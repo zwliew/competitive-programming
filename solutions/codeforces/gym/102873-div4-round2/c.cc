@@ -14,7 +14,6 @@
 #include <map>
 #include <numeric>
 #include <queue>
-#include <random>
 #include <set>
 #include <stack>
 #include <string>
@@ -38,4 +37,17 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int n;
+  cin >> n;
+  vector<int> a(n);
+  for (auto& x : a)
+    cin >> x;
+  nth_element(a.begin(), a.begin() + n / 2, a.end());
+
+  int64_t total = 0;
+  for (auto x : a) {
+    total += abs(x - a[n / 2]);
+  }
+  cout << total;
 }

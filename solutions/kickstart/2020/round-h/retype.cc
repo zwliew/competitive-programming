@@ -14,7 +14,6 @@
 #include <map>
 #include <numeric>
 #include <queue>
-#include <random>
 #include <set>
 #include <stack>
 #include <string>
@@ -37,5 +36,15 @@ int main() {
   if (fopen(FILE ".in", "r")) {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
+  }
+
+  int T;
+  cin >> T;
+  for (int ti = 1; ti <= T; ++ti) {
+    cout << "Case #" << ti << ": ";
+
+    int N, K, S;
+    cin >> N >> K >> S;
+    cout << min(N + K, K - S - S + K + N) << "\n";
   }
 }

@@ -38,4 +38,38 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int m, n, t;
+  cin >> m >> n >> t;
+
+  int lim;
+  double cur;
+  switch (t) {
+    case 1:
+      for (cur = 1, lim = 0; cur <= m; ++lim, cur *= lim)
+        ;
+      --lim;
+      break;
+    case 2:
+      lim = log2(m);
+      break;
+    case 3:
+      lim = pow(m, 0.25);
+      break;
+    case 4:
+      lim = cbrt(m);
+      break;
+    case 5:
+      lim = sqrt(m);
+      break;
+    case 6:
+      for (cur = 1, lim = 0; cur <= m; ++lim, cur = lim * log2(lim))
+        ;
+      --lim;
+      break;
+    case 7:
+      lim = m;
+      break;
+  }
+  cout << (lim >= n ? "AC" : "TLE");
 }

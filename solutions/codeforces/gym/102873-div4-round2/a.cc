@@ -38,4 +38,14 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int n, k;
+  cin >> n >> k;
+  unordered_set<int> seen;
+  while (k--) {
+    int x;
+    cin >> x;
+    seen.insert(x);
+  }
+  cout << (seen.size() == n - 1 ? "YES" : "NO");
 }

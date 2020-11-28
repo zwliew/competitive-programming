@@ -3,9 +3,11 @@
 
 template <typename T>
 bool isPrimeNaive(T x) {
-  if (x % 2 == 0) return false;
+  if (x % 2 == 0)
+    return false;
   for (T i = 3; i * i <= x; i += 2) {
-    if (x % i == 0) return false;
+    if (x % i == 0)
+      return false;
   }
   return true;
 }
@@ -42,4 +44,19 @@ std::vector<T> sieveOfEratosthenes() {
   // }
 
   return primes;
+}
+
+#include <chrono>
+#include <random>
+std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());
+bool isProbablyPrime(int n, int iter = 5) {
+  if (n < 4) {
+    return n == 2 || n == 3;
+  }
+  for (int i = 0; i < iter; ++i) {
+    int a = 2 + std::uniform_int_distribution(0, n - 4)(rng);
+    if (binpow(a, n - 1, n) != -1)
+      return false;
+  }
+  return true;
 }

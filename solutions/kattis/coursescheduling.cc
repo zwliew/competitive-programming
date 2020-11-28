@@ -38,4 +38,16 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int n;
+  cin >> n;
+  map<string, unordered_set<string>> courses;
+  while (n--) {
+    string f, l, c;
+    cin >> f >> l >> c;
+    courses[c].insert(f + " " + l);
+  }
+  for (auto& [k, v] : courses) {
+    cout << k << " " << v.size() << "\n";
+  }
 }

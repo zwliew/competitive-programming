@@ -14,7 +14,6 @@
 #include <map>
 #include <numeric>
 #include <queue>
-#include <random>
 #include <set>
 #include <stack>
 #include <string>
@@ -38,4 +37,17 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int n;
+  string s, t;
+  cin >> n >> s >> t;
+  int64_t total = 0;
+  int closest = 0;
+  for (int i = 1; i < n; ++i) {
+    if (s.substr(i - 1, 2) == t) {
+      closest = i;
+    }
+    total += closest;
+  }
+  cout << total;
 }

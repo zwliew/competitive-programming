@@ -14,7 +14,6 @@
 #include <map>
 #include <numeric>
 #include <queue>
-#include <random>
 #include <set>
 #include <stack>
 #include <string>
@@ -38,4 +37,30 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int64_t a, s;
+  cin >> a >> s;
+  if (s < a) {
+    cout << "NO";
+    return 0;
+  }
+  int64_t b = s - a;
+  string bs = to_string(b);
+  string as = to_string(a);
+  array<int, 10> cnt;
+  fill(cnt.begin(), cnt.end(), 0);
+  for (char c : as) {
+    cnt[c - '0']++;
+  }
+  for (char c : bs) {
+    cnt[c - '0']--;
+  }
+
+  for (int i = 0; i < 10; ++i) {
+    if (cnt[i]) {
+      cout << "NO";
+      return 0;
+    }
+  }
+  cout << "YES";
 }

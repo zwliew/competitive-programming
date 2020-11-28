@@ -14,7 +14,6 @@
 #include <map>
 #include <numeric>
 #include <queue>
-#include <random>
 #include <set>
 #include <stack>
 #include <string>
@@ -38,4 +37,20 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int D;
+  cin >> D;
+
+  for (int i = 1; i * i <= D; ++i) {
+    if (D % i == 0) {
+      int j = D / i;
+      int a = (i + j) / 2;
+      int b = j - a;
+      if (a - b == i) {
+        cout << b << " " << a;
+        return 0;
+      }
+    }
+  }
+  cout << "impossible";
 }

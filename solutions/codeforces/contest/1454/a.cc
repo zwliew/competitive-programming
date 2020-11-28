@@ -38,4 +38,15 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int t;
+  cin >> t;
+  while (t--) {
+    int n;
+    cin >> n;
+    for (int i = 2; i <= n; ++i) {
+      cout << i << ' ';
+    }
+    cout << "1\n";
+  }
 }
