@@ -2,7 +2,7 @@
 
 These are solutions to some coding challenges from various sources.
 
-I write some notes as I learn [here](http://bit.ly/zwliew-notes).
+I write some notes as I learn [here](https://www.notion.so/zwliew/Competitive-programming-algorithms-66bba4088f424ccb8d24fe0eed979bd1).
 
 Sources:
 
