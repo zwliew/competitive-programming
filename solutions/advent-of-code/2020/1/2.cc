@@ -22,6 +22,8 @@
 #include <unordered_set>
 #include <vector>
 
+using namespace std;
+
 #ifdef LOCAL
 #include "../../_library/cc/debug.h"
 #define FILE "test"
@@ -31,10 +33,26 @@
 #endif
 
 int main() {
-  using namespace std;
   cin.tie(nullptr)->sync_with_stdio(false);
   if (fopen(FILE ".in", "r")) {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
+  }
+
+  vector<int> vals;
+  int x;
+  while (cin >> x) {
+    vals.push_back(x);
+  }
+
+  unordered_map<int, int> s;
+  for (int i = 0; i < vals.size(); ++i) {
+    if (s.count(2020 - vals[i])) {
+      cout << s[2020 - vals[i]] * vals[i];
+      return 0;
+    }
+    for (int j = 0; j < i; ++j) {
+      s[vals[i] + vals[j]] = vals[i] * vals[j];
+    }
   }
 }

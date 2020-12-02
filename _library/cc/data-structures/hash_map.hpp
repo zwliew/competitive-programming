@@ -3,7 +3,8 @@
 
 // Faster, less hackable hash table.
 // Source: https://codeforces.com/blog/entry/62393
-struct custom_hash {
+
+struct splitmix64_hash {
   static uint64_t splitmix64(uint64_t x) {
     // http://xorshift.di.unimi.it/splitmix64.c
     x += 0x9e3779b97f4a7c15;
@@ -18,5 +19,9 @@ struct custom_hash {
     return splitmix64(x + FIXED_RANDOM);
   }
 };
-template <typename K, typename V>
-using HashMap = __gnu_pbds::gp_hash_table<K, V, custom_hash>;
+
+template <typename K, typename V, typename Hash = splitmix64_hash>
+using hash_map = __gnu_pbds::gp_hash_table<K, V, Hash>;
+
+template <typename K, typename Hash = splitmix64_hash>
+using hash_set = hash_map<K, __gnu_pbds::null_type, Hash>;

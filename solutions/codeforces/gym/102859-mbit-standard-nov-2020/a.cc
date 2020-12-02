@@ -37,4 +37,8 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int K, M, N;
+  cin >> K >> M >> N;
+  cout << max(0, (K * 10 - N + M - 1) / M);
 }

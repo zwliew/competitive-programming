@@ -22,6 +22,8 @@
 #include <unordered_set>
 #include <vector>
 
+using namespace std;
+
 #ifdef LOCAL
 #include "../../_library/cc/debug.h"
 #define FILE "test"
@@ -31,10 +33,19 @@
 #endif
 
 int main() {
-  using namespace std;
   cin.tie(nullptr)->sync_with_stdio(false);
   if (fopen(FILE ".in", "r")) {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
+  }
+
+  unordered_set<int> s;
+  int x;
+  while (cin >> x) {
+    if (s.count(2020 - x)) {
+      cout << x * (2020 - x);
+      return 0;
+    }
+    s.insert(x);
   }
 }
