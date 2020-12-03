@@ -22,8 +22,6 @@
 #include <unordered_set>
 #include <vector>
 
-using namespace std;
-
 #ifdef LOCAL
 #include "../../_library/cc/debug.h"
 #define FILE "test"
@@ -33,9 +31,31 @@ using namespace std;
 #endif
 
 int main() {
+  using namespace std;
   cin.tie(nullptr)->sync_with_stdio(false);
   if (fopen(FILE ".in", "r")) {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int N;
+  cin >> N;
+  int64_t ans = 0;
+  vector<pair<int, int>> q;
+  for (int i = 0; i < N; ++i) {
+    int x;
+    cin >> x;
+    if (x) {
+      q.emplace_back(x, i);
+    }
+  }
+
+  for (int i = 0, j = 0; j < N && i < q.size(); ++j) {
+    ans += abs(q[i].second - j);
+    --q[i].first;
+    if (!q[i].first) {
+      ++i;
+    }
+  }
+  cout << ans;
 }

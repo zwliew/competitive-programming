@@ -22,8 +22,6 @@
 #include <unordered_set>
 #include <vector>
 
-using namespace std;
-
 #ifdef LOCAL
 #include "../../_library/cc/debug.h"
 #define FILE "test"
@@ -33,9 +31,39 @@ using namespace std;
 #endif
 
 int main() {
+  using namespace std;
   cin.tie(nullptr)->sync_with_stdio(false);
   if (fopen(FILE ".in", "r")) {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
+  }
+
+  string s;
+  while (cin >> s) {
+    string res;
+    char cur = 0;
+    int cnt = 0;
+    for (char c : s) {
+      if (c != cur) {
+        if (cnt == 2) {
+          res += cur;
+        } else {
+          while (cnt--) {
+            res += cur;
+          }
+        }
+        cur = c;
+        cnt = 0;
+      }
+      ++cnt;
+    }
+    if (cnt == 2) {
+      res += cur;
+    } else {
+      while (cnt--) {
+        res += cur;
+      }
+    }
+    cout << res << " ";
   }
 }

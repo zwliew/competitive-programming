@@ -22,8 +22,6 @@
 #include <unordered_set>
 #include <vector>
 
-using namespace std;
-
 #ifdef LOCAL
 #include "../../_library/cc/debug.h"
 #define FILE "test"
@@ -33,9 +31,30 @@ using namespace std;
 #endif
 
 int main() {
+  using namespace std;
   cin.tie(nullptr)->sync_with_stdio(false);
   if (fopen(FILE ".in", "r")) {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int N, K;
+  cin >> N >> K;
+  vector<int> T(N);
+  for (auto& x : T)
+    cin >> x;
+  sort(T.begin(), T.end());
+
+  int64_t ans = 0;
+  int64_t cur = 0;
+  int prev = INT_MAX;
+  for (int x : T) {
+    if (x - prev > K) {
+      ans = max(ans, cur);
+      cur = 0;
+    }
+    cur += x;
+    prev = x;
+  }
+  cout << max(ans, cur);
 }

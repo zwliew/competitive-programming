@@ -22,8 +22,6 @@
 #include <unordered_set>
 #include <vector>
 
-using namespace std;
-
 #ifdef LOCAL
 #include "../../_library/cc/debug.h"
 #define FILE "test"
@@ -33,9 +31,26 @@ using namespace std;
 #endif
 
 int main() {
+  using namespace std;
   cin.tie(nullptr)->sync_with_stdio(false);
   if (fopen(FILE ".in", "r")) {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  vector<string> grid;
+  string s;
+  while (getline(cin, s)) {
+    grid.push_back(s);
+  }
+
+  const int dy = 3;
+  const int dx = 1;
+  int cnt = 0;
+  for (int i = 0, j = 0; i < grid.size();
+       i += dx, j = (j + dy) % grid[0].size()) {
+    if (grid[i][j] == '#')
+      ++cnt;
+  }
+  cout << cnt;
 }
