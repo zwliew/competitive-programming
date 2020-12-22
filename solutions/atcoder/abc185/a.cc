@@ -16,4 +16,12 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int ans = INT_MAX;
+  for (int i = 0; i < 4; ++i) {
+    int x;
+    cin >> x;
+    ans = min(ans, x);
+  }
+  cout << ans;
 }

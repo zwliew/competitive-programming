@@ -1,4 +1,4 @@
-# Coding Challenges
+# Competitive Programming
 
 These are solutions to some coding challenges from various sources.
 

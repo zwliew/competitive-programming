@@ -16,4 +16,8 @@ int main() {
     freopen(FILE ".in", "r", stdin);
     freopen(FILE ".out", "w", stdout);
   }
+
+  int a, b;
+  cin >> a >> b;
+  cout << a + b;
 }

@@ -11,11 +11,25 @@ T gcd(T a, T& b) {
 }
 
 template <typename T>
+std::tuple<T, int, int> egcd(T a, T b) {
+  int x = 1, y = 0, x1 = 0, y1 = 0;
+  T a1 = a, b1 = b;
+  while (b1) {
+    int q = a1 / b1;
+    std::tie(x, x1) = {x1, x - q * x1};
+    std::tie(y, y1) = {y1, y - q * y1};
+    std::tie(a, b) = {b, a % b};
+  }
+  return {a1, x, y};
+}
+
+template <typename T>
 T lcm(T a, T b) {
   return a / gcd(a, b) * b;
 }
 
-// Note: use GNU __gnu_cxx::power() instead.
+// Note: use GNU __gnu_cxx::power() instead if there is no need for modular
+// arithmetic.
 template <typename T>
 T mexp(T a, T b, T m) {
   T res = 1;
