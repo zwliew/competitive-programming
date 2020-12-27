@@ -1,3 +1,3 @@
 param([string]$file = "a")
 
-python _work/py/$file.py
+Get-Content test.in | python _work/py/$file.py > test.out

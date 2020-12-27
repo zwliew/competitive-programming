@@ -1,3 +1,3 @@
 param([string]$file="a")
 
-java _work/java/$file.java
+Get-Content test.in | java _work/java/$file.java > test.out

@@ -1,4 +1,4 @@
 param([string]$file="a")
 
 make x=$file
-./a.exe
+Get-Content test.in | ./a.exe > test.out

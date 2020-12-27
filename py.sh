@@ -2,4 +2,4 @@
 
 file=${1:-"a"}
 
-python3 _work/py/$file.py
+python3 _work/py/$file.py < test.in > test.out

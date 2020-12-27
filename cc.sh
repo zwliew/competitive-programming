@@ -3,4 +3,4 @@
 file=${1:-"a"}
 
 make x=$file
-./a.out
+./a.out < test.in > test.out
