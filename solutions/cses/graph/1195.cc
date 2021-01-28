@@ -81,4 +81,38 @@ int main() {
     }
   }
   cout << ans;
+
+  // Alternative solution by keeping track of a 2D distance array
+  //   int N, M;
+  //   cin >> N >> M;
+  //   vector<vector<array<int64_t, 2>>> adj(N);
+  //   for (int i = 0; i < M; ++i) {
+  //     int u, v, w;
+  //     cin >> u >> v >> w;
+  //     --u, --v;
+  //     adj[u].push_back({w, v});
+  //   }
+  //   vector<vector<int64_t>> dist(2, vector<int64_t>(N, LLONG_MAX));
+  //   priority_queue<array<int64_t, 3>, vector<array<int64_t, 3>>,
+  //                  greater<array<int64_t, 3>>>
+  //       q;
+  //   dist[false][0] = 0;
+  //   q.push({0, false, 0});
+  //   while (q.size()) {
+  //     auto [d, used, u] = q.top();
+  //     q.pop();
+  //     if (d > dist[used][u])
+  //       continue;
+  //     for (auto& [w, v] : adj[u]) {
+  //       if (d + w < dist[used][v]) {
+  //         dist[used][v] = d + w;
+  //         q.push({dist[used][v], used, v});
+  //       }
+  //       if (!used && d + w / 2 < dist[true][v]) {
+  //         dist[true][v] = d + w / 2;
+  //         q.push({dist[true][v], true, v});
+  //       }
+  //     }
+  //   }
+  //   cout << dist[true][N - 1];
 }
