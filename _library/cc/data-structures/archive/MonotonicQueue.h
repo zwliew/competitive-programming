@@ -25,9 +25,9 @@ struct MinMonotonicQueue {
     return res;
   }
 
-  T top() { return q.front().first; }
+  T top() const { return q.front().first; }
 
-  T min() { return top(); }
+  T min() const { return top(); }
 };
 
 // For computing maximums over sliding windows
@@ -54,9 +54,9 @@ struct MaxMonotonicQueue {
     return res;
   }
 
-  T top() { return q.front().first; }
+  T top() const { return q.front().first; }
 
-  T max() { return top(); }
+  T max() const { return top(); }
 };
 
 template <typename T>
@@ -71,7 +71,7 @@ struct MinMaxMonotonicQueue {
 
   std::pair<T, T> pop() { return {minq.pop(), maxq.pop()}; }
 
-  std::pair<T, T> top() { return {minq.top(), maxq.top()}; }
+  std::pair<T, T> top() const { return {minq.top(), maxq.top()}; }
 
-  std::pair<T, T> minMax() { return top(); }
+  std::pair<T, T> minMax() const { return top(); }
 };

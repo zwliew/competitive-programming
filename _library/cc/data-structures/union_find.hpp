@@ -57,12 +57,13 @@ class union_find {
   bool same(int u, int v) { return find(u) == find(v); }
 };
 
-class union_find_rank : union_find {
+class union_find_rank : public union_find {
  private:
   std::vector<int> rank;
 
  public:
   union_find_rank(int N) : union_find(N), rank(N) {}
+  union_find_rank(int N, bool count) : union_find(N, count), rank(N) {}
 
   // Respects rank.
   bool unite(int u, int v) {

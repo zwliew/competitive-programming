@@ -1,112 +1,91 @@
-/*
-ID: zhaowei10
-TASK:
-LANG: C++14
-*/
-#include "bits/extc++.h"
-
+#include <bits/stdc++.h>
 using namespace std;
-using namespace __gnu_cxx;
-using namespace __gnu_pbds;
-
-#ifdef LOCAL
-#include "../../_library/cpp/debug.h"
-#define FILE "test"
-#else
 #define debug(...) 0
-#define FILE ""
+#ifdef LOCAL
+#include "../../_library/cc/debug.h"
 #endif
+// #define FILE
 
 int main() {
   cin.tie(nullptr)->sync_with_stdio(false);
-  if (fopen(FILE ".in", "r")) {
-    freopen(FILE ".in", "r", stdin);
-    freopen(FILE ".out", "w", stdout);
-  }
+#if defined(FILE) && !defined(LOCAL)
+  freopen(FILE ".in", "r", stdin), freopen(FILE ".out", "w", stdout);
+#endif
 
-  int n, m;
-  cin >> n >> m;
-  vector<vector<char>> grid(n, vector<char>(m));
-  queue<pair<int, int>> q, mq;
-  vector<vector<int>> dist(n, vector<int>(m, INT_MAX)),
-      mdist(n, vector<int>(m, INT_MAX));
-  vector<vector<int>> p(n, vector<int>(m, -1));
-  pair<int, int> start;
-  for (int i = 0; i < n; ++i) {
-    for (int j = 0; j < m; ++j) {
-      cin >> grid[i][j];
-      if (grid[i][j] == 'A') {
-        q.emplace(i, j);
-        dist[i][j] = 0;
-        start = {i, j};
-      } else if (grid[i][j] == 'M') {
-        mq.emplace(i, j);
-        mdist[i][j] = 0;
+  int N, M;
+  cin >> N >> M;
+  vector<vector<bool>> grid(N, vector<bool>(M));
+  queue<array<int, 2>> monsterQ, q;
+  vector<vector<int>> monsterDist(N, vector<int>(M, INT_MAX)),
+      dist(N, vector<int>(M, INT_MAX));
+  vector<array<int, 2>> ends;
+  for (int r = 0; r < N; ++r) {
+    for (int c = 0; c < M; ++c) {
+      char x;
+      cin >> x;
+      if (x != '#') {
+        grid[r][c] = true;
+        if (r == N - 1 || !r || !c || c == M - 1) {
+          ends.push_back({r, c});
+        }
+      }
+      if (x == 'M') {
+        monsterQ.push({r, c});
+        monsterDist[r][c] = 0;
+      } else if (x == 'A') {
+        q.push({r, c});
+        dist[r][c] = 0;
       }
     }
   }
 
-  vector<char> dirs = {'R', 'L', 'U', 'D'};
-  vector<pair<int, int>> deltas = {
-      {0, 1},
-      {0, -1},
-      {-1, 0},
-      {1, 0},
+  const vector<array<int, 2>> edges = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
+  const string edgeNames = "UDRL";
+  vector<vector<int>> p(N, vector<int>(M, -1));
+  auto bfs = [&](queue<array<int, 2>>& q, vector<vector<int>>& d, bool me) {
+    while (q.size()) {
+      auto u = q.front();
+      q.pop();
+      for (int i = 0; i < 4; ++i) {
+        int r = u[0] + edges[i][0];
+        int c = u[1] + edges[i][1];
+        if (r < 0 || c < 0 || r >= N || c >= M || !grid[r][c] ||
+            d[r][c] != INT_MAX)
+          continue;
+        if (me && monsterDist[r][c] <= d[u[0]][u[1]] + 1)
+          continue;
+        q.push({r, c});
+        d[r][c] = d[u[0]][u[1]] + 1;
+        if (me)
+          p[r][c] = i;
+      }
+    }
   };
+  bfs(monsterQ, monsterDist, false);
+  bfs(q, dist, true);
 
-  while (mq.size()) {
-    auto [r, c] = mq.front();
-    mq.pop();
-
-    int nd = mdist[r][c] + 1;
-    for (auto &[dr, dc] : deltas) {
-      int nr = r + dr;
-      int nc = c + dc;
-      if (nr < 0 || nc < 0 || nr >= n || nc >= m || grid[nr][nc] == '#')
-        continue;
-      if (mdist[nr][nc] <= nd) continue;
-
-      mdist[nr][nc] = nd;
-      mq.emplace(nr, nc);
+  array<int, 2> end = {-1, -1};
+  for (auto& [r, c] : ends) {
+    if (dist[r][c] != INT_MAX) {
+      end = {r, c};
+      break;
     }
   }
 
-  while (q.size()) {
-    auto [r, c] = q.front();
-    q.pop();
-
-    debug(r, c);
-
-    if (r == n - 1 || !r || !c || c == m - 1) {
-      cout << "YES\n";
-      cout << dist[r][c] << '\n';
-      string ans;
-      while (r != start.first || c != start.second) {
-        int dir = p[r][c];
-        ans += dirs[dir];
-        r -= deltas[dir].first;
-        c -= deltas[dir].second;
-      }
-      reverse(ans.begin(), ans.end());
-      cout << ans;
-      return 0;
+  if (end[0] == -1) {
+    cout << "NO";
+  } else {
+    cout << "YES\n" << dist[end[0]][end[1]] << "\n";
+    int r = end[0];
+    int c = end[1];
+    string ans;
+    while (p[r][c] != -1) {
+      ans += edgeNames[p[r][c]];
+      int tmp = r;
+      r -= edges[p[r][c]][0];
+      c -= edges[p[tmp][c]][1];
     }
-
-    int nd = dist[r][c] + 1;
-    for (int i = 0; i < 4; ++i) {
-      auto &[dr, dc] = deltas[i];
-      int nr = r + dr;
-      int nc = c + dc;
-      if (nr < 0 || nc < 0 || nr >= n || nc >= m) continue;
-      if (grid[nr][nc] == '#' || grid[nr][nc] == 'M') continue;
-      if (dist[nr][nc] <= nd) continue;
-      if (mdist[nr][nc] <= nd) continue;
-
-      dist[nr][nc] = nd;
-      p[nr][nc] = i;
-      q.emplace(nr, nc);
-    }
+    reverse(ans.begin(), ans.end());
+    cout << ans;
   }
-
-  cout << "NO";
 }
