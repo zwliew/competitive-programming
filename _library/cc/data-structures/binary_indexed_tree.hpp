@@ -16,19 +16,26 @@ class binary_indexed_tree {
   size_t size() const { return dat.size() - 1; }
   const std::vector<T> data() const { return dat; }
 
-  void update(int i, T val) {
+  // Adds val to the element at index i
+  void add(int i, T val) {
     assert(i >= 0 && i < (int)size());
     for (++i; i < (int)dat.size(); i += i & -i) {
       dat[i] += val;
     }
   }
 
-  T query(int i) const {
-    assert(i >= 0 && i < (int)size());
+  // Returns the sum of elements in range [0, r)
+  T query(int r) const {
+    assert(r >= 0 && r <= (int)size());
     T res = 0;
-    for (++i; i; i -= i & -i) {
-      res += dat[i];
+    for (; r; r -= r & -r) {
+      res += dat[r];
     }
     return res;
+  }
+
+  // Returns the sum of elements in range [l, r)
+  T sum(int l, int r) const {
+    return query(r) - query(l);
   }
 };
