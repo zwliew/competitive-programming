@@ -1,13 +1,13 @@
+#include <algorithm>
 #include <vector>
 
 template <typename T> class segment_tree {
 private:
-  const T NEUTRAL = -1;
-
   std::vector<T> t;
   int N;
 
-  T merge(T &x, T &y) { return min(x, y); }
+  const T NEUTRAL = -1;
+  T merge(T &x, T &y) const { return std::min(x, y); }
 
   void modify(int ti, T &x) { t[ti] = x; }
 
@@ -23,7 +23,7 @@ private:
     t[ti] = merge(t[ti * 2 + 1], t[ti * 2 + 2]);
   }
 
-  void _update(int i, T x, int ti, int tl, int tr) {
+  void update(int i, T x, int ti, int tl, int tr) {
     assert(tl >= 0 && tr <= N);
     if (tl == tr - 1) {
       modify(ti, x);
@@ -31,14 +31,14 @@ private:
     }
     int tm = tl + (tr - tl) / 2;
     if (i < tm) {
-      _update(i, x, ti * 2 + 1, tl, tm);
+      update(i, x, ti * 2 + 1, tl, tm);
     } else {
-      _update(i, x, ti * 2 + 2, tm, tr);
+      update(i, x, ti * 2 + 2, tm, tr);
     }
     t[ti] = merge(t[ti * 2 + 1], t[ti * 2 + 2]);
   }
 
-  T _query(int l, int r, int ti, int tl, int tr) {
+  T query(int l, int r, int ti, int tl, int tr) {
     assert(tl >= 0 && tr <= N);
     if (l >= tr || r <= tl) {
       return NEUTRAL;
@@ -47,8 +47,8 @@ private:
       return t[ti];
     }
     int tm = tl + (tr - tl) / 2;
-    T a = _query(l, r, ti * 2 + 1, tl, tm);
-    T b = _query(l, r, ti * 2 + 2, tm, tr);
+    T a = query(l, r, ti * 2 + 1, tl, tm);
+    T b = query(l, r, ti * 2 + 2, tm, tr);
     return merge(a, b);
   }
 
@@ -62,5 +62,5 @@ public:
 
   void update(int i, T x) { _update(i, x, 0, 0, N); }
 
-  T query(int l, int r) { return _query(l, r, 0, 0, N); }
+  T query(int l, int r) { return query(l, r, 0, 0, N); }
 };

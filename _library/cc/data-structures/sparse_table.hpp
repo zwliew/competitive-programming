@@ -1,5 +1,6 @@
 #include <numeric>
 #include <vector>
+#include <algorithm>
 
 template <typename T> class sparse_table {
 private:
@@ -7,7 +8,7 @@ private:
   int H;
 
   const T NEUTRAL = INT_MAX;
-  T merge(T &a, T &b) { return std::min(a, b); }
+  T merge(T &a, T &b) const { return std::min(a, b); }
 
 public:
   sparse_table(std::vector<T> &A) {
