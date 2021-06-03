@@ -24,7 +24,7 @@ std::string to_string(bool b) {
 
 std::string to_string(std::vector<bool> v) {
   std::string res = "{";
-  for (int i = 0; i < (int)v.size(); ++i) {
+  for (uint32_t i = 0; i < v.size(); ++i) {
     res += char('0' + v[i]);
   }
   res += "}";
