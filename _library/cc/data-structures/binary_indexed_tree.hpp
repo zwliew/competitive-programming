@@ -1,14 +1,14 @@
 /**
  * Problems for testing:
  * CSES Subtree Queries -- https://cses.fi/problemset/task/1137/
+ * AtCoder DP contest (Flowers) -- https://atcoder.jp/contests/dp/tasks/dp_q
  */
 #include <vector>
 
-template <typename T> class binary_indexed_tree {
+template <typename T, T NEUTRAL> class binary_indexed_tree {
 private:
   std::vector<T> dat;
 
-  const T NEUTRAL = 0;
   T merge(T a, T b) const { return a + b; }
 
 public:
