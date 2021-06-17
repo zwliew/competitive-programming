@@ -1,6 +1,7 @@
 #!/bin/sh
 
-file=${1:-"a"}
+code_file=${1:-"a"}
+input_file=${2:-"test.in"}
 
-make x=$file
-./a.out < test.in > test.out
+make x=$code_file
+./a.out < $input_file > test.out
