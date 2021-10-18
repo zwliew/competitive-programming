@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = \
 	-DLOCAL \
-	--std=c++17 \
+	--std=c++20 \
 	-pipe \
 	-O2 \
 	-Winvalid-pch \
