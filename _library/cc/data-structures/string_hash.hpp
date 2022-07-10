@@ -1,6 +1,8 @@
 #include <string>
 #include <vector>
 
+// P = 31 or 9973
+// M = 1e9 + 9 or 1e9 + 7, 998244353
 template <int P, int M> class string_hash {
 private:
   std::vector<int> h, pw;
@@ -12,7 +14,7 @@ public:
 
     h.resize(N + 1);
     for (int i = 1; i <= N; ++i) {
-      h[i] = ((int64_t)h[i - 1] * P + S[i]) % M;
+      h[i] = ((int64_t)h[i - 1] * P + S[i - 1]) % M;
     }
 
     pw.resize(N + 1);

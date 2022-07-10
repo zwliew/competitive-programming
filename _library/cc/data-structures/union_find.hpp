@@ -12,6 +12,9 @@
  * Kruskal's algorithm for finding the MST of a graph
  * Tarjan's offline LCA algorithm for computing the LCA of 2 vertices in a tree
  * Arpa's offline RMQ trick for computing the min value in a range
+ *
+ * Tests:
+ * https://judge.yosupo.jp/problem/unionfind
  */
 class union_find {
  private:
