@@ -12,9 +12,11 @@ CXXFLAGS = \
 	-Wformat=2 \
 	-Wfloat-equal \
 	-Wconversion \
-	-Wlogical-op \
-	-Wshift-overflow=2 \
-	-Wduplicated-cond \
+	-Wlong-long \
+#	-Wlogical-op \
+	-Wshift-overflow \
+#	-Wshift-overflow=2 \
+#	-Wduplicated-cond \
 	-Wcast-qual \
 	-Wcast-align \
 	-D_GLIBCXX_DEBUG \
