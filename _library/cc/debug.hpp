@@ -1,4 +1,8 @@
+#ifndef DEBUG_HPP
+#define DEBUG_HPP
+
 #include <bitset>
+#include <complex>
 #include <iostream>
 #include <string>
 #include <utility>
@@ -6,21 +10,17 @@
 
 using namespace std;
 
-std::string to_string(char c) {
-  return std::string(1, c);
+template <class T> std::string to_string(std::complex<T> c) {
+  return "(" + to_string(c.real()) + ", " + to_string(c.imag()) + ")";
 }
 
-std::string to_string(std::string s) {
-  return '"' + s + '"';
-}
+std::string to_string(char c) { return std::string(1, c); }
 
-std::string to_string(const char* s) {
-  return to_string((std::string)s);
-}
+std::string to_string(std::string s) { return '"' + s + '"'; }
 
-std::string to_string(bool b) {
-  return (b ? "true" : "false");
-}
+std::string to_string(const char *s) { return to_string((std::string)s); }
+
+std::string to_string(bool b) { return (b ? "true" : "false"); }
 
 std::string to_string(std::vector<bool> v) {
   std::string res = "{";
@@ -31,8 +31,7 @@ std::string to_string(std::vector<bool> v) {
   return res;
 }
 
-template <size_t N>
-std::string to_string(std::bitset<N> b) {
+template <size_t N> std::string to_string(std::bitset<N> b) {
   std::string res = "";
   for (int i = 0; i < N; ++i) {
     res += char('0' + b[i]);
@@ -40,8 +39,7 @@ std::string to_string(std::bitset<N> b) {
   return res;
 }
 
-template <typename A, typename B>
-std::string to_string(std::pair<A, B> p) {
+template <typename A, typename B> std::string to_string(std::pair<A, B> p) {
   return "(" + to_string(p.first) + ", " + to_string(p.second) + ")";
 }
 
@@ -58,11 +56,10 @@ std::string to_string(std::tuple<A, B, C, D> t) {
          ")";
 }
 
-template <typename A>
-std::string to_string(A v) {
+template <typename A> std::string to_string(A v) {
   bool first = true;
   std::string res = "{";
-  for (const auto& x : v) {
+  for (const auto &x : v) {
     if (!first) {
       res += ", ";
     }
@@ -73,14 +70,13 @@ std::string to_string(A v) {
   return res;
 }
 
-void _debug() {
-  std::cerr << '\n';
-}
+void _debug() { std::cerr << '\n'; }
 
-template <typename Head, typename... Tail>
-void _debug(Head H, Tail... T) {
+template <typename Head, typename... Tail> void _debug(Head H, Tail... T) {
   std::cerr << ' ' << to_string(H);
   _debug(T...);
 }
 
 #define debug(...) std::cerr << '[' << #__VA_ARGS__ << "]:", _debug(__VA_ARGS__)
+
+#endif DEBUG_HPP

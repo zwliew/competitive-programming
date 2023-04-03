@@ -1,11 +1,13 @@
-#ifndef ATCODER_MAXFLOW_HPP
-#define ATCODER_MAXFLOW_HPP 1
+#ifndef MAXFLOW_HPP
+#define MAXFLOW_HPP
 
 #include <algorithm>
 #include <cassert>
 #include <limits>
 #include <queue>
 #include <vector>
+
+namespace mf {
 
 namespace internal {
 
@@ -166,5 +168,5 @@ private:
   std::vector<std::pair<int, int>> pos;
   std::vector<std::vector<_edge>> g;
 };
-
-#endif // ATCODER_MAXFLOW_HPP
+} // namespace mf
+#endif
