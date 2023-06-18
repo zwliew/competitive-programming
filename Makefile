@@ -3,7 +3,7 @@ CXXFLAGS = \
 	-DLOCAL \
 	--std=c++20 \
 	-pipe \
-	-O2 \
+	-O3 \
 	-Winvalid-pch \
 	-Wall \
 	-Wextra \

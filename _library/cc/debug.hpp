@@ -79,4 +79,4 @@ template <typename Head, typename... Tail> void _debug(Head H, Tail... T) {
 
 #define debug(...) std::cerr << '[' << #__VA_ARGS__ << "]:", _debug(__VA_ARGS__)
 
-#endif DEBUG_HPP
+#endif

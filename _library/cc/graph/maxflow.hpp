@@ -10,7 +10,6 @@
 namespace mf {
 
 namespace internal {
-
 template <class T> struct simple_queue {
   std::vector<T> payload;
   int pos = 0;

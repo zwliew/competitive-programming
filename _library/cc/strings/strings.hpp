@@ -34,6 +34,7 @@ std::vector<int> z_algorithm(const std::string &s) {
   return z_algorithm(s2);
 }
 
+// pi[i] = len of longest proper prefix of s[0...i] that is also a suffix.
 std::vector<int> prefix_function(const std::string &s) {
   int n = int(s.size());
   std::vector<int> pi(n);
